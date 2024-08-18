@@ -1,0 +1,13 @@
+youtube-transcript-api
+pytube
+langchain_community
+scrapetube
+langchain_openai
+langchain-ai21
+langchain-chroma
+langchain-cli
+langserve[all]
+python-dotenv
+pinecone-client
+pinecone-client[grpc]
+pinecone
