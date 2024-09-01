@@ -1,13 +1,15 @@
 youtube-transcript-api
+yt-dlp
 pytube
 langchain_community
 scrapetube
 langchain_openai
 langchain-ai21
-langchain-chroma
 langchain-cli
 langserve[all]
 python-dotenv
 pinecone-client
 pinecone-client[grpc]
 pinecone
+pytest
+pytest-timeout    
