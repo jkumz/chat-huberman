@@ -1,5 +1,5 @@
 # Processes document chunks, embeds and indexes in pinecone
-import os
+import os, logging
 from typing import List
 from langchain_ai21 import AI21SemanticTextSplitter
 from langchain_openai import OpenAIEmbeddings
@@ -31,22 +31,24 @@ class Indexer:
 
         self.index = self.pinecone.Index(host=os.environ["INDEX_HOST"], name=os.environ["INDEX_NAME"])
 
-    @staticmethod
-    def extract_metadata(video_url):
+    def __extract_metadata(self, video_url):
         opts = {}
-        with YoutubeDL(opts) as yt:
-            info = yt.extract_info(video_url, download=False)
-            if len(info) == 0:
-                return {}
-            data = {
-                "url": video_url,
-                "title": info.get("title")
-            }
-            return data
+        try:
+            with YoutubeDL(opts) as yt:
+                info = yt.extract_info(video_url, download=False)
+                if len(info) == 0:
+                    return {}
+                data = {
+                    "url": video_url,
+                    "title": info.get("title")
+                }
+                return data
+        except Exception as e:
+            logging.debug(f"Encountered error while extracting metadata: {e}")
 
     def process_and_index_chunks(self, url, doc_chunks: List[str], video_id: str, batch_size: int = 100):
         # Use attributes initialized in the constructor
-        title = self.extract_metadata(url)["title"]
+        title = self.__extract_metadata(video_url=url)["title"]
 
         try:
             self.tracker.start_processing(video_id)
@@ -79,8 +81,8 @@ class Indexer:
                 self.index.upsert(vectors=vectors_to_upsert)
 
             self.tracker.complete_processing(video_id)
-            print(f"Successfully processed and indexed video: {video_id}")
+            logging.info(f"Successfully processed and indexed video: {video_id}")
 
         except Exception as e:
-            print(f"Error processing video {video_id}: {str(e)}")
+            logging.debug(f"Error processing video {video_id}: {str(e)}")
             self.tracker.fail_processing(video_id)

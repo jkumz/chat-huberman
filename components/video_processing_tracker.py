@@ -1,9 +1,25 @@
+import os
 import sqlite3
 from datetime import datetime
 from typing import List
 
 class VideoProcessingTracker:
-    def __init__(self, db_path='video_processing.db'):
+# Find the video_processing.db file in the /persistence folder
+    def find_db_path(self, max_depth=10):
+        current_dir = os.getcwd()
+        for _ in range(max_depth):
+            if os.path.exists(os.path.join(current_dir, 'persistence', 'video_processing.db')):
+                return os.path.join(current_dir, 'persistence', 'video_processing.db')
+            parent_dir = os.path.dirname(current_dir)
+            if parent_dir == current_dir:  # Reached the root directory
+                break
+            current_dir = parent_dir
+        raise FileNotFoundError("Could not find the video_processing.db file in the /persistence directory at the project root")
+
+    def __init__(self, db_path=None):
+        if db_path is None:
+            db_path = self.find_db_path()
+        
         self.conn = sqlite3.connect(db_path)
         self.create_table()
 
@@ -61,27 +77,3 @@ class VideoProcessingTracker:
 
     def close(self):
         self.conn.close()
-
-# Usage in the main processing function
-def process_and_index_chunks(doc_chunks: List[str], video_id: str, batch_size: int = 100):
-    tracker = VideoProcessingTracker()
-    tracker.start_processing(video_id)
-    
-    try:
-        # Your existing processing code here
-        # ...
-
-        tracker.complete_processing(video_id)
-    except Exception as e:
-        print(f"Error processing video {video_id}: {str(e)}")
-        tracker.fail_processing(video_id)
-    finally:
-        tracker.close()
-
-# Example of how to use the tracker
-tracker = VideoProcessingTracker()
-unprocessed_videos = tracker.get_unprocessed_videos()
-for video_id in unprocessed_videos:
-    # Process the video
-    process_and_index_chunks(get_doc_chunks_for_video(video_id), video_id)
-tracker.close()

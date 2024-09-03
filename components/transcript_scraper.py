@@ -2,6 +2,7 @@
 ## This video ID will then be used to scrape transcripts - repeat for all videos in the channel
 
 import json
+import logging
 import scrapetube
 import os, getpass
 import time
@@ -32,14 +33,14 @@ class Scraper():
         try:
             videos = scrapetube.get_channel(channel_username=self.channel_username)
             video_urls = [f"https://www.youtube.com/watch?v={video['videoId']}" for video in videos]
-            print(f"Count of video URLs: {len(video_urls)}")
+            logging.info(f"Count of video URLs: {len(video_urls)}")
             return video_urls
 
         except json.JSONDecodeError as e:
-            print(f"Error decoding JSON response: {e}")
+            logging.debug(f"Error decoding JSON response: {e}")
             return []  # Return an empty list
         except Exception as e:
-            print(f"An error occurred: {e}")
+            logging.debug(f"An error occurred: {e}")
             return []  # Return an empty list
 
 
@@ -81,9 +82,9 @@ class Scraper():
                     has_valid_transcript = True
                     break
                 except Exception as exception:
-                    print(f"Attempt with language '{lang}' failed: {exception}")
+                    logging.debug(f"Attempt with language '{lang}' failed: {exception}")
             if not has_valid_transcript:
-                print(f"No suitable transcript found for video {index+1} - Skipping...")
+                logging.info(f"No suitable transcript found for video {index+1} - Skipping...")
                 continue
 
             # Split the document semantically - semantic splitter can only chunk 99,999 chars at a time
@@ -94,5 +95,5 @@ class Scraper():
                 for chunk in self.__prepare_document_chunks(doc.page_content)
             ]
             chunked_transcripts.append({"url":url, "chunks":doc_chunks})
-            print(f"Saved transcript {index+1}")
+            logging.info(f"Saved transcript {index+1}")
         return chunked_transcripts
