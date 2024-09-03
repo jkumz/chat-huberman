@@ -49,9 +49,9 @@ class Indexer:
     def process_and_index_chunks(self, url, doc_chunks: List[str], video_id: str, batch_size: int = 100):
         # Use attributes initialized in the constructor
         title = self.__extract_metadata(video_url=url)["title"]
+        self.tracker.start_processing(video_id)
 
         try:
-            self.tracker.start_processing(video_id)
             vectors_to_upsert = []
 
             for chunk_i, doc_chunk in enumerate(doc_chunks):
@@ -86,3 +86,4 @@ class Indexer:
         except Exception as e:
             logging.debug(f"Error processing video {video_id}: {str(e)}")
             self.tracker.fail_processing(video_id)
+            raise e
