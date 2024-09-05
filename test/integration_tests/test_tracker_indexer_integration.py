@@ -1,15 +1,15 @@
 import pytest
 from unittest.mock import patch, MagicMock
-from components.indexer import Indexer
+from components.transcript_indexer import Indexer
 
 @pytest.fixture
 def mock_external_services():
     # Mock all external services and dependencies used by the Indexer
-    with patch('components.indexer.AI21SemanticTextSplitter') as mock_splitter, \
-         patch('components.indexer.OpenAIEmbeddings') as mock_embeddings, \
-         patch('components.indexer.Pinecone') as mock_pinecone, \
-         patch('components.indexer.YoutubeDL') as mock_ytdl, \
-         patch('components.indexer.VideoProcessingTracker') as mock_tracker:
+    with patch('components.transcript_indexer.AI21SemanticTextSplitter') as mock_splitter, \
+         patch('components.transcript_indexer.OpenAIEmbeddings') as mock_embeddings, \
+         patch('components.transcript_indexer.Pinecone') as mock_pinecone, \
+         patch('components.transcript_indexer.YoutubeDL') as mock_ytdl, \
+         patch('components.transcript_indexer.VideoProcessingTracker') as mock_tracker:
         
         # Set up mock behaviors
         mock_splitter.return_value.split_text.return_value = ["Split 1", "Split 2"]
@@ -34,7 +34,7 @@ def indexer(mock_external_services):
         pinecone_api_key="mock_pinecone_key"
     )
 
-def test_indexer_tracker_interaction(indexer, mock_external_services):
+def test_tracker_indexer_interaction(indexer, mock_external_services):
     # Test the interaction between Indexer and VideoProcessingTracker during successful processing
     url = "https://www.youtube.com/watch?v=test_video"
     chunks = ["This is a long enough chunk to be processed"]

@@ -3,14 +3,14 @@ services and they are maintained. We can presume they are working.'''
 
 import pytest
 from unittest.mock import patch, MagicMock
-from components.indexer import Indexer
+from components.transcript_indexer import Indexer
 
 @pytest.fixture
 def mock_external_services():
-    with patch('components.indexer.AI21SemanticTextSplitter') as mock_splitter, \
-         patch('components.indexer.OpenAIEmbeddings') as mock_embeddings, \
-         patch('components.indexer.Pinecone') as mock_pinecone, \
-         patch('components.indexer.YoutubeDL') as mock_ytdl:
+    with patch('components.transcript_indexer.AI21SemanticTextSplitter') as mock_splitter, \
+         patch('components.transcript_indexer.OpenAIEmbeddings') as mock_embeddings, \
+         patch('components.transcript_indexer.Pinecone') as mock_pinecone, \
+         patch('components.transcript_indexer.YoutubeDL') as mock_ytdl:
         
         # Setup mock behaviors
         mock_splitter.return_value.split_text.return_value = ["Split 1", "Split 2"]
