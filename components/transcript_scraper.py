@@ -8,6 +8,8 @@ import logging
 import scrapetube
 from langchain_community.document_loaders import YoutubeLoader
 
+logger = logging.getLogger(__name__)
+
 
 class Scraper:
     """
@@ -32,14 +34,14 @@ class Scraper:
                 f"https://www.youtube.com/watch?v={video['videoId']}"
                 for video in videos
             ]
-            logging.info(f"Count of video URLs: {len(video_urls)}")
+            logger.info(f"Count of video URLs: {len(video_urls)}")
             return video_urls
 
         except json.JSONDecodeError as e:
-            logging.debug(f"Error decoding JSON response: {e}")
+            logger.debug(f"Error decoding JSON response: {e}")
             return []  # Return an empty list
         except Exception as e:
-            logging.debug(f"An error occurred: {e}")
+            logger.debug(f"An error occurred: {e}")
             return []  # Return an empty list
 
     """
@@ -84,9 +86,9 @@ class Scraper:
                     has_valid_transcript = True
                     break
                 except Exception as exception:
-                    logging.debug(f"Attempt with language '{lang}' failed: {exception}")
+                    logger.debug(f"Attempt with language '{lang}' failed: {exception}")
             if not has_valid_transcript:
-                logging.info(
+                logger.info(
                     f"No suitable transcript found for video {index+1} - Skipping..."
                 )
                 continue
@@ -99,5 +101,5 @@ class Scraper:
                 for chunk in self.__prepare_document_chunks(doc.page_content)
             ]
             chunked_transcripts.append({"url": url, "chunks": doc_chunks})
-            logging.info(f"Saved transcript {index+1}")
+            logger.info(f"Saved transcript {index+1}")
         return chunked_transcripts
