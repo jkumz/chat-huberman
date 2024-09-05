@@ -1,6 +1,9 @@
+import logging
 import os
 import sqlite3
 from datetime import datetime
+
+logger = logging.getLogger(__name__)
 
 
 class VideoProcessingTracker:
@@ -24,11 +27,13 @@ class VideoProcessingTracker:
         if db_path is None:
             db_path = self.find_db_path()
 
+        logger.info(f"Initializing VideoProcessingTracker with db_path: {db_path}")
         self.conn = sqlite3.connect(db_path)
         self.create_table()
 
     # Create table for tracking video processing status
     def create_table(self):
+        logger.debug("Creating video_processing_status table if not exists")
         cursor = self.conn.cursor()
         cursor.execute(
             """
@@ -43,18 +48,29 @@ class VideoProcessingTracker:
 
     # Start processing video - insert relevant rows
     def start_processing(self, video_id):
+        logger.info(f"Checking status for video_id: {video_id}")
         cursor = self.conn.cursor()
         cursor.execute(
-            """
-        INSERT OR REPLACE INTO video_processing_status
-        (video_id, status, start_time) VALUES (?, ?, ?)
-        """,
-            (video_id, "processing", datetime.now()),
+            "SELECT status FROM video_processing_status WHERE video_id = ?",
+            (video_id,)
         )
-        self.conn.commit()
+        result = cursor.fetchone()
+        if result is None or result[0] != "completed":
+            logger.info(f"Starting processing for video_id: {video_id}")
+            cursor.execute(
+                """
+                INSERT OR REPLACE INTO video_processing_status
+                (video_id, status, start_time) VALUES (?, ?, ?)
+                """,
+                (video_id, "processing", datetime.now()),
+            )
+            self.conn.commit()
+        else:
+            logger.info(f"Skipping processing for video_id: {video_id} as it is already completed")
 
     # Update relevant rows upon completion
     def complete_processing(self, video_id):
+        logger.info(f"Completing processing for video_id: {video_id}")
         cursor = self.conn.cursor()
         cursor.execute(
             """
@@ -68,6 +84,7 @@ class VideoProcessingTracker:
 
     # Mark as failed so that we can restart if failed
     def fail_processing(self, video_id):
+        logger.warning(f"Marking processing as failed for video_id: {video_id}")
         cursor = self.conn.cursor()
         cursor.execute(
             """
@@ -80,19 +97,25 @@ class VideoProcessingTracker:
         self.conn.commit()
 
     def get_status(self, video_id):
+        logger.debug(f"Getting status for video_id: {video_id}")
         cursor = self.conn.cursor()
         cursor.execute(
             "SELECT status FROM video_processing_status WHERE video_id = ?", (video_id,)
         )
         result = cursor.fetchone()
+        logger.debug(f"Status for video_id {video_id}: {result[0] if result else None}")
         return result[0] if result else None
 
     def get_unprocessed_videos(self):
+        logger.debug("Getting unprocessed videos")
         cursor = self.conn.cursor()
         cursor.execute(
             'SELECT video_id FROM video_processing_status WHERE status != "completed"'
         )
-        return [row[0] for row in cursor.fetchall()]
+        result = [row[0] for row in cursor.fetchall()]
+        logger.debug(f"Found {len(result)} unprocessed videos")
+        return result
 
     def close(self):
+        logger.info("Closing database connection")
         self.conn.close()

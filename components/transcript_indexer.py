@@ -4,8 +4,7 @@ import logging
 from typing import List
 from langchain_ai21 import AI21SemanticTextSplitter
 from langchain_openai import OpenAIEmbeddings
-from video_processing_tracker import VideoProcessingTracker
-from yt_dlp import YoutubeDL
+from .video_processing_tracker import VideoProcessingTracker
 from pinecone import Pinecone
 
 logger = logging.getLogger(__name__)
@@ -43,23 +42,10 @@ class Indexer:
             host=os.environ["INDEX_HOST"], name=os.environ["INDEX_NAME"]
         )
 
-    def __extract_metadata(self, video_url):
-        opts = {}
-        try:
-            with YoutubeDL(opts) as yt:
-                info = yt.extract_info(video_url, download=False)
-                if len(info) == 0:
-                    return {}
-                data = {"url": video_url, "title": info.get("title")}
-                return data
-        except Exception as e:
-            logger.debug(f"Encountered error while extracting metadata: {e}")
-
     def process_and_index_chunks(
-        self, url, doc_chunks: List[str], video_id: str, batch_size: int = 100
+        self, url, doc_chunks: List[str], video_id: str, title: str, batch_size: int = 100
     ):
         # Use attributes initialized in the constructor
-        title = self.__extract_metadata(video_url=url)["title"]
         logger.info(f"Starting processing for video: {video_id}")
         self.tracker.start_processing(video_id)
 
