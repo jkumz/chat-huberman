@@ -2,7 +2,7 @@ import os
 import sqlite3
 from datetime import datetime
 
-from .logger import logger
+from components.logger import logger
 
 
 class VideoProcessingTracker:
@@ -63,6 +63,7 @@ class VideoProcessingTracker:
                 """,
                 (video_id, "processing", datetime.now()),
             )
+            logger.info(f"Inserted start processing for video_id: {video_id}")
             self.conn.commit()
         else:
             logger.info(f"Skipping processing for video_id: {video_id} as it is already completed")
@@ -106,24 +107,30 @@ class VideoProcessingTracker:
         return result[0] if result else None
 
     def get_unprocessed_videos(self):
-        logger.debug("Getting unprocessed videos")
+        logger.info("Getting unprocessed videos")
         cursor = self.conn.cursor()
         cursor.execute(
             'SELECT video_id FROM video_processing_status WHERE status != "completed"'
         )
         result = [row[0] for row in cursor.fetchall()]
-        logger.debug(f"Found {len(result)} unprocessed videos")
+        logger.info(f"Found {len(result)} unprocessed videos")
         return result
 
-    def check_if_video_exists(self, video_id):
-        logger.debug(f"Checking if video_id {video_id} exists")
+    def check_if_video_exists_and_completed(self, video_id):
         cursor = self.conn.cursor()
         cursor.execute(
-            'SELECT video_id FROM video_processing_status WHERE video_id = ?',
+            'SELECT video_id, status FROM video_processing_status WHERE video_id = ?',
             (video_id,)
         )
         result = cursor.fetchone()
-        return result is not None
+        exists_and_completed = result is not None and result[1] == "completed"
+        if not exists_and_completed:
+            if result is None:
+                logger.debug(f"Video_id {video_id} does not exist")
+            elif result[1] != "completed":
+                logger.debug(f"Video_id {video_id} exists but status is not completed")
+
+        return exists_and_completed
 
     def close(self):
         logger.info("Closing database connection")

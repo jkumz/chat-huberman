@@ -2,12 +2,14 @@
 ## This video ID will then be used to scrape transcripts - repeat for all videos in the channel
 # TODO: Add error code handling, retries etc
 # TODO: Deploy this as a microservice on the web, polling and updating results daily in cloud
+# TODO: Add timestamp to each chunk - we will have to stop using the YoutubeLoader and build a custom scraper
+# as YoutubeLoader does not support it. We can use the youtube-transcript-api library to get the timestamps.
 
 import json
 import scrapetube
 from langchain_community.document_loaders import YoutubeLoader
-from .logger import logger
-from .video_processing_tracker import VideoProcessingTracker
+from components.logger import logger
+from components.video_processing_tracker import VideoProcessingTracker
 
 
 class Scraper:
@@ -32,7 +34,7 @@ class Scraper:
             all_video_data = []
             video_processing_tracker = VideoProcessingTracker()
             for video in videos:
-                if video_processing_tracker.check_if_video_exists(video["videoId"]):
+                if video_processing_tracker.check_if_video_exists_and_completed(video["videoId"]):
                     continue
                 video_url = f"https://www.youtube.com/watch?v={video['videoId']}"
                 title = video['title']['runs'][0]['text']

@@ -3,10 +3,10 @@ import os
 from typing import List
 from langchain_ai21 import AI21SemanticTextSplitter
 from langchain_openai import OpenAIEmbeddings
-from .video_processing_tracker import VideoProcessingTracker
+from components.video_processing_tracker import VideoProcessingTracker
 from pinecone import Pinecone
 
-from .logger import logger
+from components.logger import logger
 
 class Indexer:
     openai_embedding_model = "text-embedding-3-large"
@@ -46,11 +46,21 @@ class Indexer:
     ):
         # Use attributes initialized in the constructor
         logger.info(f"Starting processing for video: {video_id}")
+        # Check if the video is already in "processing" state
+        current_status = self.tracker.get_status(video_id)
+        if current_status == "processing":
+            logger.warning(f"Video {video_id} was already in 'processing' state. Attempting to delete existing records.")
+            try:
+                self.index.delete(filter={"video_id": video_id})
+                logger.info(f"Successfully deleted existing records for video {video_id}")
+            except Exception as delete_error:
+                logger.error(f"Error deleting existing records for video {video_id}: {str(delete_error)}")
+                raise
         self.tracker.start_processing(video_id)
 
-        try:
-            vectors_to_upsert = []
+        vectors_to_upsert = []
 
+        try:
             for chunk_i, doc_chunk in enumerate(doc_chunks):
                 if len(doc_chunk) < 30:
                     continue
@@ -81,8 +91,18 @@ class Indexer:
             logger.info(f"Successfully processed and indexed video: {video_id}")
 
         except Exception as e:
-            logger.debug(f"Error processing video {video_id}: {str(e)}")
-            self.tracker.fail_processing(video_id)
-            # Delete all vectors in the index which have the video id in the vector id
-            self.index.delete(filter={"id": {"$regex": f"^{video_id}_"}})
+            logger.error(f"Error processing video {video_id}: {str(e)}")
             raise e
+        except KeyboardInterrupt:
+            logger.warning(f"Processing interrupted for video {video_id}")
+            raise
+        finally:
+            if self.tracker.get_status(video_id) != "completed":
+                logger.warning(f"Processing incomplete for video {video_id}. Cleaning up...")
+                self.tracker.fail_processing(video_id)
+                # Delete all vectors in the index which have the video id in the metadata
+                try:
+                    self.index.delete(filter={"video_id": video_id})
+                    logger.info(f"Deleted incomplete vectors for video {video_id}")
+                except Exception as delete_error:
+                    logger.error(f"Error deleting vectors for video {video_id}: {str(delete_error)}")
