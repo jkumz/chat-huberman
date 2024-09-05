@@ -117,6 +117,7 @@ def test_get_unprocessed_videos(tracker, mock_db_connection):
     # video3 is left in 'processing' state
 
     unprocessed = tracker.get_unprocessed_videos()
+    # trunk-ignore(bandit/B101)
     assert set(unprocessed) == {"video2", "video3"}
 
     # Additional test to ensure completed videos are not returned
