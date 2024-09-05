@@ -57,6 +57,7 @@ def test_indexer_tracker_interaction_on_error(indexer, mock_external_services):
     mock_external_services['splitter'].return_value.split_text.side_effect = Exception("Splitting error")
 
     # Expect the method to raise an exception
+    # trunk-ignore(ruff/B017)
     with pytest.raises(Exception):
         indexer.process_and_index_chunks(url, chunks, video_id)
 

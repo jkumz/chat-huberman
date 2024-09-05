@@ -1,5 +1,5 @@
 from langchain_ai21 import AI21SemanticTextSplitter
-from dotenv import load_dotenv
+import os
 from langchain_chroma import Chroma
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.prompts import ChatPromptTemplate
@@ -29,14 +29,12 @@ print(f"The mean split length is {(int)(num_chars/(len(split_strings[0]) + len(s
 
 with open("semantic-splitter-text.txt", "a", encoding="utf-8") as splitter_file:
     count = 0
-    for index, split in enumerate(split_strings[0]):
-        splitter_file.write(f"Split {count+1}: {split}\n\n")
-        count+=1
-    for index, split in enumerate(split_strings[1]):
-        splitter_file.write(f"Split {count+1}: {split}\n\n")
-        count+=1
+    for split_list in split_strings:
+        for split in split_list:
+            splitter_file.write(f"Split {count+1}: {split}\n\n")
+            count += 1
 
-embedding_model = OpenAIEmbeddings(api_key="sk-proj-kSuVuigJUmFZvwvVrCjWT3BlbkFJIggxA3As7tHX9SiXUb4L")
+embedding_model = OpenAIEmbeddings(api_key=os.getenv("OPENAI_API_KEY"))
 vectorstore = Chroma("Prototype-Vector", embedding_model)
     
 for large_chunk in split_strings:
