@@ -1,10 +1,10 @@
 import os
 
 from dotenv import load_dotenv
-from transcript_indexer import Indexer
-from transcript_scraper import Scraper
+from components.transcript_indexer import Indexer
+from components.transcript_scraper import Scraper
 
-from logger import logger
+from components.logger import logger
 
 # Load environment variables
 load_dotenv()
