@@ -22,6 +22,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run tests
+      env:
+        INDEX_NAME: ${{ vars.INDEX_NAME }}
+        INDEX_SOURCE_TAG: ${{ vars.INDEX_SOURCE_TAG }}
+        LANGCHAIN_ENDPOINT: ${{ vars.LANGCHAIN_ENDPOINT }}
+        LANGCHAIN_TRACING_V2: ${{ vars.LANGCHAIN_TRACING_V2 }}
+        PINECONE_CLOUD: ${{ vars.PINECONE_CLOUD }}
+        PINECONE_REGION: ${{ vars.PINECONE_REGION }}
+        USER_AGENT: ${{ vars.USER_AGENT }}
       run: |
         python -m pytest
 
