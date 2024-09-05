@@ -31,7 +31,7 @@ class Indexer:
 
         self.index = self.pinecone.Index(host=os.environ["INDEX_HOST"], name=os.environ["INDEX_NAME"])
 
-    def __extract_metadata(self, video_url):
+
         opts = {}
         try:
             with YoutubeDL(opts) as yt:
