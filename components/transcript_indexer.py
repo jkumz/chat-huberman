@@ -4,10 +4,11 @@ import logging
 from typing import List
 from langchain_ai21 import AI21SemanticTextSplitter
 from langchain_openai import OpenAIEmbeddings
-from components.video_processing_tracker import VideoProcessingTracker
+from video_processing_tracker import VideoProcessingTracker
 from yt_dlp import YoutubeDL
 from pinecone import Pinecone
 
+logger = logging.getLogger(__name__)
 
 class Indexer:
     openai_embedding_model = "text-embedding-3-large"
@@ -52,13 +53,14 @@ class Indexer:
                 data = {"url": video_url, "title": info.get("title")}
                 return data
         except Exception as e:
-            logging.debug(f"Encountered error while extracting metadata: {e}")
+            logger.debug(f"Encountered error while extracting metadata: {e}")
 
     def process_and_index_chunks(
         self, url, doc_chunks: List[str], video_id: str, batch_size: int = 100
     ):
         # Use attributes initialized in the constructor
         title = self.__extract_metadata(video_url=url)["title"]
+        logger.info(f"Starting processing for video: {video_id}")
         self.tracker.start_processing(video_id)
 
         try:
@@ -91,9 +93,9 @@ class Indexer:
                 self.index.upsert(vectors=vectors_to_upsert)
 
             self.tracker.complete_processing(video_id)
-            logging.info(f"Successfully processed and indexed video: {video_id}")
+            logger.info(f"Successfully processed and indexed video: {video_id}")
 
         except Exception as e:
-            logging.debug(f"Error processing video {video_id}: {str(e)}")
+            logger.debug(f"Error processing video {video_id}: {str(e)}")
             self.tracker.fail_processing(video_id)
             raise e

@@ -179,6 +179,7 @@ def test_init_with_default_path(mock_find_db_path):
     mock_find_db_path.return_value = "/fake/path/video_processing.db"
 
     with patch("sqlite3.connect") as mock_connect:
+        # trunk-ignore(ruff/F841)
         tracker = VideoProcessingTracker()
         mock_connect.assert_called_once_with("/fake/path/video_processing.db")
 
@@ -188,5 +189,6 @@ def test_init_with_custom_path():
     custom_path = "/custom/path/video_processing.db"
 
     with patch("sqlite3.connect") as mock_connect:
+        # trunk-ignore(ruff/F841)
         tracker = VideoProcessingTracker(db_path=custom_path)
         mock_connect.assert_called_once_with(custom_path)
