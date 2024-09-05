@@ -27,15 +27,23 @@ class Scraper:
     the YT vid URLs from that channel into a list and returns the list
     """
 
-    def __get_urls(self):
+    def __get_all_video_data(self):
         try:
             videos = scrapetube.get_channel(channel_username=self.channel_username)
-            video_urls = [
-                f"https://www.youtube.com/watch?v={video['videoId']}"
-                for video in videos
-            ]
-            logger.info(f"Count of video URLs: {len(video_urls)}")
-            return video_urls
+            all_video_data = []
+            for video in videos:
+                video_url = f"https://www.youtube.com/watch?v={video['videoId']}"
+                title = video['title']['runs'][0]['text']
+                video_id = video["videoId"]
+                all_video_data.append(
+                    {
+                        "video_id": video_id,
+                        "video_url": video_url,
+                        "title": title,
+                    }
+                )
+            logger.info(f"Count of video URLs: {len(all_video_data)}")
+            return all_video_data
 
         except json.JSONDecodeError as e:
             logger.debug(f"Error decoding JSON response: {e}")
@@ -71,35 +79,36 @@ class Scraper:
     """
 
     def scrape_and_preprocess(self, count=None):
-        video_urls = self.__get_urls()
-        chunked_transcripts = []  # Stores dictionaries of { url : [chunks] } format
+        all_video_data = self.__get_all_video_data()
+        video_data_with_chunks = []  # Stores dictionaries with video data and chunks
 
         languages = ["en-US", "en"]  # We only want transcripts in these languages
-        for index, url in enumerate(video_urls[:count] if count else video_urls):
-            # TODO - Check if already processed - if it is don't need to repeat - use metadata
-            # Check if has english transcript
+        for video_data in all_video_data[:count] if count else all_video_data:
             has_valid_transcript = False
             for lang in languages:
                 try:
-                    loader = self.youtube_loader.from_youtube_url(url, language=lang)
+                    loader = self.youtube_loader.from_youtube_url(video_data["video_url"], language=lang)
                     video_transcript = loader.load()
                     has_valid_transcript = True
                     break
                 except Exception as exception:
                     logger.debug(f"Attempt with language '{lang}' failed: {exception}")
             if not has_valid_transcript:
-                logger.info(
-                    f"No suitable transcript found for video {index+1} - Skipping..."
-                )
+                logger.info(f"No suitable transcript found for video: {video_data['title']} - {video_data['video_url']}. Skipping...")
                 continue
 
-            # Split the document semantically - semantic splitter can only chunk 99,999 chars at a time
-            # so we use List Comprehension to prepare the chunks to be semantically split
+            # Split the document semantically
+            # Semantic splitter can only chunk 99,999 chars at a time
             doc_chunks = [
                 chunk
                 for doc in video_transcript
                 for chunk in self.__prepare_document_chunks(doc.page_content)
             ]
-            chunked_transcripts.append({"url": url, "chunks": doc_chunks})
-            logger.info(f"Saved transcript {index+1}")
-        return chunked_transcripts
+            video_data_with_chunks.append({
+                "url": video_data["video_url"],
+                "title": video_data["title"],
+                "id": video_data["video_id"],
+                "chunks": doc_chunks
+            })
+            logger.info(f"Saved transcript for video: {video_data['title']} - {video_data['video_url']}")
+        return video_data_with_chunks

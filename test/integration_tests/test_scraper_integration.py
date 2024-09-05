@@ -20,9 +20,13 @@ from components.transcript_scraper import Scraper
 def mock_scrapetube():
     # Use patch to mock the scrapetube module within the Scraper class
     with patch("components.transcript_scraper.scrapetube") as mock:
-        # Set up the mock to return a list of 5 mock video IDs when get_channel is called
         mock.get_channel.return_value = [
-            {"videoId": f"mockvideo{i}"} for i in range(1, 6)
+            {
+                "videoId": f"mockvideo{i}",
+                "title": {
+                    "runs": [{"text": f"Mock Video {i} Title"}]
+                }
+            } for i in range(1, 6)
         ]
         yield mock  # Provide the mock to the test, then clean up after
 
