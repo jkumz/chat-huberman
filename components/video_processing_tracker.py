@@ -1,7 +1,6 @@
 import os
 import sqlite3
 from datetime import datetime
-from typing import List
 
 class VideoProcessingTracker:
 # Find the video_processing.db file in the /persistence folder

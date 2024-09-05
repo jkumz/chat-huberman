@@ -1,11 +1,13 @@
 # Processes document chunks, embeds and indexes in pinecone
-import os, logging
+import os
+import logging
 from typing import List
 from langchain_ai21 import AI21SemanticTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from components.video_processing_tracker import VideoProcessingTracker
 from yt_dlp import YoutubeDL
-from pinecone import Pinecone, ServerlessSpec
+from pinecone import Pinecone
+
 
 class Indexer:
     openai_embedding_model = "text-embedding-3-large"
@@ -18,6 +20,7 @@ class Indexer:
     - openai_api_key (str): API key for OpenAI.
     - pinecone_api_key (str): API key for Pinecone.
     """
+
     def __init__(self, ai21_api_key, openai_api_key, pinecone_api_key):
         self.ai21_api_key = ai21_api_key
         self.openai_api_key = openai_api_key
@@ -25,11 +28,19 @@ class Indexer:
 
         self.tracker = VideoProcessingTracker()
 
-        self.semantic_text_splitter = AI21SemanticTextSplitter(api_key=self.ai21_api_key)
-        self.embedding_model = OpenAIEmbeddings(api_key=self.openai_api_key, model=self.openai_embedding_model)
-        self.pinecone = Pinecone(api_key=self.pinecone_api_key, source_tag=os.environ["INDEX_SOURCE_TAG"])
+        self.semantic_text_splitter = AI21SemanticTextSplitter(
+            api_key=self.ai21_api_key
+        )
+        self.embedding_model = OpenAIEmbeddings(
+            api_key=self.openai_api_key, model=self.openai_embedding_model
+        )
+        self.pinecone = Pinecone(
+            api_key=self.pinecone_api_key, source_tag=os.environ["INDEX_SOURCE_TAG"]
+        )
 
-        self.index = self.pinecone.Index(host=os.environ["INDEX_HOST"], name=os.environ["INDEX_NAME"])
+        self.index = self.pinecone.Index(
+            host=os.environ["INDEX_HOST"], name=os.environ["INDEX_NAME"]
+        )
 
     def __extract_metadata(self, video_url):
         opts = {}
@@ -38,15 +49,14 @@ class Indexer:
                 info = yt.extract_info(video_url, download=False)
                 if len(info) == 0:
                     return {}
-                data = {
-                    "url": video_url,
-                    "title": info.get("title")
-                }
+                data = {"url": video_url, "title": info.get("title")}
                 return data
         except Exception as e:
             logging.debug(f"Encountered error while extracting metadata: {e}")
 
-    def process_and_index_chunks(self, url, doc_chunks: List[str], video_id: str, batch_size: int = 100):
+    def process_and_index_chunks(
+        self, url, doc_chunks: List[str], video_id: str, batch_size: int = 100
+    ):
         # Use attributes initialized in the constructor
         title = self.__extract_metadata(video_url=url)["title"]
         self.tracker.start_processing(video_id)
@@ -67,7 +77,7 @@ class Indexer:
                         "video_title": title,
                         "chunk_index": chunk_i,
                         "split_index": split_i,
-                        "text": split
+                        "text": split,
                     }
 
                     vector_id = f"{video_id}_chunk{chunk_i}_split{split_i}"
