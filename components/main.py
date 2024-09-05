@@ -31,8 +31,8 @@ def main():
     logger.info(
         f"Starting to scrape transcripts using channel username: {channel_username}"
     )
-    chunked_transcripts = scraper.scrape_and_preprocess()
-    logger.info(f"Scraped and preprocessed {len(chunked_transcripts)} videos")
+    video_data_with_chunks = scraper.scrape_and_preprocess()
+    logger.info(f"Scraped and preprocessed {len(video_data_with_chunks)} videos")
 
     # Initialize the Indexer with API keys from environment variables
     indexer = Indexer(
@@ -42,14 +42,15 @@ def main():
     )
 
     # Process and index each video's transcript chunks
-    for video in chunked_transcripts:
-        url = video["url"]
-        chunks = video["chunks"]
-        video_id = url.split("v=")[1]  # Extract video ID from URL
+    for video_data in video_data_with_chunks:
+        url = video_data["url"]
+        title = video_data["title"]
+        chunks = video_data["chunks"]
+        video_id = video_data["id"]
 
-        logger.info(f"Processing and indexing video: {url}")
+        logger.info(f"Processing and indexing video: {title} - {url}")
         try:
-            indexer.process_and_index_chunks(url, chunks, video_id)
+            indexer.process_and_index_chunks(url, chunks, video_id, title)
             logger.info(f"Successfully processed and indexed video: {video_id}")
         except Exception as e:
             logger.error(f"Error processing video {video_id}: {str(e)}")
