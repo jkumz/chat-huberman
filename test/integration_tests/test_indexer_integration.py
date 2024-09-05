@@ -16,16 +16,19 @@ def mock_external_services():
         "components.transcript_indexer.OpenAIEmbeddings"
     ) as mock_embeddings, patch(
         "components.transcript_indexer.Pinecone"
-    ) as mock_pinecone:
+    ) as mock_pinecone, patch(
+        "components.transcript_indexer.VideoProcessingTracker"
+    ) as mock_tracker:
         # Setup mock behaviors
         mock_splitter.return_value.split_text.return_value = ["Split 1", "Split 2"]
         mock_embeddings.return_value.embed_query.return_value = [0.1, 0.2, 0.3]
         mock_pinecone.return_value.Index.return_value = MagicMock()
-
+        mock_tracker.return_value = MagicMock()
         yield {
             "splitter": mock_splitter,
             "embeddings": mock_embeddings,
-            "pinecone": mock_pinecone
+            "pinecone": mock_pinecone,
+            "tracker": mock_tracker
         }
 
 
@@ -83,3 +86,26 @@ def test_batch_processing(indexer, mock_external_services):
 
     # Verify that Pinecone upsert was called multiple times (due to batching)
     assert indexer.index.upsert.call_count > 1, "Batching upsert to Pinecone failed"
+
+def test_delete_existing_video_on_failure(indexer, mock_external_services):
+    url = "https://www.youtube.com/watch?v=test_video"
+    chunks = ["ChunkChunkChunkChunkChunkChunk"] * 150
+    video_id = "test_video"
+    title = "Test Video"
+
+    # Mock the upsert method to raise an exception
+    indexer.index.upsert.side_effect = Exception("Simulated failure")
+
+    # Process should raise an exception
+    with pytest.raises(Exception, match="Simulated failure"):
+        indexer.process_and_index_chunks(url, chunks, video_id, title)
+
+    # Verify that the tracker methods are called correctly
+    mock_external_services['tracker'].return_value.start_processing.assert_called_once_with(video_id)
+    mock_external_services['tracker'].return_value.fail_processing.assert_called_once_with(video_id)
+    mock_external_services['tracker'].return_value.complete_processing.assert_not_called()
+
+    # Verify that delete was called with the correct filter
+    indexer.index.delete.assert_called_once()
+    delete_call = indexer.index.delete.call_args
+    assert delete_call[1]['filter']['id']['$regex'] == f"^{video_id}_"

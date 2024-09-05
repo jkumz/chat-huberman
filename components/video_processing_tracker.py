@@ -1,9 +1,8 @@
-import logging
 import os
 import sqlite3
 from datetime import datetime
 
-logger = logging.getLogger(__name__)
+from .logger import logger
 
 
 class VideoProcessingTracker:
@@ -115,6 +114,16 @@ class VideoProcessingTracker:
         result = [row[0] for row in cursor.fetchall()]
         logger.debug(f"Found {len(result)} unprocessed videos")
         return result
+
+    def check_if_video_exists(self, video_id):
+        logger.debug(f"Checking if video_id {video_id} exists")
+        cursor = self.conn.cursor()
+        cursor.execute(
+            'SELECT video_id FROM video_processing_status WHERE video_id = ?',
+            (video_id,)
+        )
+        result = cursor.fetchone()
+        return result is not None
 
     def close(self):
         logger.info("Closing database connection")

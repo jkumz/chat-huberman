@@ -4,11 +4,10 @@
 # TODO: Deploy this as a microservice on the web, polling and updating results daily in cloud
 
 import json
-import logging
 import scrapetube
 from langchain_community.document_loaders import YoutubeLoader
-
-logger = logging.getLogger(__name__)
+from .logger import logger
+from .video_processing_tracker import VideoProcessingTracker
 
 
 class Scraper:
@@ -31,7 +30,10 @@ class Scraper:
         try:
             videos = scrapetube.get_channel(channel_username=self.channel_username)
             all_video_data = []
+            video_processing_tracker = VideoProcessingTracker()
             for video in videos:
+                if video_processing_tracker.check_if_video_exists(video["videoId"]):
+                    continue
                 video_url = f"https://www.youtube.com/watch?v={video['videoId']}"
                 title = video['title']['runs'][0]['text']
                 video_id = video["videoId"]
