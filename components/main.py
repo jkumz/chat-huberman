@@ -1,22 +1,10 @@
-import logging
 import os
-import sys
 
 from dotenv import load_dotenv
 from transcript_indexer import Indexer
 from transcript_scraper import Scraper
 
-# Set up logging
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler("app.log")
-    ]
-)
-
-logger = logging.getLogger(__name__)
+from logger import logger
 
 # Load environment variables
 load_dotenv()

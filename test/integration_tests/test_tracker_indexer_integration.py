@@ -8,20 +8,18 @@ def mock_external_services():
     with patch('components.transcript_indexer.AI21SemanticTextSplitter') as mock_splitter, \
          patch('components.transcript_indexer.OpenAIEmbeddings') as mock_embeddings, \
          patch('components.transcript_indexer.Pinecone') as mock_pinecone, \
-         patch('components.transcript_indexer.YoutubeDL') as mock_ytdl, \
          patch('components.transcript_indexer.VideoProcessingTracker') as mock_tracker:
         
         # Set up mock behaviors
         mock_splitter.return_value.split_text.return_value = ["Split 1", "Split 2"]
         mock_embeddings.return_value.embed_query.return_value = [0.1, 0.2, 0.3]
         mock_pinecone.return_value.Index.return_value = MagicMock()
-        mock_ytdl.return_value.__enter__.return_value.extract_info.return_value = {"title": "Test Video"}
+        mock_tracker.return_value = MagicMock()
         
         yield {
             'splitter': mock_splitter,
             'embeddings': mock_embeddings,
             'pinecone': mock_pinecone,
-            'ytdl': mock_ytdl,
             'tracker': mock_tracker
         }
 
@@ -39,8 +37,8 @@ def test_tracker_indexer_interaction(indexer, mock_external_services):
     url = "https://www.youtube.com/watch?v=test_video"
     chunks = ["This is a long enough chunk to be processed"]
     video_id = "test_video"
-
-    indexer.process_and_index_chunks(url, chunks, video_id)
+    title = "Test Video"
+    indexer.process_and_index_chunks(url, chunks, video_id, title)
 
     # Verify that the tracker methods are called correctly
     mock_external_services['tracker'].return_value.start_processing.assert_called_once_with(video_id)
@@ -52,6 +50,7 @@ def test_indexer_tracker_interaction_on_error(indexer, mock_external_services):
     url = "https://www.youtube.com/watch?v=test_video"
     chunks = ["This is a long enough chunk to be processed"]
     video_id = "test_video"
+    title = "Test Video"
 
     # Simulate an error in semantic splitting
     mock_external_services['splitter'].return_value.split_text.side_effect = Exception("Splitting error")
@@ -59,9 +58,14 @@ def test_indexer_tracker_interaction_on_error(indexer, mock_external_services):
     # Expect the method to raise an exception
     # trunk-ignore(ruff/B017)
     with pytest.raises(Exception):
-        indexer.process_and_index_chunks(url, chunks, video_id)
+        indexer.process_and_index_chunks(url, chunks, video_id, title)
 
     # Verify that the tracker methods are called correctly in case of an error
     mock_external_services['tracker'].return_value.start_processing.assert_called_once_with(video_id)
     mock_external_services['tracker'].return_value.complete_processing.assert_not_called()
     mock_external_services['tracker'].return_value.fail_processing.assert_called_once_with(video_id)
+
+    # Verify that all embeddings for the video ID are removed from the index
+    indexer.index.delete.assert_called_once()
+    delete_call = indexer.index.delete.call_args
+    assert delete_call[1]['filter']['id']['$regex'] == f"^{video_id}_"

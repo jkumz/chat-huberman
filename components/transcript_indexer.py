@@ -1,13 +1,12 @@
 # Processes document chunks, embeds and indexes in pinecone
 import os
-import logging
 from typing import List
 from langchain_ai21 import AI21SemanticTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from .video_processing_tracker import VideoProcessingTracker
 from pinecone import Pinecone
 
-logger = logging.getLogger(__name__)
+from .logger import logger
 
 class Indexer:
     openai_embedding_model = "text-embedding-3-large"
@@ -84,4 +83,6 @@ class Indexer:
         except Exception as e:
             logger.debug(f"Error processing video {video_id}: {str(e)}")
             self.tracker.fail_processing(video_id)
+            # Delete all vectors in the index which have the video id in the vector id
+            self.index.delete(filter={"id": {"$regex": f"^{video_id}_"}})
             raise e
