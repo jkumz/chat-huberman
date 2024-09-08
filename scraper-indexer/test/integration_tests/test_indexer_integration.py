@@ -1,15 +1,24 @@
 """We don't want to test Pinecone, AI21 Semantic Splitting, or OpenAI embedding. These are external
 services and they are maintained. We can presume they are working."""
 
+import os
 from unittest.mock import MagicMock, patch
 
 import pytest
 
 from components.transcript_indexer import Indexer
 
+@pytest.fixture
+def mock_environment():
+    with patch.dict(os.environ, {
+        "INDEX_SOURCE_TAG": "test_source_tag",
+        "INDEX_HOST": "test_host",
+        "INDEX_NAME": "test_index"
+    }):
+        yield
 
 @pytest.fixture
-def mock_external_services():
+def mock_external_services(mock_environment):
     with patch(
         "components.transcript_indexer.AI21SemanticTextSplitter"
     ) as mock_splitter, patch(
@@ -108,4 +117,4 @@ def test_delete_existing_video_on_failure(indexer, mock_external_services):
     # Verify that delete was called with the correct filter
     indexer.index.delete.assert_called_once()
     delete_call = indexer.index.delete.call_args
-    assert delete_call[1]['filter']['id']['$regex'] == f"^{video_id}_"
+    assert delete_call[1] == {"filter": {"video_id": video_id}}

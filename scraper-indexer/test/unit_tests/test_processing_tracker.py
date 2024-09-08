@@ -128,12 +128,12 @@ def test_get_unprocessed_videos(tracker, mock_db_connection):
 
 @patch("os.path.exists")
 @patch("os.path.join")
-@patch("os.getcwd")
+@patch("os.path.abspath")
 @patch("os.path.dirname")
 @patch("sqlite3.connect")
-def test_find_db_path(mock_connect, mock_dirname, mock_getcwd, mock_join, mock_exists):
+def test_find_db_path(mock_connect, mock_dirname, mock_abspath, mock_join, mock_exists):
     # Set up the mock directory structure
-    mock_getcwd.return_value = "/fake/path/to/current/dir"
+    mock_abspath.return_value = "/fake/path/scraper-indexer/components/video_processing_tracker.py"
 
     def fake_dirname(path):
         parts = path.split("/")
@@ -145,7 +145,7 @@ def test_find_db_path(mock_connect, mock_dirname, mock_getcwd, mock_join, mock_e
 
     # Set up mock_exists to return True only for the correct path
     def fake_exists(path):
-        return path == "/fake/path/persistence/video_processing.db"
+        return path == "/fake/path/scraper-indexer/persistence/video_processing.db"
 
     mock_exists.side_effect = fake_exists
 
@@ -156,22 +156,19 @@ def test_find_db_path(mock_connect, mock_dirname, mock_getcwd, mock_join, mock_e
 
     db_path = tracker.find_db_path()
 
-    assert db_path == "/fake/path/persistence/video_processing.db"
+    assert db_path == "/fake/path/scraper-indexer/persistence/video_processing.db", f"got {db_path}"
 
     # Check that os.path.exists was called for each directory up to the correct one
     expected_checks = [
-        "/fake/path/to/current/dir/persistence/video_processing.db",
-        "/fake/path/to/current/persistence/video_processing.db",
-        "/fake/path/to/persistence/video_processing.db",
-        "/fake/path/persistence/video_processing.db",
+        "/fake/path/scraper-indexer/components/persistence/video_processing.db",
+        "/fake/path/scraper-indexer/persistence/video_processing.db",
     ]
 
     for check in expected_checks:
         mock_exists.assert_any_call(check)
 
     # Verify that sqlite3.connect was called with the correct path
-    mock_connect.assert_called_once_with("/fake/path/persistence/video_processing.db")
-
+    mock_connect.assert_called_once_with("/fake/path/scraper-indexer/persistence/video_processing.db")
 
 @patch("components.video_processing_tracker.VideoProcessingTracker.find_db_path")
 def test_init_with_default_path(mock_find_db_path):

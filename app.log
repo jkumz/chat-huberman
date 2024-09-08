@@ -1,0 +1,1631 @@
+2024-09-08 21:39:31,272 - INFO - Starting to scrape transcripts using channel username: hubermanlab
+2024-09-08 21:39:31,273 - INFO - Scraped and preprocessed 0 videos
+2024-09-08 21:40:58,187 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:40:58,188 - INFO - Closing database connection
+2024-09-08 21:40:58,188 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:40:58,189 - INFO - Checking status for video_id: test_video
+2024-09-08 21:40:58,189 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:40:58,189 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:40:58,189 - INFO - Closing database connection
+2024-09-08 21:40:58,189 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:40:58,190 - INFO - Checking status for video_id: test_video
+2024-09-08 21:40:58,190 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:40:58,190 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:40:58,190 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:40:58,190 - INFO - Closing database connection
+2024-09-08 21:40:58,190 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:40:58,190 - INFO - Checking status for video_id: test_video
+2024-09-08 21:40:58,190 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:40:58,190 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:40:58,191 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:40:58,191 - INFO - Closing database connection
+2024-09-08 21:40:58,191 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:40:58,191 - INFO - Checking status for video_id: test_video
+2024-09-08 21:40:58,191 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:40:58,192 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:40:58,192 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:40:58,192 - INFO - Closing database connection
+2024-09-08 21:40:58,192 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:40:58,193 - INFO - Checking status for video_id: video1
+2024-09-08 21:40:58,193 - INFO - Starting processing for video_id: video1
+2024-09-08 21:40:58,193 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:40:58,193 - INFO - Checking status for video_id: video2
+2024-09-08 21:40:58,193 - INFO - Starting processing for video_id: video2
+2024-09-08 21:40:58,193 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:40:58,193 - INFO - Checking status for video_id: video3
+2024-09-08 21:40:58,193 - INFO - Starting processing for video_id: video3
+2024-09-08 21:40:58,193 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:40:58,193 - INFO - Completing processing for video_id: video1
+2024-09-08 21:40:58,193 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:40:58,194 - INFO - Getting unprocessed videos
+2024-09-08 21:40:58,194 - INFO - Found 2 unprocessed videos
+2024-09-08 21:40:58,194 - INFO - Completing processing for video_id: video3
+2024-09-08 21:40:58,194 - INFO - Getting unprocessed videos
+2024-09-08 21:40:58,194 - INFO - Found 1 unprocessed videos
+2024-09-08 21:40:58,194 - INFO - Closing database connection
+2024-09-08 21:40:58,195 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/persistence/video_processing.db
+2024-09-08 21:40:58,196 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:40:58,197 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:41:39,059 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,062 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,062 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:41:39,062 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:41:39,063 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,064 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,064 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:41:39,064 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:41:39,065 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,065 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,065 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:41:39,065 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:41:39,066 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,066 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,066 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:41:39,066 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:41:39,066 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:41:39,066 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:41:39,066 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:41:39,067 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,067 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,067 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:41:39,069 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,069 - INFO - Count of video URLs: 0
+2024-09-08 21:41:39,070 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,070 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,070 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:41:39,071 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,071 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,071 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:41:39,072 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,072 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,072 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:41:39,073 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,073 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,073 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:41:39,074 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,074 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,075 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:41:39,075 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,076 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,076 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:41:39,078 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:41:39,078 - INFO - Count of video URLs: 5
+2024-09-08 21:41:39,078 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:41:39,098 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:41:39,098 - INFO - Closing database connection
+2024-09-08 21:41:39,099 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:41:39,099 - INFO - Checking status for video_id: test_video
+2024-09-08 21:41:39,099 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:41:39,099 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:41:39,099 - INFO - Closing database connection
+2024-09-08 21:41:39,099 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:41:39,099 - INFO - Checking status for video_id: test_video
+2024-09-08 21:41:39,100 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:41:39,100 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:41:39,100 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:41:39,100 - INFO - Closing database connection
+2024-09-08 21:41:39,100 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:41:39,100 - INFO - Checking status for video_id: test_video
+2024-09-08 21:41:39,100 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:41:39,100 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:41:39,100 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:41:39,101 - INFO - Closing database connection
+2024-09-08 21:41:39,101 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:41:39,101 - INFO - Checking status for video_id: test_video
+2024-09-08 21:41:39,101 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:41:39,101 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:41:39,101 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:41:39,101 - INFO - Closing database connection
+2024-09-08 21:41:39,102 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:41:39,102 - INFO - Checking status for video_id: video1
+2024-09-08 21:41:39,102 - INFO - Starting processing for video_id: video1
+2024-09-08 21:41:39,102 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:41:39,102 - INFO - Checking status for video_id: video2
+2024-09-08 21:41:39,102 - INFO - Starting processing for video_id: video2
+2024-09-08 21:41:39,102 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:41:39,102 - INFO - Checking status for video_id: video3
+2024-09-08 21:41:39,102 - INFO - Starting processing for video_id: video3
+2024-09-08 21:41:39,102 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:41:39,102 - INFO - Completing processing for video_id: video1
+2024-09-08 21:41:39,102 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:41:39,102 - INFO - Getting unprocessed videos
+2024-09-08 21:41:39,102 - INFO - Found 2 unprocessed videos
+2024-09-08 21:41:39,102 - INFO - Completing processing for video_id: video3
+2024-09-08 21:41:39,102 - INFO - Getting unprocessed videos
+2024-09-08 21:41:39,102 - INFO - Found 1 unprocessed videos
+2024-09-08 21:41:39,103 - INFO - Closing database connection
+2024-09-08 21:41:39,107 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:41:39,108 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:43:45,503 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,505 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,506 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:43:45,506 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:43:45,507 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,507 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,507 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:43:45,507 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:43:45,508 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,509 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,509 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:43:45,509 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:43:45,510 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,510 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,510 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:43:45,510 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:43:45,510 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:43:45,510 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:43:45,510 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:43:45,511 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,512 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,512 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:43:45,513 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,513 - INFO - Count of video URLs: 0
+2024-09-08 21:43:45,514 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,514 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,514 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:43:45,515 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,515 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,515 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:43:45,516 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,516 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,516 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:43:45,517 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,517 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,517 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:43:45,518 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,518 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,518 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:43:45,520 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,520 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,520 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:43:45,522 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:43:45,523 - INFO - Count of video URLs: 5
+2024-09-08 21:43:45,523 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:43:45,543 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:43:45,543 - INFO - Closing database connection
+2024-09-08 21:43:45,544 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:43:45,544 - INFO - Checking status for video_id: test_video
+2024-09-08 21:43:45,544 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:43:45,545 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:43:45,545 - INFO - Closing database connection
+2024-09-08 21:43:45,545 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:43:45,545 - INFO - Checking status for video_id: test_video
+2024-09-08 21:43:45,545 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:43:45,545 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:43:45,546 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:43:45,546 - INFO - Closing database connection
+2024-09-08 21:43:45,546 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:43:45,546 - INFO - Checking status for video_id: test_video
+2024-09-08 21:43:45,546 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:43:45,546 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:43:45,546 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:43:45,547 - INFO - Closing database connection
+2024-09-08 21:43:45,547 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:43:45,547 - INFO - Checking status for video_id: test_video
+2024-09-08 21:43:45,547 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:43:45,547 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:43:45,547 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:43:45,547 - INFO - Closing database connection
+2024-09-08 21:43:45,548 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:43:45,548 - INFO - Checking status for video_id: video1
+2024-09-08 21:43:45,548 - INFO - Starting processing for video_id: video1
+2024-09-08 21:43:45,548 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:43:45,548 - INFO - Checking status for video_id: video2
+2024-09-08 21:43:45,548 - INFO - Starting processing for video_id: video2
+2024-09-08 21:43:45,548 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:43:45,548 - INFO - Checking status for video_id: video3
+2024-09-08 21:43:45,548 - INFO - Starting processing for video_id: video3
+2024-09-08 21:43:45,548 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:43:45,548 - INFO - Completing processing for video_id: video1
+2024-09-08 21:43:45,548 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:43:45,548 - INFO - Getting unprocessed videos
+2024-09-08 21:43:45,548 - INFO - Found 2 unprocessed videos
+2024-09-08 21:43:45,548 - INFO - Completing processing for video_id: video3
+2024-09-08 21:43:45,548 - INFO - Getting unprocessed videos
+2024-09-08 21:43:45,548 - INFO - Found 1 unprocessed videos
+2024-09-08 21:43:45,549 - INFO - Closing database connection
+2024-09-08 21:43:45,554 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:43:45,556 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:44:03,286 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,289 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,289 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:44:03,289 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:44:03,290 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,290 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,290 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:44:03,291 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:44:03,292 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,292 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,292 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:44:03,292 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:44:03,293 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,293 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,293 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:44:03,293 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:44:03,293 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:44:03,293 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:44:03,293 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:44:03,294 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,294 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,294 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:44:03,295 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,295 - INFO - Count of video URLs: 0
+2024-09-08 21:44:03,296 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,296 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,296 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:44:03,297 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,297 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,297 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:44:03,298 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,298 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,299 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:44:03,299 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,300 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,300 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:44:03,301 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,301 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,301 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:44:03,302 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,303 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,303 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:44:03,305 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:44:03,305 - INFO - Count of video URLs: 5
+2024-09-08 21:44:03,305 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:44:03,325 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:44:03,325 - INFO - Closing database connection
+2024-09-08 21:44:03,325 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:44:03,326 - INFO - Checking status for video_id: test_video
+2024-09-08 21:44:03,326 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:44:03,326 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:44:03,326 - INFO - Closing database connection
+2024-09-08 21:44:03,326 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:44:03,326 - INFO - Checking status for video_id: test_video
+2024-09-08 21:44:03,327 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:44:03,327 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:44:03,327 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:44:03,327 - INFO - Closing database connection
+2024-09-08 21:44:03,328 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:44:03,328 - INFO - Checking status for video_id: test_video
+2024-09-08 21:44:03,328 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:44:03,328 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:44:03,328 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:44:03,328 - INFO - Closing database connection
+2024-09-08 21:44:03,329 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:44:03,329 - INFO - Checking status for video_id: test_video
+2024-09-08 21:44:03,329 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:44:03,329 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:44:03,329 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:44:03,329 - INFO - Closing database connection
+2024-09-08 21:44:03,330 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:44:03,330 - INFO - Checking status for video_id: video1
+2024-09-08 21:44:03,330 - INFO - Starting processing for video_id: video1
+2024-09-08 21:44:03,330 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:44:03,330 - INFO - Checking status for video_id: video2
+2024-09-08 21:44:03,330 - INFO - Starting processing for video_id: video2
+2024-09-08 21:44:03,330 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:44:03,330 - INFO - Checking status for video_id: video3
+2024-09-08 21:44:03,330 - INFO - Starting processing for video_id: video3
+2024-09-08 21:44:03,330 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:44:03,330 - INFO - Completing processing for video_id: video1
+2024-09-08 21:44:03,330 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:44:03,330 - INFO - Getting unprocessed videos
+2024-09-08 21:44:03,330 - INFO - Found 2 unprocessed videos
+2024-09-08 21:44:03,330 - INFO - Completing processing for video_id: video3
+2024-09-08 21:44:03,330 - INFO - Getting unprocessed videos
+2024-09-08 21:44:03,330 - INFO - Found 1 unprocessed videos
+2024-09-08 21:44:03,330 - INFO - Closing database connection
+2024-09-08 21:44:03,335 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:44:03,336 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:46:17,583 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,585 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,585 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:17,585 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:46:17,586 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,587 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,587 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:17,587 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:46:17,588 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,588 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,588 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:17,588 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:46:17,589 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,589 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,589 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:17,589 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:46:17,589 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:46:17,589 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:46:17,589 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:46:17,590 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,590 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,590 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:46:17,591 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,591 - INFO - Count of video URLs: 0
+2024-09-08 21:46:17,593 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,593 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,593 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:17,594 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,594 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,594 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:17,595 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,595 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,595 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:17,596 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,596 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,597 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:17,597 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,598 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,598 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:17,599 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,599 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,599 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:17,601 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:17,601 - INFO - Count of video URLs: 5
+2024-09-08 21:46:17,601 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:17,622 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:17,622 - INFO - Closing database connection
+2024-09-08 21:46:17,623 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:17,623 - INFO - Checking status for video_id: test_video
+2024-09-08 21:46:17,623 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:46:17,623 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:46:17,623 - INFO - Closing database connection
+2024-09-08 21:46:17,624 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:17,624 - INFO - Checking status for video_id: test_video
+2024-09-08 21:46:17,624 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:46:17,624 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:46:17,624 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:46:17,624 - INFO - Closing database connection
+2024-09-08 21:46:17,624 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:17,625 - INFO - Checking status for video_id: test_video
+2024-09-08 21:46:17,625 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:46:17,625 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:46:17,625 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:46:17,625 - INFO - Closing database connection
+2024-09-08 21:46:17,625 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:17,625 - INFO - Checking status for video_id: test_video
+2024-09-08 21:46:17,625 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:46:17,625 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:46:17,625 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:46:17,626 - INFO - Closing database connection
+2024-09-08 21:46:17,626 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:17,626 - INFO - Checking status for video_id: video1
+2024-09-08 21:46:17,626 - INFO - Starting processing for video_id: video1
+2024-09-08 21:46:17,626 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:46:17,626 - INFO - Checking status for video_id: video2
+2024-09-08 21:46:17,626 - INFO - Starting processing for video_id: video2
+2024-09-08 21:46:17,626 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:46:17,626 - INFO - Checking status for video_id: video3
+2024-09-08 21:46:17,626 - INFO - Starting processing for video_id: video3
+2024-09-08 21:46:17,626 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:46:17,626 - INFO - Completing processing for video_id: video1
+2024-09-08 21:46:17,626 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:46:17,626 - INFO - Getting unprocessed videos
+2024-09-08 21:46:17,626 - INFO - Found 2 unprocessed videos
+2024-09-08 21:46:17,626 - INFO - Completing processing for video_id: video3
+2024-09-08 21:46:17,626 - INFO - Getting unprocessed videos
+2024-09-08 21:46:17,627 - INFO - Found 1 unprocessed videos
+2024-09-08 21:46:17,627 - INFO - Closing database connection
+2024-09-08 21:46:17,632 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:46:17,633 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:46:39,791 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,793 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,793 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:39,793 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:46:39,794 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,794 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,794 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:39,794 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:46:39,795 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,795 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,795 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:39,796 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:46:39,796 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,797 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,797 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:39,797 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:46:39,797 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:46:39,797 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:46:39,797 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:46:39,798 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,798 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,798 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:46:39,799 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,799 - INFO - Count of video URLs: 0
+2024-09-08 21:46:39,800 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,800 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,800 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:39,801 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,801 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,801 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:39,802 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,802 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,802 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:39,803 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,804 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,804 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:39,805 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,805 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,805 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:39,806 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,806 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,806 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:39,808 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:46:39,808 - INFO - Count of video URLs: 5
+2024-09-08 21:46:39,808 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:46:39,827 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:39,828 - INFO - Closing database connection
+2024-09-08 21:46:39,828 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:39,828 - INFO - Checking status for video_id: test_video
+2024-09-08 21:46:39,829 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:46:39,829 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:46:39,829 - INFO - Closing database connection
+2024-09-08 21:46:39,829 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:39,829 - INFO - Checking status for video_id: test_video
+2024-09-08 21:46:39,829 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:46:39,829 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:46:39,829 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:46:39,830 - INFO - Closing database connection
+2024-09-08 21:46:39,830 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:39,830 - INFO - Checking status for video_id: test_video
+2024-09-08 21:46:39,830 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:46:39,830 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:46:39,830 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:46:39,831 - INFO - Closing database connection
+2024-09-08 21:46:39,831 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:39,831 - INFO - Checking status for video_id: test_video
+2024-09-08 21:46:39,831 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:46:39,831 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:46:39,831 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:46:39,831 - INFO - Closing database connection
+2024-09-08 21:46:39,832 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:46:39,832 - INFO - Checking status for video_id: video1
+2024-09-08 21:46:39,832 - INFO - Starting processing for video_id: video1
+2024-09-08 21:46:39,832 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:46:39,832 - INFO - Checking status for video_id: video2
+2024-09-08 21:46:39,832 - INFO - Starting processing for video_id: video2
+2024-09-08 21:46:39,832 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:46:39,832 - INFO - Checking status for video_id: video3
+2024-09-08 21:46:39,832 - INFO - Starting processing for video_id: video3
+2024-09-08 21:46:39,832 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:46:39,832 - INFO - Completing processing for video_id: video1
+2024-09-08 21:46:39,832 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:46:39,832 - INFO - Getting unprocessed videos
+2024-09-08 21:46:39,832 - INFO - Found 2 unprocessed videos
+2024-09-08 21:46:39,832 - INFO - Completing processing for video_id: video3
+2024-09-08 21:46:39,832 - INFO - Getting unprocessed videos
+2024-09-08 21:46:39,832 - INFO - Found 1 unprocessed videos
+2024-09-08 21:46:39,832 - INFO - Closing database connection
+2024-09-08 21:46:39,837 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:46:39,838 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:47:29,351 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,353 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,353 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:47:29,354 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:47:29,355 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,355 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,355 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:47:29,355 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:47:29,356 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,356 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,356 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:47:29,357 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:47:29,357 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,358 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,358 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:47:29,358 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:47:29,358 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:47:29,358 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:47:29,358 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:47:29,359 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,359 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,359 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:47:29,360 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,360 - INFO - Count of video URLs: 0
+2024-09-08 21:47:29,361 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,361 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,361 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:47:29,362 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,362 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,362 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:47:29,363 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,363 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,363 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:47:29,364 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,364 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,364 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:47:29,365 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,365 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,365 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:47:29,366 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,366 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,366 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:47:29,369 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:47:29,369 - INFO - Count of video URLs: 5
+2024-09-08 21:47:29,369 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:47:29,388 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:47:29,389 - INFO - Closing database connection
+2024-09-08 21:47:29,389 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:47:29,389 - INFO - Checking status for video_id: test_video
+2024-09-08 21:47:29,389 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:47:29,389 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:47:29,389 - INFO - Closing database connection
+2024-09-08 21:47:29,390 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:47:29,390 - INFO - Checking status for video_id: test_video
+2024-09-08 21:47:29,390 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:47:29,390 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:47:29,390 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:47:29,390 - INFO - Closing database connection
+2024-09-08 21:47:29,391 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:47:29,391 - INFO - Checking status for video_id: test_video
+2024-09-08 21:47:29,391 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:47:29,391 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:47:29,391 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:47:29,391 - INFO - Closing database connection
+2024-09-08 21:47:29,391 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:47:29,391 - INFO - Checking status for video_id: test_video
+2024-09-08 21:47:29,392 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:47:29,392 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:47:29,392 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:47:29,392 - INFO - Closing database connection
+2024-09-08 21:47:29,392 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:47:29,393 - INFO - Checking status for video_id: video1
+2024-09-08 21:47:29,393 - INFO - Starting processing for video_id: video1
+2024-09-08 21:47:29,393 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:47:29,393 - INFO - Checking status for video_id: video2
+2024-09-08 21:47:29,393 - INFO - Starting processing for video_id: video2
+2024-09-08 21:47:29,393 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:47:29,393 - INFO - Checking status for video_id: video3
+2024-09-08 21:47:29,393 - INFO - Starting processing for video_id: video3
+2024-09-08 21:47:29,393 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:47:29,393 - INFO - Completing processing for video_id: video1
+2024-09-08 21:47:29,393 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:47:29,393 - INFO - Getting unprocessed videos
+2024-09-08 21:47:29,393 - INFO - Found 2 unprocessed videos
+2024-09-08 21:47:29,393 - INFO - Completing processing for video_id: video3
+2024-09-08 21:47:29,393 - INFO - Getting unprocessed videos
+2024-09-08 21:47:29,393 - INFO - Found 1 unprocessed videos
+2024-09-08 21:47:29,393 - INFO - Closing database connection
+2024-09-08 21:47:29,398 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:47:29,399 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:48:58,311 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,313 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,313 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:48:58,313 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:48:58,314 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,315 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,315 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:48:58,315 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:48:58,316 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,316 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,316 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:48:58,316 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:48:58,317 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,317 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,317 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:48:58,317 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:48:58,317 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:48:58,317 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:48:58,317 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:48:58,318 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,318 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,318 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:48:58,319 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,319 - INFO - Count of video URLs: 0
+2024-09-08 21:48:58,321 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,321 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,321 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:48:58,322 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,322 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,322 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:48:58,323 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,323 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,323 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:48:58,324 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,324 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,324 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:48:58,325 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,325 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,325 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:48:58,326 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,326 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,327 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:48:58,328 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/video_processing.db
+2024-09-08 21:48:58,328 - INFO - Count of video URLs: 5
+2024-09-08 21:48:58,328 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:48:58,348 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:48:58,348 - INFO - Closing database connection
+2024-09-08 21:48:58,349 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:48:58,349 - INFO - Checking status for video_id: test_video
+2024-09-08 21:48:58,349 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:48:58,349 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:48:58,349 - INFO - Closing database connection
+2024-09-08 21:48:58,350 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:48:58,350 - INFO - Checking status for video_id: test_video
+2024-09-08 21:48:58,350 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:48:58,350 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:48:58,350 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:48:58,350 - INFO - Closing database connection
+2024-09-08 21:48:58,351 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:48:58,351 - INFO - Checking status for video_id: test_video
+2024-09-08 21:48:58,351 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:48:58,351 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:48:58,351 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:48:58,351 - INFO - Closing database connection
+2024-09-08 21:48:58,351 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:48:58,352 - INFO - Checking status for video_id: test_video
+2024-09-08 21:48:58,352 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:48:58,352 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:48:58,352 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:48:58,352 - INFO - Closing database connection
+2024-09-08 21:48:58,352 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:48:58,352 - INFO - Checking status for video_id: video1
+2024-09-08 21:48:58,352 - INFO - Starting processing for video_id: video1
+2024-09-08 21:48:58,353 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:48:58,353 - INFO - Checking status for video_id: video2
+2024-09-08 21:48:58,353 - INFO - Starting processing for video_id: video2
+2024-09-08 21:48:58,353 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:48:58,353 - INFO - Checking status for video_id: video3
+2024-09-08 21:48:58,353 - INFO - Starting processing for video_id: video3
+2024-09-08 21:48:58,353 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:48:58,353 - INFO - Completing processing for video_id: video1
+2024-09-08 21:48:58,353 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:48:58,353 - INFO - Getting unprocessed videos
+2024-09-08 21:48:58,353 - INFO - Found 2 unprocessed videos
+2024-09-08 21:48:58,353 - INFO - Completing processing for video_id: video3
+2024-09-08 21:48:58,353 - INFO - Getting unprocessed videos
+2024-09-08 21:48:58,353 - INFO - Found 1 unprocessed videos
+2024-09-08 21:48:58,353 - INFO - Closing database connection
+2024-09-08 21:48:58,358 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:48:58,359 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:50:13,838 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,841 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,841 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:13,841 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:50:13,842 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,842 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,842 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:13,842 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:50:13,843 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,844 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,844 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:13,844 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:50:13,845 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,845 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,845 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:13,845 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:50:13,845 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:50:13,845 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:50:13,845 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:50:13,846 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,846 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,846 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:50:13,847 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,847 - INFO - Count of video URLs: 0
+2024-09-08 21:50:13,848 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,848 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,848 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:13,849 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,850 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,850 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:13,851 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,851 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,851 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:13,852 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,852 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,852 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:13,853 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,853 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,853 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:13,854 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,854 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,854 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:13,856 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:13,856 - INFO - Count of video URLs: 5
+2024-09-08 21:50:13,856 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:13,876 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:13,876 - INFO - Closing database connection
+2024-09-08 21:50:13,876 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:13,877 - INFO - Checking status for video_id: test_video
+2024-09-08 21:50:13,877 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:50:13,877 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:50:13,877 - INFO - Closing database connection
+2024-09-08 21:50:13,877 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:13,877 - INFO - Checking status for video_id: test_video
+2024-09-08 21:50:13,877 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:50:13,878 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:50:13,878 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:50:13,878 - INFO - Closing database connection
+2024-09-08 21:50:13,878 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:13,878 - INFO - Checking status for video_id: test_video
+2024-09-08 21:50:13,878 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:50:13,878 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:50:13,878 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:50:13,878 - INFO - Closing database connection
+2024-09-08 21:50:13,879 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:13,879 - INFO - Checking status for video_id: test_video
+2024-09-08 21:50:13,879 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:50:13,879 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:50:13,879 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:50:13,879 - INFO - Closing database connection
+2024-09-08 21:50:13,880 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:13,880 - INFO - Checking status for video_id: video1
+2024-09-08 21:50:13,880 - INFO - Starting processing for video_id: video1
+2024-09-08 21:50:13,880 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:50:13,880 - INFO - Checking status for video_id: video2
+2024-09-08 21:50:13,880 - INFO - Starting processing for video_id: video2
+2024-09-08 21:50:13,880 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:50:13,880 - INFO - Checking status for video_id: video3
+2024-09-08 21:50:13,880 - INFO - Starting processing for video_id: video3
+2024-09-08 21:50:13,880 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:50:13,880 - INFO - Completing processing for video_id: video1
+2024-09-08 21:50:13,880 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:50:13,880 - INFO - Getting unprocessed videos
+2024-09-08 21:50:13,880 - INFO - Found 2 unprocessed videos
+2024-09-08 21:50:13,880 - INFO - Completing processing for video_id: video3
+2024-09-08 21:50:13,880 - INFO - Getting unprocessed videos
+2024-09-08 21:50:13,880 - INFO - Found 1 unprocessed videos
+2024-09-08 21:50:13,880 - INFO - Closing database connection
+2024-09-08 21:50:13,885 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:50:13,886 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:50:33,497 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,499 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,499 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:33,499 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:50:33,500 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,500 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,500 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:33,500 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:50:33,501 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,501 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,501 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:33,501 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:50:33,502 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,502 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,503 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:33,503 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:50:33,503 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:50:33,503 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:50:33,503 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:50:33,504 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,504 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,504 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:50:33,505 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,505 - INFO - Count of video URLs: 0
+2024-09-08 21:50:33,506 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,506 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,506 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:33,507 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,507 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,507 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:33,508 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,508 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,508 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:33,509 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,510 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,510 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:33,511 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,511 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,511 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:33,512 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,512 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,513 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:33,514 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:50:33,514 - INFO - Count of video URLs: 5
+2024-09-08 21:50:33,515 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:50:33,534 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:33,535 - INFO - Closing database connection
+2024-09-08 21:50:33,536 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:33,536 - INFO - Checking status for video_id: test_video
+2024-09-08 21:50:33,536 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:50:33,536 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:50:33,536 - INFO - Closing database connection
+2024-09-08 21:50:33,537 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:33,537 - INFO - Checking status for video_id: test_video
+2024-09-08 21:50:33,537 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:50:33,537 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:50:33,537 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:50:33,537 - INFO - Closing database connection
+2024-09-08 21:50:33,537 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:33,538 - INFO - Checking status for video_id: test_video
+2024-09-08 21:50:33,538 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:50:33,538 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:50:33,538 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:50:33,538 - INFO - Closing database connection
+2024-09-08 21:50:33,538 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:33,538 - INFO - Checking status for video_id: test_video
+2024-09-08 21:50:33,538 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:50:33,538 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:50:33,538 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:50:33,539 - INFO - Closing database connection
+2024-09-08 21:50:33,539 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:50:33,539 - INFO - Checking status for video_id: video1
+2024-09-08 21:50:33,539 - INFO - Starting processing for video_id: video1
+2024-09-08 21:50:33,539 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:50:33,539 - INFO - Checking status for video_id: video2
+2024-09-08 21:50:33,539 - INFO - Starting processing for video_id: video2
+2024-09-08 21:50:33,539 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:50:33,539 - INFO - Checking status for video_id: video3
+2024-09-08 21:50:33,539 - INFO - Starting processing for video_id: video3
+2024-09-08 21:50:33,539 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:50:33,539 - INFO - Completing processing for video_id: video1
+2024-09-08 21:50:33,539 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:50:33,540 - INFO - Getting unprocessed videos
+2024-09-08 21:50:33,540 - INFO - Found 2 unprocessed videos
+2024-09-08 21:50:33,540 - INFO - Completing processing for video_id: video3
+2024-09-08 21:50:33,540 - INFO - Getting unprocessed videos
+2024-09-08 21:50:33,540 - INFO - Found 1 unprocessed videos
+2024-09-08 21:50:33,540 - INFO - Closing database connection
+2024-09-08 21:50:33,541 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/scraper-indexer/components/video_processing_tracker.py
+2024-09-08 21:50:33,544 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:50:33,545 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:51:06,517 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,519 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,519 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:06,520 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:06,520 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,521 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,521 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:06,521 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:06,522 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,522 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,522 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:06,522 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:06,523 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,523 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,523 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:06,523 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:06,523 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:51:06,523 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:51:06,523 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:51:06,524 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,524 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,524 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:51:06,525 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,526 - INFO - Count of video URLs: 0
+2024-09-08 21:51:06,527 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,527 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,527 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:06,528 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,528 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,528 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:06,530 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,530 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,530 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:06,531 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,531 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,531 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:06,532 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,532 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,532 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:06,533 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,533 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,534 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:06,535 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:06,536 - INFO - Count of video URLs: 5
+2024-09-08 21:51:06,536 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:06,556 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:06,556 - INFO - Closing database connection
+2024-09-08 21:51:06,557 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:06,557 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:06,557 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:06,557 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:06,557 - INFO - Closing database connection
+2024-09-08 21:51:06,557 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:06,557 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:06,558 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:06,558 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:06,558 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:51:06,558 - INFO - Closing database connection
+2024-09-08 21:51:06,558 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:06,558 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:06,558 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:06,558 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:06,558 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:51:06,559 - INFO - Closing database connection
+2024-09-08 21:51:06,559 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:06,559 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:06,559 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:06,559 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:06,559 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:51:06,559 - INFO - Closing database connection
+2024-09-08 21:51:06,560 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:06,560 - INFO - Checking status for video_id: video1
+2024-09-08 21:51:06,560 - INFO - Starting processing for video_id: video1
+2024-09-08 21:51:06,560 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:51:06,560 - INFO - Checking status for video_id: video2
+2024-09-08 21:51:06,560 - INFO - Starting processing for video_id: video2
+2024-09-08 21:51:06,560 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:51:06,560 - INFO - Checking status for video_id: video3
+2024-09-08 21:51:06,560 - INFO - Starting processing for video_id: video3
+2024-09-08 21:51:06,560 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:51:06,560 - INFO - Completing processing for video_id: video1
+2024-09-08 21:51:06,560 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:51:06,560 - INFO - Getting unprocessed videos
+2024-09-08 21:51:06,560 - INFO - Found 2 unprocessed videos
+2024-09-08 21:51:06,560 - INFO - Completing processing for video_id: video3
+2024-09-08 21:51:06,560 - INFO - Getting unprocessed videos
+2024-09-08 21:51:06,560 - INFO - Found 1 unprocessed videos
+2024-09-08 21:51:06,561 - INFO - Closing database connection
+2024-09-08 21:51:06,562 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/scraper-indexer/components/video_processing_tracker.py
+2024-09-08 21:51:06,565 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:51:06,566 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:51:32,766 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,768 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,768 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:32,768 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:32,769 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,769 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,769 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:32,769 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:32,770 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,770 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,770 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:32,771 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:32,771 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,772 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,772 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:32,772 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:32,772 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:51:32,772 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:51:32,772 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:51:32,773 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,773 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,773 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:51:32,774 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,774 - INFO - Count of video URLs: 0
+2024-09-08 21:51:32,775 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,775 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,775 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:32,776 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,777 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,777 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:32,778 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,778 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,778 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:32,779 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,780 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,780 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:32,781 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,781 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,781 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:32,782 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,782 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,782 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:32,784 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:32,784 - INFO - Count of video URLs: 5
+2024-09-08 21:51:32,784 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:32,804 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:32,805 - INFO - Closing database connection
+2024-09-08 21:51:32,805 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:32,805 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:32,805 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:32,805 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:32,806 - INFO - Closing database connection
+2024-09-08 21:51:32,806 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:32,806 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:32,806 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:32,806 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:32,806 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:51:32,806 - INFO - Closing database connection
+2024-09-08 21:51:32,807 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:32,807 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:32,807 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:32,807 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:32,807 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:51:32,807 - INFO - Closing database connection
+2024-09-08 21:51:32,807 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:32,808 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:32,808 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:32,808 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:32,808 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:51:32,808 - INFO - Closing database connection
+2024-09-08 21:51:32,808 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:32,808 - INFO - Checking status for video_id: video1
+2024-09-08 21:51:32,808 - INFO - Starting processing for video_id: video1
+2024-09-08 21:51:32,808 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:51:32,809 - INFO - Checking status for video_id: video2
+2024-09-08 21:51:32,809 - INFO - Starting processing for video_id: video2
+2024-09-08 21:51:32,809 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:51:32,809 - INFO - Checking status for video_id: video3
+2024-09-08 21:51:32,809 - INFO - Starting processing for video_id: video3
+2024-09-08 21:51:32,809 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:51:32,809 - INFO - Completing processing for video_id: video1
+2024-09-08 21:51:32,809 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:51:32,809 - INFO - Getting unprocessed videos
+2024-09-08 21:51:32,809 - INFO - Found 2 unprocessed videos
+2024-09-08 21:51:32,809 - INFO - Completing processing for video_id: video3
+2024-09-08 21:51:32,809 - INFO - Getting unprocessed videos
+2024-09-08 21:51:32,809 - INFO - Found 1 unprocessed videos
+2024-09-08 21:51:32,809 - INFO - Closing database connection
+2024-09-08 21:51:32,810 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/scraper-indexer/components/video_processing_tracker.py
+2024-09-08 21:51:32,813 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:51:32,814 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:51:53,051 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,052 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,053 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:53,053 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:53,054 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,054 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,054 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:53,054 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:53,056 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,056 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,056 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:53,056 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:53,057 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,057 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,057 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:53,058 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:51:53,058 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:51:53,058 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:51:53,058 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:51:53,059 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,059 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,059 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:51:53,061 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,061 - INFO - Count of video URLs: 0
+2024-09-08 21:51:53,063 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,063 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,063 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:53,064 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,064 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,064 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:53,065 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,066 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,066 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:53,067 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,067 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,067 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:53,068 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,068 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,068 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:53,069 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,069 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,070 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:53,071 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:51:53,072 - INFO - Count of video URLs: 5
+2024-09-08 21:51:53,072 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:51:53,092 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:53,093 - INFO - Closing database connection
+2024-09-08 21:51:53,093 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:53,093 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:53,093 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:53,093 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:53,093 - INFO - Closing database connection
+2024-09-08 21:51:53,094 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:53,094 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:53,094 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:53,094 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:53,094 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:51:53,094 - INFO - Closing database connection
+2024-09-08 21:51:53,094 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:53,095 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:53,095 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:53,095 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:53,095 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:51:53,095 - INFO - Closing database connection
+2024-09-08 21:51:53,095 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:53,095 - INFO - Checking status for video_id: test_video
+2024-09-08 21:51:53,096 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:51:53,096 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:51:53,096 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:51:53,096 - INFO - Closing database connection
+2024-09-08 21:51:53,096 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:51:53,096 - INFO - Checking status for video_id: video1
+2024-09-08 21:51:53,096 - INFO - Starting processing for video_id: video1
+2024-09-08 21:51:53,096 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:51:53,096 - INFO - Checking status for video_id: video2
+2024-09-08 21:51:53,096 - INFO - Starting processing for video_id: video2
+2024-09-08 21:51:53,096 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:51:53,096 - INFO - Checking status for video_id: video3
+2024-09-08 21:51:53,097 - INFO - Starting processing for video_id: video3
+2024-09-08 21:51:53,097 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:51:53,097 - INFO - Completing processing for video_id: video1
+2024-09-08 21:51:53,097 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:51:53,097 - INFO - Getting unprocessed videos
+2024-09-08 21:51:53,097 - INFO - Found 2 unprocessed videos
+2024-09-08 21:51:53,097 - INFO - Completing processing for video_id: video3
+2024-09-08 21:51:53,097 - INFO - Getting unprocessed videos
+2024-09-08 21:51:53,097 - INFO - Found 1 unprocessed videos
+2024-09-08 21:51:53,097 - INFO - Closing database connection
+2024-09-08 21:51:53,098 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/scraper-indexer/components/video_processing_tracker.py
+2024-09-08 21:51:53,101 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:51:53,102 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:53:05,302 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,304 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,304 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:53:05,304 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:53:05,306 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,306 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,306 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:53:05,306 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:53:05,307 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,307 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,307 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:53:05,307 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:53:05,308 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,308 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,308 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:53:05,308 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:53:05,308 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:53:05,308 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:53:05,308 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:53:05,309 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,309 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,309 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:53:05,310 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,310 - INFO - Count of video URLs: 0
+2024-09-08 21:53:05,311 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,311 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,312 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:53:05,312 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,313 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,313 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:53:05,314 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,314 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,314 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:53:05,315 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,315 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,315 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:53:05,316 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,316 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,316 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:53:05,317 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,317 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,317 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:53:05,319 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,320 - INFO - Count of video URLs: 5
+2024-09-08 21:53:05,320 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:53:05,340 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:53:05,341 - INFO - Closing database connection
+2024-09-08 21:53:05,341 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:53:05,341 - INFO - Checking status for video_id: test_video
+2024-09-08 21:53:05,341 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:53:05,341 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:53:05,341 - INFO - Closing database connection
+2024-09-08 21:53:05,342 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:53:05,342 - INFO - Checking status for video_id: test_video
+2024-09-08 21:53:05,342 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:53:05,342 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:53:05,342 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:53:05,342 - INFO - Closing database connection
+2024-09-08 21:53:05,343 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:53:05,343 - INFO - Checking status for video_id: test_video
+2024-09-08 21:53:05,343 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:53:05,343 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:53:05,343 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:53:05,343 - INFO - Closing database connection
+2024-09-08 21:53:05,343 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:53:05,344 - INFO - Checking status for video_id: test_video
+2024-09-08 21:53:05,344 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:53:05,344 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:53:05,344 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:53:05,344 - INFO - Closing database connection
+2024-09-08 21:53:05,344 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:53:05,344 - INFO - Checking status for video_id: video1
+2024-09-08 21:53:05,344 - INFO - Starting processing for video_id: video1
+2024-09-08 21:53:05,344 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:53:05,344 - INFO - Checking status for video_id: video2
+2024-09-08 21:53:05,345 - INFO - Starting processing for video_id: video2
+2024-09-08 21:53:05,345 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:53:05,345 - INFO - Checking status for video_id: video3
+2024-09-08 21:53:05,345 - INFO - Starting processing for video_id: video3
+2024-09-08 21:53:05,345 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:53:05,345 - INFO - Completing processing for video_id: video1
+2024-09-08 21:53:05,345 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:53:05,345 - INFO - Getting unprocessed videos
+2024-09-08 21:53:05,345 - INFO - Found 2 unprocessed videos
+2024-09-08 21:53:05,345 - INFO - Completing processing for video_id: video3
+2024-09-08 21:53:05,345 - INFO - Getting unprocessed videos
+2024-09-08 21:53:05,345 - INFO - Found 1 unprocessed videos
+2024-09-08 21:53:05,345 - INFO - Closing database connection
+2024-09-08 21:53:05,346 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:53:05,347 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:53:05,348 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:55:31,154 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,156 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,157 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:31,157 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:55:31,158 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,158 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,158 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:31,158 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:55:31,159 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,159 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,159 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:31,160 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:55:31,160 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,161 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,161 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:31,161 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:55:31,161 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:55:31,161 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:55:31,161 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:55:31,162 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,162 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,162 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:55:31,163 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,164 - INFO - Count of video URLs: 0
+2024-09-08 21:55:31,165 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,165 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,165 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:31,166 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,166 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,166 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:31,167 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,167 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,167 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:31,168 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,168 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,168 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:31,169 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,169 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,170 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:31,170 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,171 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,171 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:31,173 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,174 - INFO - Count of video URLs: 5
+2024-09-08 21:55:31,174 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:31,215 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:31,216 - INFO - Closing database connection
+2024-09-08 21:55:31,216 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:31,216 - INFO - Checking status for video_id: test_video
+2024-09-08 21:55:31,216 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:55:31,216 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:55:31,217 - INFO - Closing database connection
+2024-09-08 21:55:31,217 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:31,217 - INFO - Checking status for video_id: test_video
+2024-09-08 21:55:31,217 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:55:31,217 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:55:31,217 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:55:31,217 - INFO - Closing database connection
+2024-09-08 21:55:31,218 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:31,218 - INFO - Checking status for video_id: test_video
+2024-09-08 21:55:31,218 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:55:31,218 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:55:31,218 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:55:31,218 - INFO - Closing database connection
+2024-09-08 21:55:31,219 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:31,219 - INFO - Checking status for video_id: test_video
+2024-09-08 21:55:31,219 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:55:31,219 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:55:31,219 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:55:31,219 - INFO - Closing database connection
+2024-09-08 21:55:31,219 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:31,220 - INFO - Checking status for video_id: video1
+2024-09-08 21:55:31,220 - INFO - Starting processing for video_id: video1
+2024-09-08 21:55:31,220 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:55:31,220 - INFO - Checking status for video_id: video2
+2024-09-08 21:55:31,220 - INFO - Starting processing for video_id: video2
+2024-09-08 21:55:31,220 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:55:31,220 - INFO - Checking status for video_id: video3
+2024-09-08 21:55:31,220 - INFO - Starting processing for video_id: video3
+2024-09-08 21:55:31,220 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:55:31,220 - INFO - Completing processing for video_id: video1
+2024-09-08 21:55:31,220 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:55:31,220 - INFO - Getting unprocessed videos
+2024-09-08 21:55:31,220 - INFO - Found 2 unprocessed videos
+2024-09-08 21:55:31,220 - INFO - Completing processing for video_id: video3
+2024-09-08 21:55:31,220 - INFO - Getting unprocessed videos
+2024-09-08 21:55:31,220 - INFO - Found 1 unprocessed videos
+2024-09-08 21:55:31,220 - INFO - Closing database connection
+2024-09-08 21:55:31,221 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:31,222 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:55:31,223 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:55:38,927 - INFO - Starting processing for video: test_video
+2024-09-08 21:55:38,927 - INFO - Successfully processed and indexed video: test_video
+2024-09-08 21:55:38,928 - WARNING - Processing incomplete for video test_video. Cleaning up...
+2024-09-08 21:55:38,928 - INFO - Deleted incomplete vectors for video test_video
+2024-09-08 21:55:38,930 - INFO - Starting processing for video: test_video
+2024-09-08 21:55:38,934 - INFO - Successfully processed and indexed video: test_video
+2024-09-08 21:55:38,934 - WARNING - Processing incomplete for video test_video. Cleaning up...
+2024-09-08 21:55:38,934 - INFO - Deleted incomplete vectors for video test_video
+2024-09-08 21:55:38,936 - INFO - Starting processing for video: test_video
+2024-09-08 21:55:38,937 - ERROR - Error processing video test_video: Simulated failure
+2024-09-08 21:55:38,938 - WARNING - Processing incomplete for video test_video. Cleaning up...
+2024-09-08 21:55:38,938 - INFO - Deleted incomplete vectors for video test_video
+2024-09-08 21:55:38,940 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,941 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,942 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:38,942 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:55:38,943 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,943 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,943 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:38,944 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:55:38,944 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,945 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,945 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:38,945 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:55:38,946 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,946 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,946 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:38,946 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:55:38,946 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:55:38,946 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:55:38,946 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:55:38,947 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,947 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,947 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:55:38,948 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,948 - INFO - Count of video URLs: 0
+2024-09-08 21:55:38,949 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,949 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,949 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:38,950 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,950 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,951 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:38,952 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,953 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,953 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:38,954 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,954 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,954 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:38,955 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,956 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,956 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:38,957 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,957 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,957 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:38,979 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:38,980 - INFO - Count of video URLs: 5
+2024-09-08 21:55:38,980 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:55:39,053 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:39,053 - INFO - Closing database connection
+2024-09-08 21:55:39,054 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:39,054 - INFO - Checking status for video_id: test_video
+2024-09-08 21:55:39,054 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:55:39,054 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:55:39,054 - INFO - Closing database connection
+2024-09-08 21:55:39,055 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:39,055 - INFO - Checking status for video_id: test_video
+2024-09-08 21:55:39,055 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:55:39,055 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:55:39,055 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:55:39,055 - INFO - Closing database connection
+2024-09-08 21:55:39,055 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:39,056 - INFO - Checking status for video_id: test_video
+2024-09-08 21:55:39,056 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:55:39,056 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:55:39,056 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:55:39,056 - INFO - Closing database connection
+2024-09-08 21:55:39,056 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:39,056 - INFO - Checking status for video_id: test_video
+2024-09-08 21:55:39,057 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:55:39,057 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:55:39,057 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:55:39,057 - INFO - Closing database connection
+2024-09-08 21:55:39,057 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:55:39,057 - INFO - Checking status for video_id: video1
+2024-09-08 21:55:39,057 - INFO - Starting processing for video_id: video1
+2024-09-08 21:55:39,057 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:55:39,057 - INFO - Checking status for video_id: video2
+2024-09-08 21:55:39,057 - INFO - Starting processing for video_id: video2
+2024-09-08 21:55:39,057 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:55:39,057 - INFO - Checking status for video_id: video3
+2024-09-08 21:55:39,057 - INFO - Starting processing for video_id: video3
+2024-09-08 21:55:39,058 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:55:39,058 - INFO - Completing processing for video_id: video1
+2024-09-08 21:55:39,058 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:55:39,058 - INFO - Getting unprocessed videos
+2024-09-08 21:55:39,058 - INFO - Found 2 unprocessed videos
+2024-09-08 21:55:39,058 - INFO - Completing processing for video_id: video3
+2024-09-08 21:55:39,058 - INFO - Getting unprocessed videos
+2024-09-08 21:55:39,058 - INFO - Found 1 unprocessed videos
+2024-09-08 21:55:39,058 - INFO - Closing database connection
+2024-09-08 21:55:39,059 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:55:39,060 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:55:39,061 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:56:13,585 - INFO - Starting processing for video: test_video
+2024-09-08 21:56:13,586 - INFO - Successfully processed and indexed video: test_video
+2024-09-08 21:56:13,586 - WARNING - Processing incomplete for video test_video. Cleaning up...
+2024-09-08 21:56:13,586 - INFO - Deleted incomplete vectors for video test_video
+2024-09-08 21:56:13,588 - INFO - Starting processing for video: test_video
+2024-09-08 21:56:13,592 - INFO - Successfully processed and indexed video: test_video
+2024-09-08 21:56:13,592 - WARNING - Processing incomplete for video test_video. Cleaning up...
+2024-09-08 21:56:13,592 - INFO - Deleted incomplete vectors for video test_video
+2024-09-08 21:56:13,594 - INFO - Starting processing for video: test_video
+2024-09-08 21:56:13,596 - ERROR - Error processing video test_video: Simulated failure
+2024-09-08 21:56:13,596 - WARNING - Processing incomplete for video test_video. Cleaning up...
+2024-09-08 21:56:13,596 - INFO - Deleted incomplete vectors for video test_video
+2024-09-08 21:56:13,598 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,600 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,600 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:13,600 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:56:13,601 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,601 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,601 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:13,601 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:56:13,602 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,602 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,603 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:13,603 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:56:13,604 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,604 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,605 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:13,605 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:56:13,605 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:56:13,605 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:56:13,605 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:56:13,606 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,606 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,606 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:56:13,607 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,607 - INFO - Count of video URLs: 0
+2024-09-08 21:56:13,608 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,608 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,608 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:13,609 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,609 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,609 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:13,610 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,610 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,610 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:13,611 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,611 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,611 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:13,612 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,612 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,612 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:13,613 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,614 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,614 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:13,615 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,616 - INFO - Count of video URLs: 5
+2024-09-08 21:56:13,616 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:13,693 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:13,694 - INFO - Closing database connection
+2024-09-08 21:56:13,694 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:13,694 - INFO - Checking status for video_id: test_video
+2024-09-08 21:56:13,694 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:56:13,694 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:56:13,694 - INFO - Closing database connection
+2024-09-08 21:56:13,695 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:13,695 - INFO - Checking status for video_id: test_video
+2024-09-08 21:56:13,695 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:56:13,695 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:56:13,695 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:56:13,695 - INFO - Closing database connection
+2024-09-08 21:56:13,696 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:13,696 - INFO - Checking status for video_id: test_video
+2024-09-08 21:56:13,696 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:56:13,696 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:56:13,696 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:56:13,696 - INFO - Closing database connection
+2024-09-08 21:56:13,696 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:13,697 - INFO - Checking status for video_id: test_video
+2024-09-08 21:56:13,697 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:56:13,697 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:56:13,697 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:56:13,697 - INFO - Closing database connection
+2024-09-08 21:56:13,697 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:13,698 - INFO - Checking status for video_id: video1
+2024-09-08 21:56:13,698 - INFO - Starting processing for video_id: video1
+2024-09-08 21:56:13,698 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:56:13,698 - INFO - Checking status for video_id: video2
+2024-09-08 21:56:13,698 - INFO - Starting processing for video_id: video2
+2024-09-08 21:56:13,698 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:56:13,698 - INFO - Checking status for video_id: video3
+2024-09-08 21:56:13,698 - INFO - Starting processing for video_id: video3
+2024-09-08 21:56:13,698 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:56:13,698 - INFO - Completing processing for video_id: video1
+2024-09-08 21:56:13,698 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:56:13,698 - INFO - Getting unprocessed videos
+2024-09-08 21:56:13,698 - INFO - Found 2 unprocessed videos
+2024-09-08 21:56:13,698 - INFO - Completing processing for video_id: video3
+2024-09-08 21:56:13,698 - INFO - Getting unprocessed videos
+2024-09-08 21:56:13,698 - INFO - Found 1 unprocessed videos
+2024-09-08 21:56:13,698 - INFO - Closing database connection
+2024-09-08 21:56:13,699 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:13,700 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:56:13,701 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db
+2024-09-08 21:56:20,906 - INFO - Starting processing for video: test_video
+2024-09-08 21:56:20,907 - INFO - Successfully processed and indexed video: test_video
+2024-09-08 21:56:20,907 - WARNING - Processing incomplete for video test_video. Cleaning up...
+2024-09-08 21:56:20,907 - INFO - Deleted incomplete vectors for video test_video
+2024-09-08 21:56:20,909 - INFO - Starting processing for video: test_video
+2024-09-08 21:56:20,913 - INFO - Successfully processed and indexed video: test_video
+2024-09-08 21:56:20,913 - WARNING - Processing incomplete for video test_video. Cleaning up...
+2024-09-08 21:56:20,913 - INFO - Deleted incomplete vectors for video test_video
+2024-09-08 21:56:20,916 - INFO - Starting processing for video: test_video
+2024-09-08 21:56:20,917 - ERROR - Error processing video test_video: Simulated failure
+2024-09-08 21:56:20,917 - WARNING - Processing incomplete for video test_video. Cleaning up...
+2024-09-08 21:56:20,917 - INFO - Deleted incomplete vectors for video test_video
+2024-09-08 21:56:20,919 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,922 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,922 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:20,922 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:56:20,923 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,923 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,923 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:20,923 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:56:20,924 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,924 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,925 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:20,925 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:56:20,926 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,926 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,926 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:20,926 - INFO - Saved transcript for video: Mock Video 2 Title - https://www.youtube.com/watch?v=mockvideo2
+2024-09-08 21:56:20,926 - INFO - Saved transcript for video: Mock Video 3 Title - https://www.youtube.com/watch?v=mockvideo3
+2024-09-08 21:56:20,926 - INFO - Saved transcript for video: Mock Video 4 Title - https://www.youtube.com/watch?v=mockvideo4
+2024-09-08 21:56:20,926 - INFO - Saved transcript for video: Mock Video 5 Title - https://www.youtube.com/watch?v=mockvideo5
+2024-09-08 21:56:20,927 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,928 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,928 - INFO - No suitable transcript found for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1. Skipping...
+2024-09-08 21:56:20,929 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,929 - INFO - Count of video URLs: 0
+2024-09-08 21:56:20,930 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,930 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,930 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:20,931 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,931 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,931 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:20,932 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,932 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,932 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:20,933 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,933 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,933 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:20,934 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,935 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,935 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:20,935 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,936 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,936 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:20,937 - INFO - Initializing VideoProcessingTracker with db_path: /Users/jk/Desktop/learning/chat-huberman/chat-huberman-root/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,938 - INFO - Count of video URLs: 5
+2024-09-08 21:56:20,938 - INFO - Saved transcript for video: Mock Video 1 Title - https://www.youtube.com/watch?v=mockvideo1
+2024-09-08 21:56:20,962 - INFO - Starting processing for video: test_video
+2024-09-08 21:56:20,962 - INFO - Successfully processed and indexed video: test_video
+2024-09-08 21:56:20,963 - WARNING - Processing incomplete for video test_video. Cleaning up...
+2024-09-08 21:56:20,963 - INFO - Deleted incomplete vectors for video test_video
+2024-09-08 21:56:20,965 - INFO - Starting processing for video: test_video
+2024-09-08 21:56:20,965 - ERROR - Error processing video test_video: Splitting error
+2024-09-08 21:56:20,965 - WARNING - Processing incomplete for video test_video. Cleaning up...
+2024-09-08 21:56:20,965 - INFO - Deleted incomplete vectors for video test_video
+2024-09-08 21:56:20,966 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:20,967 - INFO - Closing database connection
+2024-09-08 21:56:20,967 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:20,967 - INFO - Checking status for video_id: test_video
+2024-09-08 21:56:20,967 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:56:20,967 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:56:20,967 - INFO - Closing database connection
+2024-09-08 21:56:20,968 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:20,968 - INFO - Checking status for video_id: test_video
+2024-09-08 21:56:20,968 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:56:20,968 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:56:20,968 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:56:20,968 - INFO - Closing database connection
+2024-09-08 21:56:20,969 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:20,969 - INFO - Checking status for video_id: test_video
+2024-09-08 21:56:20,969 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:56:20,969 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:56:20,969 - WARNING - Marking processing as failed for video_id: test_video
+2024-09-08 21:56:20,969 - INFO - Closing database connection
+2024-09-08 21:56:20,969 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:20,970 - INFO - Checking status for video_id: test_video
+2024-09-08 21:56:20,970 - INFO - Starting processing for video_id: test_video
+2024-09-08 21:56:20,970 - INFO - Inserted start processing for video_id: test_video
+2024-09-08 21:56:20,970 - INFO - Completing processing for video_id: test_video
+2024-09-08 21:56:20,970 - INFO - Closing database connection
+2024-09-08 21:56:20,971 - INFO - Initializing VideoProcessingTracker with db_path: :memory:
+2024-09-08 21:56:20,971 - INFO - Checking status for video_id: video1
+2024-09-08 21:56:20,971 - INFO - Starting processing for video_id: video1
+2024-09-08 21:56:20,971 - INFO - Inserted start processing for video_id: video1
+2024-09-08 21:56:20,971 - INFO - Checking status for video_id: video2
+2024-09-08 21:56:20,971 - INFO - Starting processing for video_id: video2
+2024-09-08 21:56:20,971 - INFO - Inserted start processing for video_id: video2
+2024-09-08 21:56:20,971 - INFO - Checking status for video_id: video3
+2024-09-08 21:56:20,971 - INFO - Starting processing for video_id: video3
+2024-09-08 21:56:20,971 - INFO - Inserted start processing for video_id: video3
+2024-09-08 21:56:20,971 - INFO - Completing processing for video_id: video1
+2024-09-08 21:56:20,971 - WARNING - Marking processing as failed for video_id: video2
+2024-09-08 21:56:20,971 - INFO - Getting unprocessed videos
+2024-09-08 21:56:20,971 - INFO - Found 2 unprocessed videos
+2024-09-08 21:56:20,971 - INFO - Completing processing for video_id: video3
+2024-09-08 21:56:20,971 - INFO - Getting unprocessed videos
+2024-09-08 21:56:20,971 - INFO - Found 1 unprocessed videos
+2024-09-08 21:56:20,971 - INFO - Closing database connection
+2024-09-08 21:56:20,972 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/scraper-indexer/persistence/video_processing.db
+2024-09-08 21:56:20,973 - INFO - Initializing VideoProcessingTracker with db_path: /fake/path/video_processing.db
+2024-09-08 21:56:20,974 - INFO - Initializing VideoProcessingTracker with db_path: /custom/path/video_processing.db

@@ -1,14 +1,13 @@
 import os
 
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 from components.transcript_indexer import Indexer
 from components.transcript_scraper import Scraper
 
 from components.logger import logger
 
 # Load environment variables
-load_dotenv()
-
+load_dotenv(find_dotenv(filename=".scraper-indexer.env"))
 
 def main():
     # Initialize the Scraper with the Huberman Lab channel

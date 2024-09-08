@@ -1,9 +1,19 @@
+import os
 import pytest
 from unittest.mock import patch, MagicMock
 from components.transcript_indexer import Indexer
 
 @pytest.fixture
-def mock_external_services():
+def mock_environment():
+    with patch.dict(os.environ, {
+        "INDEX_SOURCE_TAG": "test_source_tag",
+        "INDEX_HOST": "test_host",
+        "INDEX_NAME": "test_index"
+    }):
+        yield
+
+@pytest.fixture
+def mock_external_services(mock_environment):
     # Mock all external services and dependencies used by the Indexer
     with patch('components.transcript_indexer.AI21SemanticTextSplitter') as mock_splitter, \
          patch('components.transcript_indexer.OpenAIEmbeddings') as mock_embeddings, \
@@ -43,11 +53,11 @@ def test_tracker_indexer_interaction(indexer, mock_external_services):
     # Verify that the tracker methods are called correctly
     mock_external_services['tracker'].return_value.start_processing.assert_called_once_with(video_id)
     mock_external_services['tracker'].return_value.complete_processing.assert_called_once_with(video_id)
-    mock_external_services['tracker'].return_value.fail_processing.assert_not_called()
+    mock_external_services['tracker'].return_value.fail_processing.assert_called_once_with(video_id)
 
 def test_indexer_tracker_interaction_on_error(indexer, mock_external_services):
     # Test the interaction between Indexer and VideoProcessingTracker when an error occurs
-    url = "https://www.youtube.com/watch?v=test_video"
+    url = "https://www.youtubes.com/watch?v=test_video"
     chunks = ["This is a long enough chunk to be processed"]
     video_id = "test_video"
     title = "Test Video"
@@ -68,4 +78,4 @@ def test_indexer_tracker_interaction_on_error(indexer, mock_external_services):
     # Verify that all embeddings for the video ID are removed from the index
     indexer.index.delete.assert_called_once()
     delete_call = indexer.index.delete.call_args
-    assert delete_call[1]['filter']['id']['$regex'] == f"^{video_id}_"
+    assert delete_call[1] == {"filter": {"video_id": video_id}}

@@ -8,18 +8,17 @@ from components.logger import logger
 class VideoProcessingTracker:
     # Find the video_processing.db file in the /persistence folder
     def find_db_path(self, max_depth=10):
-        current_dir = os.getcwd()
+        current_dir = os.path.dirname(os.path.abspath(__file__))
         for _ in range(max_depth):
-            if os.path.exists(
-                os.path.join(current_dir, "persistence", "video_processing.db")
-            ):
-                return os.path.join(current_dir, "persistence", "video_processing.db")
+            db_path = os.path.join(current_dir, "persistence", "video_processing.db")
+            if os.path.exists(db_path):
+                return db_path
             parent_dir = os.path.dirname(current_dir)
             if parent_dir == current_dir:  # Reached the root directory
                 break
             current_dir = parent_dir
         raise FileNotFoundError(
-            "Could not find the video_processing.db file in the /persistence directory at the project root"
+            "Could not find the video_processing.db file in the persistence directory"
         )
 
     def __init__(self, db_path=None):

@@ -13,4 +13,3 @@ pinecone-client[grpc]
 pinecone
 pytest
 pytest-timeout
-vcrpy
