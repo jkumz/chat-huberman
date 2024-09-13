@@ -55,27 +55,31 @@ def test_tracker_indexer_interaction(indexer, mock_external_services):
     mock_external_services['tracker'].return_value.complete_processing.assert_called_once_with(video_id)
     mock_external_services['tracker'].return_value.fail_processing.assert_called_once_with(video_id)
 
-def test_indexer_tracker_interaction_on_error(indexer, mock_external_services):
-    # Test the interaction between Indexer and VideoProcessingTracker when an error occurs
-    url = "https://www.youtubes.com/watch?v=test_video"
-    chunks = ["This is a long enough chunk to be processed"]
+def test_delete_existing_video_on_failure(indexer, mock_external_services):
+    url = "https://www.youtube.com/watch?v=test_video"
+    chunks = ["ChunkChunkChunkChunkChunkChunk"] * 150
     video_id = "test_video"
     title = "Test Video"
 
-    # Simulate an error in semantic splitting
-    mock_external_services['splitter'].return_value.split_text.side_effect = Exception("Splitting error")
+    # Mock the upsert method to raise an exception
+    indexer.index.upsert.side_effect = Exception("Simulated failure")
 
-    # Expect the method to raise an exception
-    # trunk-ignore(ruff/B017)
-    with pytest.raises(Exception):
+    # Process should raise an exception
+    with pytest.raises(Exception, match="Simulated failure"):
         indexer.process_and_index_chunks(url, chunks, video_id, title)
 
-    # Verify that the tracker methods are called correctly in case of an error
+    # Verify that the tracker methods are called correctly
     mock_external_services['tracker'].return_value.start_processing.assert_called_once_with(video_id)
-    mock_external_services['tracker'].return_value.complete_processing.assert_not_called()
     mock_external_services['tracker'].return_value.fail_processing.assert_called_once_with(video_id)
+    mock_external_services['tracker'].return_value.complete_processing.assert_not_called()
 
-    # Verify that all embeddings for the video ID are removed from the index
+    # Verify that delete was called with the correct IDs
     indexer.index.delete.assert_called_once()
     delete_call = indexer.index.delete.call_args
-    assert delete_call[1] == {"filter": {"video_id": video_id}}
+
+    expected_vector_ids = [f"{video_id}_chunk{i}_split{j}" 
+                           for i in range(len(chunks)) 
+                           for j in range(100)]
+    
+    assert delete_call.kwargs['ids'] == expected_vector_ids
+    assert delete_call.kwargs['delete_all'] == False

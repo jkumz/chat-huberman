@@ -6,6 +6,8 @@ scrapetube
 langchain_openai
 langchain-ai21
 langchain-cli
+langchain-anthropic
+langchain-pinecone
 langserve[all]
 python-dotenv
 pinecone-client

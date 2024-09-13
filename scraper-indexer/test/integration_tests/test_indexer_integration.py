@@ -114,7 +114,13 @@ def test_delete_existing_video_on_failure(indexer, mock_external_services):
     mock_external_services['tracker'].return_value.fail_processing.assert_called_once_with(video_id)
     mock_external_services['tracker'].return_value.complete_processing.assert_not_called()
 
-    # Verify that delete was called with the correct filter
+    # Verify that delete was called with the correct IDs
     indexer.index.delete.assert_called_once()
     delete_call = indexer.index.delete.call_args
-    assert delete_call[1] == {"filter": {"video_id": video_id}}
+
+    expected_vector_ids = [f"{video_id}_chunk{i}_split{j}" 
+                           for i in range(len(chunks)) 
+                           for j in range(100)]
+    
+    assert delete_call.kwargs['ids'] == expected_vector_ids
+    assert delete_call.kwargs['delete_all'] == False
