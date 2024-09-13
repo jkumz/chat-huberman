@@ -30,11 +30,13 @@ class Scraper:
 
     def __get_all_video_data(self):
         try:
-            videos = scrapetube.get_channel(channel_username=self.channel_username)
+            videos = scrapetube.get_channel(channel_username=self.channel_username, sort_by="newest", sleep=3)
             all_video_data = []
             video_processing_tracker = VideoProcessingTracker()
+            logger.info("Looking for unprocessed videos")
             for video in videos:
                 if video_processing_tracker.check_if_video_exists_and_completed(video["videoId"]):
+                    logger.debug(f"Video {video['videoId']} already exists and completed - skipping")
                     continue
                 video_url = f"https://www.youtube.com/watch?v={video['videoId']}"
                 title = video['title']['runs'][0]['text']

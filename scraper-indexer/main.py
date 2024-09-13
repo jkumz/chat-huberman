@@ -1,3 +1,9 @@
+'''
+This is the main entry point for the scraper-indexer application.
+It is responsible for initializing the scraper and indexer, and for processing and indexing the transcripts.
+These transcripts are then retrieved and used by the chat service.
+'''
+
 import os
 
 from dotenv import load_dotenv, find_dotenv
@@ -44,6 +50,6 @@ def main():
 
     logger.info("Completed processing and indexing all videos")
 
-
+#TODO - Cloud deployment
 if __name__ == "__main__":
     main()

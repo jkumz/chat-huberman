@@ -48,10 +48,14 @@ class Indexer:
         logger.info(f"Starting processing for video: {video_id}")
         # Check if the video is already in "processing" state
         current_status = self.tracker.get_status(video_id)
-        if current_status == "processing":
-            logger.warning(f"Video {video_id} was already in 'processing' state. Attempting to delete existing records.")
+        if current_status == "processing" or current_status == "failed":
+            logger.warning(f"Video {video_id} was already in 'processing' state or 'failed' state. Attempting to delete existing records.")
             try:
-                self.index.delete(filter={"video_id": video_id})
+                # Generate vector IDs based on the video ID
+                vector_ids = [f"{video_id}_chunk{i}_split{j}" 
+                          for i in range(len(doc_chunks)) 
+                          for j in range(100)] 
+                self.index.delete(ids=vector_ids, delete_all=False)
                 logger.info(f"Successfully deleted existing records for video {video_id}")
             except Exception as delete_error:
                 logger.error(f"Error deleting existing records for video {video_id}: {str(delete_error)}")
@@ -102,7 +106,11 @@ class Indexer:
                 self.tracker.fail_processing(video_id)
                 # Delete all vectors in the index which have the video id in the metadata
                 try:
-                    self.index.delete(filter={"video_id": video_id})
+                    # Generate vector IDs based on the video ID
+                    vector_ids = [f"{video_id}_chunk{i}_split{j}" 
+                                for i in range(len(doc_chunks)) 
+                                for j in range(100)] 
+                    self.index.delete(ids=vector_ids, delete_all=False)
                     logger.info(f"Deleted incomplete vectors for video {video_id}")
                 except Exception as delete_error:
                     logger.error(f"Error deleting vectors for video {video_id}: {str(delete_error)}")

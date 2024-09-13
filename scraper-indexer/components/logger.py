@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 
 def __setup_logger():
@@ -8,7 +9,9 @@ def __setup_logger():
 
     # Create handlers
     console_handler = logging.StreamHandler(sys.stdout)
-    file_handler = logging.FileHandler("app.log")
+    # Use the current working directory for the log file
+    log_file_path = os.path.join(os.getcwd(), "scraper-indexer", "app.log")
+    file_handler = logging.FileHandler(log_file_path)
 
     # Create formatters and add it to handlers
     formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
@@ -18,6 +21,8 @@ def __setup_logger():
     # Add handlers to the logger
     logger.addHandler(console_handler)
     logger.addHandler(file_handler)
+
+    logger.propagate = False
 
     return logger
 
