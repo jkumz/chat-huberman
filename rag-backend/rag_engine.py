@@ -1,10 +1,11 @@
 from langchain_anthropic import ChatAnthropic
-from langchain_openai import OpenAIEmbeddings
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
 from dotenv import load_dotenv, find_dotenv
+from query_translator import QueryTranslator
 
 import os
 import tiktoken
@@ -18,7 +19,7 @@ claude_opus_model="claude-3-opus-20240229" # most performant, $15 per 1m tokens 
 
 #TODO: Calculate cost per query after the fact, display to user
 #TODO: Memory: Remember previous questions and answers in chat, and use them to inform the current answer
-#TODO: Ability to go back to previous chats - MAYBE - this would require storing it in a database with user id etc
+#TODO: Ability to go back to previous chats - MAYBE - this would require storing it in a database with user id etc, good learning experience though
 
 # Something to consider: Should we make a Base Class, and then other RAG engines inherit from it using different LLMs
 class RAGEngine:
@@ -38,7 +39,7 @@ class RAGEngine:
         self.retriever = self.vector_store.as_retriever(search_kwargs={"k": 5})
         self.set_model(model)
         self.output_parser = StrOutputParser()
-
+        self.query_translator = QueryTranslator()
     '''
     Method for setting the model and updating the costs
     
@@ -152,34 +153,39 @@ class RAGEngine:
     #TODO: MAYBE: Step back approach - Make question more abstract, and then step by step make it more specific until we have a relevant context
     #TODO: HyDE: Generate a hypothetical "document" that would answer the question, embed it, then use that to get relevant context.
     #      So to clarify, we can't answer it without context, but we can say what good context would look like, and then go find it.
+    
     def retrieve_relevant_chunks(self, user_input):
-        #TODO: Use metadata of chunks as well as content to determine relevance,
-        # for example if the title of the video is semantically similar to the user input,
-        # then we can go more in depth on that video
-        return self.retriever.invoke(user_input)
+        if self.query_translator.should_use_multi_query(user_input):
+            retrieval_chain = (
+                self.query_translator.multi_query_generation()
+                | self.retriever.map()
+                | (lambda docs: self.query_translator.get_unique_union(docs))
+            )
+            return retrieval_chain.invoke({"user_input": user_input})
+        else:
+            return self.retriever.invoke({"user_input": user_input})
 
 def main():
-    # test retrieval
     rag_engine = RAGEngine()
+    query_translator = rag_engine.query_translator
     query = ""
     conversation_file = "rag-backend/conversation.txt"
-    
+
     while query != "exit":
-        query = input("Enter a query: ")
-        
-        retrieved = [{"content": doc.page_content, "metadata": doc.metadata} for doc in rag_engine.retrieve_relevant_chunks(query)]
+        query = input("Enter a query: \n")
+        retrieved = rag_engine.retrieve_relevant_chunks(query)
         response = rag_engine.chain(user_input=query, context=retrieved)
         
         with open(conversation_file, "a") as f:
             f.write(f"User: {query}\n")
             f.write(f"Assistant: {response}\n\n")
 
-        input_text = query + ''.join([f"{doc['content']}{doc['metadata']}" for doc in retrieved])
-        input_cost, output_cost, total_cost, input_tokens, output_tokens = rag_engine.calculate_cost(input_text, response)
-        print(f"Input cost: ${input_cost}, Output cost: ${output_cost}, Total cost: ${total_cost}")
-        print(f"Input tokens: {input_tokens}, Output tokens: {output_tokens}")
-        
+        # input_text = query + ''.join([f"{doc.page_content}{doc.metadata}" for doc in retrieved])
+        # input_cost, output_cost, total_cost, input_tokens, output_tokens = rag_engine.calculate_cost(input_text, response)
+        # print(f"Input cost: ${input_cost}, Output cost: ${output_cost}, Total cost: ${total_cost}")
+        # print(f"Input tokens: {input_tokens}, Output tokens: {output_tokens}")
         print(response)
+
 
 if __name__ == "__main__":
     main()

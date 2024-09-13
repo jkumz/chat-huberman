@@ -4,6 +4,7 @@ pytube
 langchain_community
 scrapetube
 langchain_openai
+langchain_anthropic
 langchain-ai21
 langchain-cli
 langserve[all]

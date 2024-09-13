@@ -1,1 +1,3 @@
 .scraper-indexer.env
+.venv
+app.log
