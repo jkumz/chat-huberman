@@ -1,12 +1,11 @@
 from langchain_anthropic import ChatAnthropic
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate
 from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
 from dotenv import load_dotenv, find_dotenv
 from query_translator import QueryTranslator
-
+from prompts import get_main_prompt
 import os
 import tiktoken
 
@@ -21,9 +20,8 @@ claude_opus_model="claude-3-opus-20240229" # most performant, $15 per 1m tokens 
 #TODO: Memory: Remember previous questions and answers in chat, and use them to inform the current answer
 #TODO: Ability to go back to previous chats - MAYBE - this would require storing it in a database with user id etc, good learning experience though
 
-# Something to consider: Should we make a Base Class, and then other RAG engines inherit from it using different LLMs
 class RAGEngine:
-    '''
+    """
     Constructor class for the RAG engine class
     
     Parameters:
@@ -31,7 +29,7 @@ class RAGEngine:
     - llm: The LLM to use for generating responses
     - embedding_model: The embedding model to use for generating embeddings
     - output_parser: The output parser to use for parsing the output of the LLM
-    '''
+    """
     def __init__(self, model=claude_sonnet_model):
         self.embedding_model = OpenAIEmbeddings(model=os.getenv("EMBEDDING_MODEL"), api_key=os.getenv("OPENAI_API_KEY"))
         self.index = Pinecone(api_key=os.getenv("PINECONE_API_KEY")).Index(name=os.getenv("INDEX_NAME"), host=os.getenv("INDEX_HOST"))
@@ -97,8 +95,6 @@ class RAGEngine:
     Returns:
     - The response from the LLM
     '''
-    # TODO: Check answer loop: Use ChatGPT to check if the answer is correct or "answered"
-    # if it isn't, then we need to refine the question and re-run the chain and try fill in the blanks.
         
     # TODO: We can also look through the context, and if there is context that is not fully completed, we can
     # generate a query that will retrieve more relevant context and add it to the context list
@@ -110,29 +106,7 @@ class RAGEngine:
     # - No "I used the context provided to answer your question" in the answer
     # - Sound like a human, not an AI
     def chain(self, user_input, context):
-        prompt = ChatPromptTemplate.from_template(
-            """
-        You are an excellent assistant in a high risk environment. You are tasked with providing
-        answers to scientific questions based only on the provided context. If you can not come to an answer
-        from the context provided, please say so. The context provided is one or more chunks of text extracted
-        from youtube transcripts, as well as metadata about the video that contains the chunk. After your answer,
-        provide a list of video titles and urls that you used to answer the question.
-
-        Instructions:
-
-        - Carefully read and understand the provided context.
-        - Analyze the question in relation to the given context.
-        - Formulate your answer using only the information present in the context.
-        - If the context doesn't contain sufficient information to answer the question fully, state this clearly and explain what specific information is missing.
-        - Do not use any knowledge or information beyond what is provided in the context.
-        - If you're unsure about any part of the answer, express your uncertainty and explain why.
-        - Provide citations or references to specific parts of the context when applicable.
-        - Do not tell the user that you are basing your answer on any context, just answer the question.
-
-        The question you must answer is: {question}
-
-        The provided context is: {documents}
-        """)
+        prompt = get_main_prompt()
 
         chain = prompt | self.llm | self.output_parser
         return chain.invoke({"question": user_input, "documents": context})
@@ -148,32 +122,39 @@ class RAGEngine:
     ''' 
     # Most of the following ideas would be using a cheaper LLM to save costs as Claude 3.5 Sonnet is very expensive
     #TODO: Query transformations/translations
-    #TODO: RAG Fusion Reranking
     #TODO: Query decompostion: If input is a complex problem, break it down into sub-queries - how do we gauge complexity?
     #TODO: MAYBE: Step back approach - Make question more abstract, and then step by step make it more specific until we have a relevant context
     #TODO: HyDE: Generate a hypothetical "document" that would answer the question, embed it, then use that to get relevant context.
     #      So to clarify, we can't answer it without context, but we can say what good context would look like, and then go find it.
     
-    def retrieve_relevant_chunks(self, user_input):
+    def retrieve_relevant_documents(self, user_input, use_reranking=True):
         if self.query_translator.should_use_multi_query(user_input):
-            retrieval_chain = (
-                self.query_translator.multi_query_generation()
-                | self.retriever.map()
-                | (lambda docs: self.query_translator.get_unique_union(docs))
-            )
-            return retrieval_chain.invoke({"user_input": user_input})
+            # RAG Fusion method removes duplicates when reranking so no need for unique union in chain
+            if use_reranking:
+                reranked_retrieval_chain = (
+                    self.query_translator.multi_query_generation()
+                    | self.retriever.map()
+                )
+                unflattened_unranked_docs = reranked_retrieval_chain.invoke({"user_input": user_input})
+                return self.query_translator.reciprocal_rank_fusion(result_docs=unflattened_unranked_docs)
+            else:
+                retrieval_chain = (
+                    self.query_translator.multi_query_generation()
+                    | self.retriever.map()
+                    | (lambda docs: self.query_translator.get_unique_union(docs))
+                )
+                return retrieval_chain.invoke({"user_input": user_input})
         else:
             return self.retriever.invoke({"user_input": user_input})
 
 def main():
     rag_engine = RAGEngine()
-    query_translator = rag_engine.query_translator
     query = ""
     conversation_file = "rag-backend/conversation.txt"
 
     while query != "exit":
         query = input("Enter a query: \n")
-        retrieved = rag_engine.retrieve_relevant_chunks(query)
+        retrieved = rag_engine.retrieve_relevant_documents(query)
         response = rag_engine.chain(user_input=query, context=retrieved)
         
         with open(conversation_file, "a") as f:
