@@ -82,4 +82,6 @@ def test_delete_existing_video_on_failure(indexer, mock_external_services):
                            for j in range(100)]
     
     assert delete_call.kwargs['ids'] == expected_vector_ids
+    # trunk-ignore(bandit/B101)
+    # trunk-ignore(ruff/E712)
     assert delete_call.kwargs['delete_all'] == False

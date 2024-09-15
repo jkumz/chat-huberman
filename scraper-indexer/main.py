@@ -1,8 +1,8 @@
-'''
+"""
 This is the main entry point for the scraper-indexer application.
 It is responsible for initializing the scraper and indexer, and for processing and indexing the transcripts.
 These transcripts are then retrieved and used by the chat service.
-'''
+"""
 
 import os
 
