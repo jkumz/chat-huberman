@@ -16,3 +16,4 @@ pinecone
 pytest
 pytest-timeout
 bs4
+ragas

@@ -1,3 +1,5 @@
 .scraper-indexer.env
 .venv
 app.log
+rag-backend/.rag_engine.env
+.rag_engine.env

@@ -147,6 +147,32 @@ class RAGEngine:
         else:
             return self.retriever.invoke({"user_input": user_input})
 
+    '''
+    Method for getting the answer to a user's question
+
+    Parameters:
+    - user_input: The user's input query/question which needs answering
+
+    Returns:
+    - The answer to the user's question
+    '''
+    def get_answer(self, user_input):
+        retrieved = self.retrieve_relevant_documents(user_input)
+        return self.chain(user_input=user_input, context=retrieved)
+
+    '''
+    Method for getting the answer to a user's question along with the relevant context
+
+    Parameters:
+    - user_input: The user's input query/question which needs answering
+
+    Returns:
+    - The answer to the user's question along with the relevant context
+    '''
+    def get_answer_with_context(self, user_input):
+        retrieved = self.retrieve_relevant_documents(user_input)
+        return {"answer": self.chain(user_input=user_input, context=retrieved), "context": retrieved}
+
 def main():
     rag_engine = RAGEngine()
     query = ""
