@@ -8,13 +8,22 @@ from query_translator import QueryTranslator
 from prompts import get_main_prompt
 import os
 import tiktoken
+from logger import logger
 
 
 load_dotenv(find_dotenv(filename=".rag_engine.env"))
 
-claude_sonnet_model="claude-3-5-sonnet-20240620" # most powerful, $3 per 1m tokens in, $15 per 1m tokens out
-claude_haiku_model="claude-3-haiku-20240307" # less powerful, $0.25 per 1m tokens in, $1.25 per 1m tokens out
-claude_opus_model="claude-3-opus-20240229" # most performant, $15 per 1m tokens in, $75 per 1m tokens out
+CLAUDE_SONNET_MODEL="claude-3-5-sonnet-20240620" # most powerful
+SONNET_INPUT_COST_PER_TOKEN = 0.000003 # $3 per 1m tokens in
+SONNET_OUTPUT_COST_PER_TOKEN = 0.000015 # $15 per 1m tokens out
+
+CLAUDE_HAIKU_MODEL="claude-3-haiku-20240307" # less powerful
+HAIKU_INPUT_COST_PER_TOKEN = 0.00000025 # $0.25 per 1m tokens in
+HAIKU_OUTPUT_COST_PER_TOKEN = 0.00000125 # $1.25 per 1m tokens out
+
+CLAUDE_OPUS_MODEL="claude-3-opus-20240229" # most performant
+OPUS_INPUT_COST_PER_TOKEN = 0.000015 # $15 per 1m tokens in
+OPUS_OUTPUT_COST_PER_TOKEN = 0.000075 # $75 per 1m tokens out
 
 #TODO: Calculate cost per query after the fact, display to user
 #TODO: Memory: Remember previous questions and answers in chat, and use them to inform the current answer
@@ -30,7 +39,7 @@ class RAGEngine:
     - embedding_model: The embedding model to use for generating embeddings
     - output_parser: The output parser to use for parsing the output of the LLM
     """
-    def __init__(self, model=claude_sonnet_model):
+    def __init__(self, model=CLAUDE_SONNET_MODEL):
         self.embedding_model = OpenAIEmbeddings(model=os.getenv("EMBEDDING_MODEL"), api_key=os.getenv("OPENAI_API_KEY"))
         self.index = Pinecone(api_key=os.getenv("PINECONE_API_KEY")).Index(name=os.getenv("INDEX_NAME"), host=os.getenv("INDEX_HOST"))
         self.vector_store = PineconeVectorStore(index=self.index, embedding=self.embedding_model)
@@ -54,15 +63,15 @@ class RAGEngine:
     Method for updating the costs
     '''
     def __update_costs(self):
-        if self.model == claude_sonnet_model:
-            self.input_cost_per_token = 0.000003  # $3 per 1M tokens
-            self.output_cost_per_token = 0.000015  # $15 per 1M tokens
-        elif self.model == claude_haiku_model:
-            self.input_cost_per_token = 0.00000025  # $0.25 per 1M tokens
-            self.output_cost_per_token = 0.00000125  # $1.25 per 1M tokens
-        elif self.model == claude_opus_model:
-            self.input_cost_per_token = 0.000015  # $15 per 1M tokens
-            self.output_cost_per_token = 0.000075  # $75 per 1M tokens
+        if self.model == CLAUDE_SONNET_MODEL:
+            self.input_cost_per_token = SONNET_INPUT_COST_PER_TOKEN
+            self.output_cost_per_token = SONNET_OUTPUT_COST_PER_TOKEN
+        elif self.model == CLAUDE_HAIKU_MODEL:
+            self.input_cost_per_token = HAIKU_INPUT_COST_PER_TOKEN
+            self.output_cost_per_token = HAIKU_OUTPUT_COST_PER_TOKEN
+        elif self.model == CLAUDE_OPUS_MODEL:
+            self.input_cost_per_token = OPUS_INPUT_COST_PER_TOKEN
+            self.output_cost_per_token = OPUS_OUTPUT_COST_PER_TOKEN
         else:
             raise ValueError(f"Unknown model: {self.model}")
         
@@ -77,13 +86,11 @@ class RAGEngine:
     - The cost of the input and output
     '''
     #TODO: Fix this, there is a discrepancy between the number of tokens in Claude backend and what is returned from the tokenizer
-    def calculate_cost(self, input_text, output_text):
-        input_tokens = len(self.tokenizer.encode(input_text))
-        output_tokens = len(self.tokenizer.encode(output_text))
+    def calculate_generation_cost(self, input_tokens, output_tokens):
         input_cost = input_tokens * self.input_cost_per_token
         output_cost = output_tokens * self.output_cost_per_token
         total_cost = input_cost + output_cost
-        return input_cost, output_cost, total_cost, input_tokens, output_tokens
+        return input_cost, output_cost, total_cost
 
     '''
     Method for chaining together the components of the RAG engine
@@ -108,8 +115,11 @@ class RAGEngine:
     def chain(self, user_input, context):
         prompt = get_main_prompt()
 
-        chain = prompt | self.llm | self.output_parser
-        return chain.invoke({"question": user_input, "documents": context})
+        chain = prompt | self.llm
+        response = chain.invoke({"question": user_input, "documents": context})
+        resp_metadata = response.usage_metadata
+        parsed_response = self.output_parser.invoke(response.content)
+        return parsed_response, resp_metadata
     
     '''
     Method for retrieving the most relevant chunks from the index
@@ -121,11 +131,8 @@ class RAGEngine:
     - The most relevant chunks from the index
     ''' 
     # Most of the following ideas would be using a cheaper LLM to save costs as Claude 3.5 Sonnet is very expensive
-    #TODO: Query transformations/translations
-    #TODO: Query decompostion: If input is a complex problem, break it down into sub-queries - how do we gauge complexity?
-    #TODO: MAYBE: Step back approach - Make question more abstract, and then step by step make it more specific until we have a relevant context
-    #TODO: HyDE: Generate a hypothetical "document" that would answer the question, embed it, then use that to get relevant context.
-    #      So to clarify, we can't answer it without context, but we can say what good context would look like, and then go find it.
+    # Decided not to implement HyDE as running RAGAS has shown that retrieval is highly effective, no need for HyDE in this case.
+    # Or other forms of query translation/transformation, as RAGAS results show there is no need
     
     def retrieve_relevant_documents(self, user_input, use_reranking=True):
         if self.query_translator.should_use_multi_query(user_input):
@@ -181,16 +188,20 @@ def main():
     while query != "exit":
         query = input("Enter a query: \n")
         retrieved = rag_engine.retrieve_relevant_documents(query)
-        response = rag_engine.chain(user_input=query, context=retrieved)
+        response, generation_token_usage = rag_engine.chain(user_input=query, context=retrieved)
+        input_tokens = generation_token_usage["input_tokens"]
+        output_tokens = generation_token_usage["output_tokens"]
+        total_tokens = generation_token_usage["total_tokens"]
+        print(f"Input tokens: {input_tokens}, \tOutput tokens: {output_tokens}, \tTotal tokens: {total_tokens}")
         
         with open(conversation_file, "a") as f:
             f.write(f"User: {query}\n")
             f.write(f"Assistant: {response}\n\n")
 
-        # input_text = query + ''.join([f"{doc.page_content}{doc.metadata}" for doc in retrieved])
-        # input_cost, output_cost, total_cost, input_tokens, output_tokens = rag_engine.calculate_cost(input_text, response)
-        # print(f"Input cost: ${input_cost}, Output cost: ${output_cost}, Total cost: ${total_cost}")
-        # print(f"Input tokens: {input_tokens}, Output tokens: {output_tokens}")
+        input_cost, output_cost, total_cost = rag_engine.calculate_generation_cost(input_tokens, output_tokens)
+        logger.info(f"Input tokens: {input_tokens}, \tInput cost: ${input_cost}")
+        logger.info(f"Output tokens: {output_tokens}, \tOutput cost: ${output_cost}")
+        logger.info(f"Total cost: ${total_cost}")
         print(response)
 
 
