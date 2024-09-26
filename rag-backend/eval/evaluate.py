@@ -37,7 +37,6 @@ from ragas.metrics import (
     context_precision,
     answer_similarity,
     answer_correctness,
-    noise_sensitivity_relevant,
 )
 from ragas import evaluate
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
@@ -118,7 +117,6 @@ async def main():
             context_recall,
             answer_similarity,
             answer_correctness,
-            noise_sensitivity_relevant,
         ],
     )
 
@@ -131,7 +129,6 @@ async def main():
         'context_recall': result['context_recall'],
         'answer_similarity': result['answer_similarity'],
         'answer_correctness': result['answer_correctness'],
-        'noise_sensitivity_relevant': result['noise_sensitivity_relevant'],
         'question': item['question'],
         'answer': item['answer'],
         'contexts': str(item['contexts']),  # Convert list to string
