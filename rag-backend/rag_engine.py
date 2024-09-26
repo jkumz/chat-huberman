@@ -2,6 +2,7 @@ from langchain_anthropic import ChatAnthropic
 from langchain_openai import OpenAIEmbeddings
 from langchain_core.output_parsers import StrOutputParser
 from langchain_pinecone import PineconeVectorStore
+from collections import deque
 from pinecone import Pinecone
 from dotenv import load_dotenv, find_dotenv
 from query_translator import QueryTranslator
@@ -112,11 +113,11 @@ class RAGEngine:
         # - No "Based on the context provided" or "The context provided is" in the answer
     # - No "I used the context provided to answer your question" in the answer
     # - Sound like a human, not an AI
-    def chain(self, user_input, context):
+    def chain(self, user_input, context, chat_history):
         prompt = get_main_prompt()
 
         chain = prompt | self.llm
-        response = chain.invoke({"question": user_input, "documents": context})
+        response = chain.invoke({"question": user_input, "documents": context, "chat_history": chat_history})
         resp_metadata = response.usage_metadata
         parsed_response = self.output_parser.invoke(response.content)
         return parsed_response, resp_metadata
@@ -184,25 +185,31 @@ def main():
     rag_engine = RAGEngine()
     query = ""
     conversation_file = "rag-backend/conversation.txt"
+    conversation_stack = deque()
 
     while query != "exit":
         query = input("Enter a query: \n")
         retrieved = rag_engine.retrieve_relevant_documents(query)
-        response, generation_token_usage = rag_engine.chain(user_input=query, context=retrieved)
+        chat_history = "\n".join(conversation_stack) if conversation_stack else ""
+        response, generation_token_usage = rag_engine.chain(user_input=query, context=retrieved, chat_history=chat_history)
         input_tokens = generation_token_usage["input_tokens"]
         output_tokens = generation_token_usage["output_tokens"]
         total_tokens = generation_token_usage["total_tokens"]
         print(f"Input tokens: {input_tokens}, \tOutput tokens: {output_tokens}, \tTotal tokens: {total_tokens}")
+        input_cost, output_cost, total_cost = rag_engine.calculate_generation_cost(input_tokens, output_tokens)
         
         with open(conversation_file, "a") as f:
             f.write(f"User: {query}\n")
             f.write(f"Assistant: {response}\n\n")
+            f.write(f"Total cost: ${total_cost}\n\n")
 
-        input_cost, output_cost, total_cost = rag_engine.calculate_generation_cost(input_tokens, output_tokens)
         logger.info(f"Input tokens: {input_tokens}, \tInput cost: ${input_cost}")
         logger.info(f"Output tokens: {output_tokens}, \tOutput cost: ${output_cost}")
-        logger.info(f"Total cost: ${total_cost}")
+        logger.info(f"Generation cost: ${total_cost}")
         print(response)
+
+        conversation_stack.append(query)
+        conversation_stack.append(response)
 
 
 if __name__ == "__main__":
