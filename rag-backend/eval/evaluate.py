@@ -13,9 +13,7 @@ The "answer correctness" metric in our case (neuroscience podcast) is not as use
 A ground truth answer is assigned to a question, and then an LLM checks how well aligned the response is to the ground truth.
 Our responses usually cover a broad range of information, and while they may contain the answer, they also often include information beyond that.
 The information beyond the simple answer can sometimes give the impression that the response is less aligned with the ground truth than it actually is.
-The <thinking> tags also throw off the metric a little, as the content here is not relevant to the ground truth.
 This also affects the answer relevance, where redundant details bring down the score, but these are the LLMs thoughts that the user doesn't normally see.
-The answer similarity score may also be a little off - this compares embeddings between answer and ground truth. The LLM thoughts may again lower the score.
 This is a consequence of Chain of Thought prompting. As of now RAGAS doesn't have a way to handle this, so we're stuck with it for now.
 
 In general, the RAGAS score is a good metric to use, as it takes into account the context and the answer in a broader scope.
@@ -29,6 +27,7 @@ In general, the RAGAS score is a good metric to use, as it takes into account th
 # 1 - GET DOCS TO GENERATE SYNTHETIC Q/A/GT
 import asyncio
 import os
+import re
 import sys
 import pandas as pd
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -91,10 +90,6 @@ generator_llm = ChatOpenAI(model=os.environ["LOW_COST_LLM"])
 critic_llm = ChatOpenAI(model=os.environ["CRITIC_LLM"])
 embeddings = OpenAIEmbeddings(model=os.environ["EMBEDDING_MODEL"], api_key=os.environ["OPENAI_API_KEY"])
 
-# To save costs, should we re-use one generated test test? I suppose this offsets the effectiveness of the test set.
-# So maybe not, but until it's set up and working we can do this to save costs, as every time we run this we 
-# generate a new test set and cost money doing so.
-
 async def main():
     #3 - GENERATE SYNTHETIC QUESTION/ANSWER/GROUND TRUTH
     generator = TestsetGenerator.from_langchain(generator_llm=generator_llm, critic_llm=critic_llm, embeddings=embeddings)
@@ -106,9 +101,11 @@ async def main():
     for item in testset.test_data:
         rag_response = rag_engine.get_answer_with_context(item.question)
         rag_context = [doc.page_content for doc in rag_response["context"]]
+        answer = rag_response["answer"][0]
+        filtered_answer = re.sub(r'<thinking>.*?</thinking>', '', answer, flags=re.DOTALL)
         eval_data.append({
             "question": item.question,
-            "answer": rag_response["answer"][0],
+            "answer": filtered_answer,
             "contexts": item.contexts, 
             "retrieved_contexts": rag_context,
             "ground_truths": [item.ground_truth],
