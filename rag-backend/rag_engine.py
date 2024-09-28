@@ -1,3 +1,4 @@
+import re
 from langchain_anthropic import ChatAnthropic
 from langchain_openai import OpenAIEmbeddings
 from langchain_core.output_parsers import StrOutputParser
@@ -153,7 +154,7 @@ class RAGEngine:
                 )
                 return retrieval_chain.invoke({"user_input": user_input})
         else:
-            return self.retriever.invoke({"user_input": user_input})
+            return self.retriever.invoke(user_input)
 
     '''
     Method for getting the answer to a user's question
@@ -191,7 +192,8 @@ def main():
         query = input("Enter a query: \n")
         retrieved = rag_engine.retrieve_relevant_documents(query)
         chat_history = "\n".join(conversation_stack) if conversation_stack else ""
-        response, generation_token_usage = rag_engine.chain(user_input=query, context=retrieved, chat_history=chat_history)
+        raw_response, generation_token_usage = rag_engine.chain(user_input=query, context=retrieved, chat_history=chat_history)
+        human_readable_response = re.sub(r'<thinking>.*?</thinking>', '', raw_response, flags=re.DOTALL)
         input_tokens = generation_token_usage["input_tokens"]
         output_tokens = generation_token_usage["output_tokens"]
         total_tokens = generation_token_usage["total_tokens"]
@@ -200,16 +202,16 @@ def main():
         
         with open(conversation_file, "a") as f:
             f.write(f"User: {query}\n")
-            f.write(f"Assistant: {response}\n\n")
+            f.write(f"Assistant: {raw_response}\n\n")
             f.write(f"Total cost: ${total_cost}\n\n")
 
         logger.info(f"Input tokens: {input_tokens}, \tInput cost: ${input_cost}")
         logger.info(f"Output tokens: {output_tokens}, \tOutput cost: ${output_cost}")
         logger.info(f"Generation cost: ${total_cost}")
-        print(response)
+        print(human_readable_response)
 
         conversation_stack.append(query)
-        conversation_stack.append(response)
+        conversation_stack.append(raw_response)
 
 
 if __name__ == "__main__":
