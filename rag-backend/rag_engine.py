@@ -113,7 +113,7 @@ class RAGEngine:
         # - No "Based on the context provided" or "The context provided is" in the answer
     # - No "I used the context provided to answer your question" in the answer
     # - Sound like a human, not an AI
-    def chain(self, user_input, context, chat_history):
+    def chain(self, user_input, context, chat_history=""):
         prompt = get_main_prompt()
 
         chain = prompt | self.llm

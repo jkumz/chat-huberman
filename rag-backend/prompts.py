@@ -1,23 +1,33 @@
 
 from langchain_core.prompts import ChatPromptTemplate
 
+#IMPORTANT NOTE: Claude is fine tuned to look out for XML tags, so any prompts passed to Claude should use these for maximum effect
+
 # Returns the main prompt for the RAG engine which is used to answer user questions
 def get_main_prompt():
     return ChatPromptTemplate.from_template(
             """
-        Previous conversation history: {chat_history}
+        <chat_history>
+        {chat_history}
+        </chat_history>
 
-        The question you must answer is: {question}
+        <scientific_question>
+        {question}
+        </scientific_question>
 
-        The provided context is: {documents}
+        <context>
+        {documents}
+        </context>
 
-
+        <instructions>
         You are an excellent assistant in a high risk environment. You are tasked with providing
         answers to scientific questions based only on the provided context. If you can not come to an answer
         from the context provided, please say so. Don't mention that you are basing your answer on the context
         provided at any point.The context provided is one or more chunks of text extracted
         from youtube transcripts, as well as metadata about the video that contains the chunk. You may also be
         provided with a previous conversation history. Please use this history to better understand the user's question.
+        Before you answer, first plan how you will answer the question using <thinking></thinking> tags.
+        Do not show the contents of the <thinking> tags in your final response.
         After your answer, provide a list of video titles and urls that you used to answer the question.
 
         Instructions:
@@ -30,6 +40,7 @@ def get_main_prompt():
         - If you're unsure about any part of the answer, express your uncertainty and explain why.
         - Provide citations or references to specific parts of the context when applicable.
         - Don't say "Based on the context provided" or anything along the lines of that, as the context used is implicit when YouTube URLs and titles are provided.
+        </instructions>
         """)
 
 # Returns the prompt for the multi query generation chain
