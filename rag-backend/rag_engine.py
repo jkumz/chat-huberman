@@ -5,9 +5,9 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_pinecone import PineconeVectorStore
 from collections import deque
 from pinecone import Pinecone
-from dotenv import load_dotenv, find_dotenv
+from dotenv import (load_dotenv, find_dotenv)
 from query_translator import QueryTranslator
-from prompts import get_main_prompt
+from prompts import get_main_prompt, get_few_shot_prompt
 import os
 import tiktoken
 from logger import logger
@@ -57,7 +57,7 @@ class RAGEngine:
     ''' 
     def set_model(self, model):
         self.model = model
-        self.llm = ChatAnthropic(model=model, temperature=0, api_key=os.getenv("ANTHROPIC_API_KEY"))
+        self.llm = ChatAnthropic(model=model, temperature=0, api_key=os.getenv("ANTHROPIC_API_KEY"), model_kwargs={"extra_headers": {"anthropic-beta": "prompt-caching-2024-07-31"}})
         self.tokenizer = tiktoken.encoding_for_model(os.getenv("EMBEDDING_MODEL"))
         self.__update_costs()
 
@@ -87,7 +87,6 @@ class RAGEngine:
     Returns:
     - The cost of the input and output
     '''
-    #TODO: Fix this, there is a discrepancy between the number of tokens in Claude backend and what is returned from the tokenizer
     def calculate_generation_cost(self, input_tokens, output_tokens):
         input_cost = input_tokens * self.input_cost_per_token
         output_cost = output_tokens * self.output_cost_per_token
@@ -112,10 +111,11 @@ class RAGEngine:
 
         # TODO: Few shot learning: Give examples of previous conversations to the LLM to help it answer the question
         # - No "Based on the context provided" or "The context provided is" in the answer
-    # - No "I used the context provided to answer your question" in the answer
-    # - Sound like a human, not an AI
-    def chain(self, user_input, context, chat_history=""):
-        prompt = get_main_prompt()
+    def chain(self, user_input, context, chat_history="", few_shot=False):
+        if few_shot:
+            prompt = get_few_shot_prompt()
+        else:
+            prompt = get_main_prompt()
 
         chain = prompt | self.llm
         response = chain.invoke({"question": user_input, "documents": context, "chat_history": chat_history})
@@ -132,10 +132,6 @@ class RAGEngine:
     Returns:
     - The most relevant chunks from the index
     ''' 
-    # Most of the following ideas would be using a cheaper LLM to save costs as Claude 3.5 Sonnet is very expensive
-    # Decided not to implement HyDE as running RAGAS has shown that retrieval is highly effective, no need for HyDE in this case.
-    # Or other forms of query translation/transformation, as RAGAS results show there is no need
-    
     def retrieve_relevant_documents(self, user_input, use_reranking=True):
         if self.query_translator.should_use_multi_query(user_input):
             # RAG Fusion method removes duplicates when reranking so no need for unique union in chain
@@ -165,9 +161,9 @@ class RAGEngine:
     Returns:
     - The answer to the user's question
     '''
-    def get_answer(self, user_input):
+    def get_answer(self, user_input, few_shot=False):
         retrieved = self.retrieve_relevant_documents(user_input)
-        return self.chain(user_input=user_input, context=retrieved)
+        return self.chain(user_input=user_input, context=retrieved, few_shot=few_shot)
 
     '''
     Method for getting the answer to a user's question along with the relevant context
@@ -178,9 +174,9 @@ class RAGEngine:
     Returns:
     - The answer to the user's question along with the relevant context
     '''
-    def get_answer_with_context(self, user_input):
+    def get_answer_with_context(self, user_input, few_shot=False):
         retrieved = self.retrieve_relevant_documents(user_input)
-        return {"answer": self.chain(user_input=user_input, context=retrieved), "context": retrieved}
+        return {"answer": self.chain(user_input=user_input, context=retrieved, few_shot=few_shot), "context": retrieved}
 
 def main():
     rag_engine = RAGEngine()
@@ -192,7 +188,7 @@ def main():
         query = input("Enter a query: \n")
         retrieved = rag_engine.retrieve_relevant_documents(query)
         chat_history = "\n".join(conversation_stack) if conversation_stack else ""
-        raw_response, generation_token_usage = rag_engine.chain(user_input=query, context=retrieved, chat_history=chat_history)
+        raw_response, generation_token_usage = rag_engine.chain(user_input=query, context=retrieved, chat_history=chat_history, few_shot=True)
         human_readable_response = re.sub(r'<thinking>.*?</thinking>', '', raw_response, flags=re.DOTALL)
         input_tokens = generation_token_usage["input_tokens"]
         output_tokens = generation_token_usage["output_tokens"]

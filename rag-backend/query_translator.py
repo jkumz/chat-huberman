@@ -1,9 +1,8 @@
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import ChatOpenAI
 from langchain_core.documents import Document
-from prompts import get_multi_query_generation_prompt, get_check_if_multi_query_should_be_used_prompt
 import os
-
+from prompts import get_check_if_multi_query_should_be_used_prompt, get_multi_query_generation_prompt
 
 class QueryTranslator:
     # We only need a low cost LLM as it is only used for generating alternative queries
