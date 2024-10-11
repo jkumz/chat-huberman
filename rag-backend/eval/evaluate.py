@@ -32,7 +32,7 @@ import sys
 import pandas as pd
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from langchain_openai import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_pinecone import PineconeVectorStore
 from langchain_core.documents import Document
 from pinecone import Pinecone
@@ -49,7 +49,6 @@ from ragas.metrics import (
     answer_correctness,
 )
 from ragas import evaluate
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from rag_engine import RAGEngine
 
 load_dotenv(find_dotenv(filename=".rag_engine.env"))
@@ -86,14 +85,21 @@ for result in query_results:
 
 
 #2 - PREPARE MODELS TO GENERATE SYNTHETIC QUESTION/ANSWER/GROUND TRUTH
-generator_llm = ChatOpenAI(model=os.environ["LOW_COST_LLM"])
-critic_llm = ChatOpenAI(model=os.environ["CRITIC_LLM"])
+generator_llm = ChatOpenAI(model=os.environ["LOW_COST_LLM"], api_key=os.environ["OPENAI_API_KEY"])
+critic_llm = ChatOpenAI(model=os.environ["CRITIC_LLM"], api_key=os.environ["OPENAI_API_KEY"])
 embeddings = OpenAIEmbeddings(model=os.environ["EMBEDDING_MODEL"], api_key=os.environ["OPENAI_API_KEY"])
 
 async def main():
     #3 - GENERATE SYNTHETIC QUESTION/ANSWER/GROUND TRUTH
     generator = TestsetGenerator.from_langchain(generator_llm=generator_llm, critic_llm=critic_llm, embeddings=embeddings)
-    testset = generator.generate_with_langchain_docs(documents=documents, test_size=10)
+    try:
+        testset = generator.generate_with_langchain_docs(documents=documents, test_size=10, raise_exceptions=False)
+    except Exception as e:
+        print(f"Error in generate_with_langchain_docs: {str(e)}")
+        print(f"Type of error: {type(e)}")
+        import traceback
+        traceback.print_exc()
+        return  # Exit the function if we can't generate the testset
 
     #4 - STRUCTURE THE DATA FOR EVALUATION
     rag_engine = RAGEngine()
@@ -115,6 +121,8 @@ async def main():
     final_dataset = Dataset.from_pandas(dataframe)
 
     #5 - EVALUATE THE FINAL DATASET / TESTSET USING RAGAS
+    # NOTE - Answer correctness is based on answer vs ground truth, and ours answers are usually more comprehensive.
+    # This causes it to go down a little bit.
     result = evaluate(
         final_dataset,
         metrics=[
@@ -153,6 +161,7 @@ async def main():
     with open(dataset_txt_file, 'a') as f:
         for item in eval_data:
             f.write(f"Timestamp: {timestamp}\n\n")
+            f.write(f"Question: {item['question']}\n\n")
             f.write(f"Answer: {item['answer']}\n\n")
             f.write(f"Contexts: {str(item['contexts'])}\n\n")
             f.write(f"Retrieved Contexts: {str(item['retrieved_contexts'])}\n\n")

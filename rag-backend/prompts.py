@@ -5,7 +5,7 @@ from langchain_core.prompts import(ChatPromptTemplate,
                                    AIMessagePromptTemplate,
                                    SystemMessagePromptTemplate)
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
-from example_prompts import (example_with_context, example_without_context, example_with_history)
+from example_prompts import (example_with_context, example_without_context, example_with_history, example_with_bad_context)
 
 #IMPORTANT NOTE: Claude is fine tuned to look out for XML tags, so any prompts passed to Claude should use these for maximum effect
 
@@ -29,9 +29,9 @@ sys_msg = """
             - If the context doesn't contain sufficient information to answer the question fully, state this clearly and explain what specific information is missing.
         </instructions>
         <vital_instructions>
-            All of your response must be based solely on the context provided and chat history (if there is any) and not any other information.
+            All of your response must be based solely on the context provided and chat history (if there is any) and not any other information. This means if you know something, but it's not in the context, you can't say it.
             If you can not come to an answer from the context provided, please say so.
-            Don't refer to the context as "the context", "the provided information", or anything along the lines of that.
+            Don't refer to the context as "the context", "the provided information", or anything along the lines of that. Instead, say "the Huberman Lab podcast" or "the Huberman Lab". For example "I apologize, but the provided context doesn't contain specific information about ... but, from what it's covered we can infer ..." becomes "I apologize, but the Huberman Lab podcast doesn't contain specific information about ... but from what it's covered we can infer ..."
             If you have to mention it, just call it the "Huberman Lab podcast" or "Huberman Lab YouTube videos".
             Do not quote the context directly. Instead, give your interpretation of the context.
         </vital_instructions>
@@ -42,7 +42,8 @@ def get_few_shot_prompt():
     examples = [
         example_with_context,
         example_without_context,
-        example_with_history
+        example_with_history,
+        example_with_bad_context
     ]
 
     # Create the system prompt which is used to give the AI it's role and define rules and restrictions for the chat
