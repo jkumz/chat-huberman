@@ -3,6 +3,7 @@ yt-dlp
 pytube
 langchain_community
 scrapetube
+langchain==0.2.16
 langchain_openai
 langchain-ai21
 langchain-cli
