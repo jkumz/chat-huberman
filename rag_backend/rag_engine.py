@@ -45,8 +45,9 @@ class RAGEngine:
     - embedding_model: The embedding model to use for generating embeddings
     - output_parser: The output parser to use for parsing the output of the LLM
     """
-    def __init__(self, model=CLAUDE_SONNET_MODEL):
-        self.embedding_model = OpenAIEmbeddings(model=os.getenv("EMBEDDING_MODEL"), api_key=os.getenv("OPENAI_API_KEY"))
+    def __init__(self, openai_api_key, anthropic_api_key, model=CLAUDE_SONNET_MODEL) :
+        self.embedding_model = OpenAIEmbeddings(model=os.getenv("EMBEDDING_MODEL"), api_key=openai_api_key)
+        self.anthropic_api_key = anthropic_api_key
         self.index = Pinecone(api_key=os.getenv("PINECONE_API_KEY")).Index(name=os.getenv("INDEX_NAME"), host=os.getenv("INDEX_HOST"))
         self.vector_store = PineconeVectorStore(index=self.index, embedding=self.embedding_model)
         self.retriever = self.vector_store.as_retriever(search_kwargs={"k": 5})
@@ -59,9 +60,13 @@ class RAGEngine:
     Parameters:
     - model: The model to use for generating responses
     ''' 
+    #TODO - Remove my API key that's used here.
     def set_model(self, model):
         self.model = model
-        self.llm = ChatAnthropic(model=model, temperature=0, api_key=os.getenv("ANTHROPIC_API_KEY"), model_kwargs={"extra_headers": {"anthropic-beta": "prompt-caching-2024-07-31"}})
+        if self.anthropic_api_key:
+            self.llm = ChatAnthropic(model=model, temperature=0, api_key=self.anthropic_api_key, model_kwargs={"extra_headers": {"anthropic-beta": "prompt-caching-2024-07-31"}})
+        else:
+            self.llm = ChatAnthropic(model=model, temperature=0, api_key=os.getenv("ANTHROPIC_API_KEY"), model_kwargs={"extra_headers": {"anthropic-beta": "prompt-caching-2024-07-31"}})
         self.tokenizer = tiktoken.encoding_for_model(os.getenv("EMBEDDING_MODEL"))
         self.__update_costs()
 
@@ -107,14 +112,6 @@ class RAGEngine:
     Returns:
     - The response from the LLM
     '''
-        
-    # TODO: We can also look through the context, and if there is context that is not fully completed, we can
-    # generate a query that will retrieve more relevant context and add it to the context list
-    # Example: "Implementing the big 6 pillars of health: <6 pillars not mentioned, so LLM defines
-    # a query that will retrieve more context on the 6 pillars and add it to the context list>"
-
-        # TODO: Few shot learning: Give examples of previous conversations to the LLM to help it answer the question
-        # - No "Based on the context provided" or "The context provided is" in the answer
     def chain(self, user_input, context, chat_history="", few_shot=False):
         if few_shot:
             prompt = get_few_shot_prompt()
@@ -181,38 +178,3 @@ class RAGEngine:
     def get_answer_with_context(self, user_input, few_shot=False):
         retrieved = self.retrieve_relevant_documents(user_input)
         return {"answer": self.chain(user_input=user_input, context=retrieved, few_shot=few_shot), "context": retrieved}
-
-def main():
-    rag_engine = RAGEngine()
-    query = ""
-    conversation_file = "rag-backend/conversation.txt"
-    conversation_stack = queue.Queue(maxsize=10)
-
-    while query != "exit":
-        query = input("Enter a query: \n")
-        retrieved = rag_engine.retrieve_relevant_documents(query)
-        chat_history = "\n".join(conversation_stack) if conversation_stack else ""
-        raw_response, generation_token_usage = rag_engine.chain(user_input=query, context=retrieved, chat_history=chat_history, few_shot=True)
-        human_readable_response = re.sub(r'<thinking>.*?</thinking>', '', raw_response, flags=re.DOTALL)
-        input_tokens = generation_token_usage["input_tokens"]
-        output_tokens = generation_token_usage["output_tokens"]
-        total_tokens = generation_token_usage["total_tokens"]
-        print(f"Input tokens: {input_tokens}, \tOutput tokens: {output_tokens}, \tTotal tokens: {total_tokens}")
-        input_cost, output_cost, total_cost = rag_engine.calculate_generation_cost(input_tokens, output_tokens)
-        
-        with open(conversation_file, "a") as f:
-            f.write(f"User: {query}\n")
-            f.write(f"Assistant: {raw_response}\n\n")
-            f.write(f"Total cost: ${total_cost}\n\n")
-
-        logger.info(f"Input tokens: {input_tokens}, \tInput cost: ${input_cost}")
-        logger.info(f"Output tokens: {output_tokens}, \tOutput cost: ${output_cost}")
-        logger.info(f"Generation cost: ${total_cost}")
-        print(human_readable_response)
-
-        conversation_stack.append(query)
-        conversation_stack.append(raw_response)
-
-
-if __name__ == "__main__":
-    main()
