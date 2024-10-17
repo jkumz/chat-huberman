@@ -1,13 +1,40 @@
-from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import ChatOpenAI
+from langchain_core.output_parsers import StrOutputParser
 from langchain_core.documents import Document
 import os
-from .prompts import get_check_if_multi_query_should_be_used_prompt, get_multi_query_generation_prompt
+import tiktoken
+from rag_backend.prompts import get_check_if_multi_query_should_be_used_prompt, get_multi_query_generation_prompt
+
+LOW_COST_LLM = "gpt-4o-mini"
 
 class QueryTranslator:
     # We only need a low cost LLM as it is only used for generating alternative queries
     def __init__(self):
-        self.llm = ChatOpenAI(model=os.getenv("LOW_COST_LLM"), api_key=os.getenv("OPENAI_API_KEY"), temperature=0.0)
+        self.llm = ChatOpenAI(model=LOW_COST_LLM, api_key=os.getenv("OPENAI_API_KEY"), temperature=0.0)
+        self.total_cost = 0.00
+
+    '''
+        This method is used to determine if the user query would benefit from multi-query generation.
+    '''
+    def calculate_cost(self, query, response):
+        input_tokens = len(tiktoken.encoding_for_model(LOW_COST_LLM).encode(query))
+        output_tokens = len(tiktoken.encoding_for_model(LOW_COST_LLM).encode(response))
+        input_cost = input_tokens * 0.00000015 # $0.15 per 1m tokens in
+        output_cost = output_tokens * 0.00000060 # $0.60 per 1m tokens out
+        total_cost = input_cost + output_cost
+        return total_cost
+
+    '''
+        This method is used to get the total cost of the query translator.
+    '''
+    def get_total_cost(self):
+        return self.total_cost
+
+    '''
+        This method is used to reset the total cost of the query translator.
+    '''
+    def reset_total_cost(self):
+        self.total_cost = 0.00
 
     '''
         This method is used to determine if the user query would benefit from multi-query generation.
@@ -17,7 +44,8 @@ class QueryTranslator:
         
         decision_chain = prompt_template | self.llm | StrOutputParser()
         decision = decision_chain.invoke({"query": query}).strip().lower()
-        
+        self.total_cost += self.calculate_cost(query, decision)
+
         return decision == "yes"
 
     '''
@@ -28,6 +56,7 @@ class QueryTranslator:
         prompt_template = get_multi_query_generation_prompt()
         # We want to add the RAG Fusion reranking step here, so documents get reranked before being sent to the user
         generate_queries_chain = prompt_template | self.llm | StrOutputParser() | (lambda x: x.split("\n"))
+
         return generate_queries_chain
 
     '''

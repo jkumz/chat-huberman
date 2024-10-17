@@ -31,15 +31,14 @@ def tracker(mock_db_connection):
 def test_create_table(tracker, mock_db_connection):
     # Test if the video_processing_status table is created upon initialization
     _, cursor = mock_db_connection
-    cursor.execute.assert_called_with(
-        """
+    expected_sql = """
         CREATE TABLE IF NOT EXISTS video_processing_status
         (video_id TEXT PRIMARY KEY, 
          status TEXT, 
          start_time TIMESTAMP,
          end_time TIMESTAMP)
         """
-    )
+    cursor.execute.assert_called_with(expected_sql)
 
 
 @freeze_time("2023-01-01 12:00:00")

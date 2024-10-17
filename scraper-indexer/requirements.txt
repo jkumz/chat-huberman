@@ -1,0 +1,10 @@
+langchain-ai21
+langchain_openai
+langchain_community
+pinecone
+scrapetube
+pytest
+pytest-timeout
+python-dotenv
+psycopg2
+pytest-freezegun

@@ -10,11 +10,11 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
 from dotenv import (load_dotenv, find_dotenv)
-from .query_translator import QueryTranslator
-from .prompts import get_main_prompt, get_few_shot_prompt
+from rag_backend.query_translator import QueryTranslator
+from rag_backend.prompts import get_main_prompt, get_few_shot_prompt
 import os
 import tiktoken
-from .logger import logger
+from rag_backend.logger import logger as logger
 
 
 load_dotenv(find_dotenv(filename=".rag_engine.env"))
@@ -54,6 +54,10 @@ class RAGEngine:
         self.set_model(model)
         self.output_parser = StrOutputParser()
         self.query_translator = QueryTranslator()
+
+        self.generation_cost = 0.00
+        self.retrieval_cost = 0.00
+        self.translation_cost = 0.00
     '''
     Method for setting the model and updating the costs
     
@@ -100,7 +104,50 @@ class RAGEngine:
         input_cost = input_tokens * self.input_cost_per_token
         output_cost = output_tokens * self.output_cost_per_token
         total_cost = input_cost + output_cost
-        return input_cost, output_cost, total_cost
+        return total_cost
+
+    '''
+    Method for getting the generation cost
+    Returns:
+    - The generation cost
+    '''
+    def get_generation_cost(self):
+        return self.generation_cost
+
+    '''
+    Method for getting the retrieval cost
+    Returns:
+    - The retrieval cost
+    '''
+    def get_retrieval_cost(self):
+        return self.retrieval_cost
+
+    '''
+    Method for resetting the generation cost
+    '''
+    def reset_generation_cost(self):
+        self.generation_cost = 0.00
+
+    '''
+    Method for resetting the retrieval cost
+    '''
+    def reset_retrieval_cost(self):
+        self.retrieval_cost = 0.00
+
+    '''
+    Method for getting the translation cost
+    Returns:
+    - The translation cost
+    '''
+    def get_translation_cost(self):
+        return self.translation_cost
+
+    '''
+    Method for resetting the translation cost
+    '''
+    def reset_translation_cost(self):
+        self.translation_cost = 0.00
+
 
     '''
     Method for chaining together the components of the RAG engine
@@ -122,7 +169,12 @@ class RAGEngine:
         response = chain.invoke({"question": user_input, "documents": context, "chat_history": chat_history})
         resp_metadata = response.usage_metadata
         parsed_response = self.output_parser.invoke(response.content)
-        return parsed_response, resp_metadata
+        input_tokens = resp_metadata["input_tokens"]
+        output_tokens = resp_metadata["output_tokens"]
+        gen_cost = self.calculate_generation_cost(input_tokens, output_tokens)
+        self.generation_cost += gen_cost
+        self.translation_cost = self.query_translator.get_total_cost()
+        return parsed_response
     
     '''
     Method for retrieving the most relevant chunks from the index
@@ -133,6 +185,7 @@ class RAGEngine:
     Returns:
     - The most relevant chunks from the index
     ''' 
+    #TODO - Calculate embedding cost of multi query prompts as input tokens
     def retrieve_relevant_documents(self, user_input, use_reranking=True):
         if self.query_translator.should_use_multi_query(user_input):
             # RAG Fusion method removes duplicates when reranking so no need for unique union in chain
@@ -152,6 +205,7 @@ class RAGEngine:
                 return retrieval_chain.invoke({"user_input": user_input})
         else:
             return self.retriever.invoke(user_input)
+
 
     '''
     Method for getting the answer to a user's question
@@ -178,3 +232,13 @@ class RAGEngine:
     def get_answer_with_context(self, user_input, few_shot=False):
         retrieved = self.retrieve_relevant_documents(user_input)
         return {"answer": self.chain(user_input=user_input, context=retrieved, few_shot=few_shot), "context": retrieved}
+
+
+def main():
+        rag_engine = RAGEngine(openai_api_key=os.getenv("OPENAI_API_KEY"), anthropic_api_key=os.getenv("ANTHROPIC_API_KEY"))
+        ret = rag_engine.retrieve_relevant_documents("What happens when you smoke?", use_reranking=True)
+        for i, doc in enumerate(ret):
+            print(i)
+
+if __name__ == "__main__":
+    main()

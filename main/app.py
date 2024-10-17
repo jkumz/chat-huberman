@@ -1,8 +1,9 @@
 import re
-import time
 import streamlit as st
 import sys
 import os
+
+#TODO Add error handling to this process
 
 # Add the parent directory to the Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -23,7 +24,8 @@ def _store_conversation(user, ai, cost):
 def _get_rag_engine(openai_api_key, anthropic_api_key):
     return engine(openai_api_key=openai_api_key, anthropic_api_key=anthropic_api_key)
 
-def _update_total_cost():
+def _update_total_cost(cost=0.00):
+    st.session_state.total_cost += cost
     st.session_state.total_cost_placeholder.caption(f"Total cost: ${st.session_state.total_cost:.2f}")
 
 def _centre_spinners():
@@ -63,7 +65,9 @@ def setup_page():
 
     # Initialize the RAG engine with API keys
     if st.session_state.api_keys_accepted:
-        rag_engine = _get_rag_engine(st.session_state.openai_api_key, st.session_state.anthropic_api_key)
+        if 'rag_engine' not in st.session_state:
+            st.session_state.rag_engine = _get_rag_engine(st.session_state.openai_api_key, st.session_state.anthropic_api_key)
+        rag_engine = st.session_state.rag_engine
 
     # Format spinners to center
     _centre_spinners()
@@ -94,7 +98,7 @@ def setup_page():
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
             if "metadata" in message:
-                st.caption(f"Tokens: {message['metadata']['total_tokens']} | Cost: {message['metadata']['total_cost']}")
+                st.caption(f"Cost: {message['metadata']['total_cost']}")
 
     # React to user input
     if "processing" not in st.session_state:
@@ -116,34 +120,28 @@ def setup_page():
         try:
             # Get response from RAG engine
             with st.spinner("Gathering relevant information to answer your query..."):
-                context = rag_engine.retrieve_relevant_documents(prompt)
+                context = st.session_state.rag_engine.retrieve_relevant_documents(prompt)
 
             with st.spinner("Synthesising response and calculating response generation cost..."):
                 chat_history = "\n".join([m["content"] for m in st.session_state.messages])
-                raw_response, generation_token_usage = rag_engine.chain(user_input=prompt, context=context, chat_history=chat_history, few_shot=True)
+                raw_response = st.session_state.rag_engine.chain(user_input=prompt, context=context, chat_history=chat_history, few_shot=True)
                 response = re.sub(r'<thinking>.*?</thinking>', '', raw_response, flags=re.DOTALL)
 
             # Calculate costs
-                input_tokens = generation_token_usage["input_tokens"]
-                output_tokens = generation_token_usage["output_tokens"]
-                total_tokens = generation_token_usage["total_tokens"]
-                input_cost, output_cost, total_cost = rag_engine.calculate_generation_cost(input_tokens, output_tokens)
-                st.session_state.total_cost += total_cost
-
-                # Update the total cost display
-                _update_total_cost()
+            total_cost = st.session_state.rag_engine.get_generation_cost() + st.session_state.rag_engine.get_retrieval_cost() + st.session_state.rag_engine.get_translation_cost()
+            # Update the total cost display
+            _update_total_cost(total_cost)
 
             # Display assistant response in chat message container
             with st.chat_message("assistant"):
                 st.markdown(response)
-                st.caption(f"Tokens: {total_tokens} | Cost: ${total_cost:.6f}")
+                st.caption(f"Cost: ${total_cost:.6f}")
 
             # Add assistant response to chat history
             st.session_state.messages.append({
                 "role": "assistant", 
                 "content": response,
                 "metadata": {
-                    "total_tokens": total_tokens,
                     "total_cost": f"${total_cost:.6f}"
                 }
             })
