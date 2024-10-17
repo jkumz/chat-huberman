@@ -1,191 +1,171 @@
 # trunk-ignore-all(isort)
 import pytest
-import sqlite3
 from unittest.mock import patch, MagicMock
 from components.video_processing_tracker import VideoProcessingTracker
+from psycopg2 import sql
+from freezegun import freeze_time
+from datetime import datetime
 
 
 @pytest.fixture
 def mock_db_connection():
-    # Create an in-memory SQLite database for testing
-    conn = sqlite3.connect(":memory:")
-    yield conn
+    # Create a mock PostgreSQL connection
+    conn = MagicMock()
+    cursor = MagicMock()
+    conn.cursor.return_value = cursor
+    yield conn, cursor
     conn.close()
 
 
 @pytest.fixture
 def tracker(mock_db_connection):
     # Create a VideoProcessingTracker instance with a mock database connection
-    with patch(
-        "components.video_processing_tracker.sqlite3.connect",
-        return_value=mock_db_connection,
-    ):
-        tracker = VideoProcessingTracker(db_path=":memory:")
+    conn, _ = mock_db_connection
+    with patch('psycopg2.connect', return_value=conn):
+        tracker = VideoProcessingTracker(db_url='mock://connection')
+        tracker.create_table()  # Ensure this method is called
         yield tracker
         tracker.close()
 
 
 def test_create_table(tracker, mock_db_connection):
     # Test if the video_processing_status table is created upon initialization
-    cursor = mock_db_connection.cursor()
-    cursor.execute(
-        "SELECT name FROM sqlite_master WHERE type='table' AND name='video_processing_status'"
+    _, cursor = mock_db_connection
+    cursor.execute.assert_called_with(
+        """
+        CREATE TABLE IF NOT EXISTS video_processing_status
+        (video_id TEXT PRIMARY KEY, 
+         status TEXT, 
+         start_time TIMESTAMP,
+         end_time TIMESTAMP)
+        """
     )
-    assert cursor.fetchone() is not None
 
 
+@freeze_time("2023-01-01 12:00:00")
 def test_start_processing(tracker, mock_db_connection):
     # Test if start_processing correctly inserts a new record with 'processing' status
+    _, cursor = mock_db_connection
     video_id = "test_video"
+    cursor.fetchone.return_value = None  # Simulate video not existing
+
     tracker.start_processing(video_id)
 
-    cursor = mock_db_connection.cursor()
-    cursor.execute(
-        "SELECT status, start_time FROM video_processing_status WHERE video_id = ?",
-        (video_id,),
+    cursor.execute.assert_any_call(
+        "SELECT status FROM video_processing_status WHERE video_id = %s",
+        (video_id,)
     )
-    result = cursor.fetchone()
+    cursor.execute.assert_called_with(
+        """
+                INSERT INTO video_processing_status
+                (video_id, status, start_time) VALUES (%s, %s, %s)
+                ON CONFLICT (video_id) DO UPDATE
+                SET status = EXCLUDED.status, start_time = EXCLUDED.start_time
+                """,
+        (video_id, "processing", datetime.now())
+    )
 
-    assert result is not None
-    assert result[0] == "processing"
-    assert result[1] is not None  # Check if start_time is set
 
-
+@freeze_time("2023-01-01 12:00:00")
 def test_complete_processing(tracker, mock_db_connection):
     # Test if complete_processing updates the status to 'completed' and sets the end_time
+    _, cursor = mock_db_connection
     video_id = "test_video"
-    tracker.start_processing(video_id)
+
     tracker.complete_processing(video_id)
 
-    cursor = mock_db_connection.cursor()
-    cursor.execute(
-        "SELECT status, end_time FROM video_processing_status WHERE video_id = ?",
-        (video_id,),
+    cursor.execute.assert_called_with(
+        """
+            UPDATE video_processing_status
+            SET status = 'completed', end_time = %s
+            WHERE video_id = %s
+            """,
+        (datetime.now(), video_id)
     )
-    result = cursor.fetchone()
-
-    assert result is not None
-    assert result[0] == "completed"
-    assert result[1] is not None  # Check if end_time is set
 
 
+@freeze_time("2023-01-01 12:00:00")
 def test_fail_processing(tracker, mock_db_connection):
     # Test if fail_processing updates the status to 'failed' and sets the end_time
+    _, cursor = mock_db_connection
     video_id = "test_video"
-    tracker.start_processing(video_id)
+
     tracker.fail_processing(video_id)
 
-    cursor = mock_db_connection.cursor()
-    cursor.execute(
-        "SELECT status, end_time FROM video_processing_status WHERE video_id = ?",
-        (video_id,),
+    cursor.execute.assert_called_with(
+        """
+            UPDATE video_processing_status
+            SET status = 'failed', end_time = %s
+            WHERE video_id = %s
+            """,
+        (datetime.now(), video_id)
     )
-    result = cursor.fetchone()
-
-    assert result is not None
-    assert result[0] == "failed"
-    assert result[1] is not None  # Check if end_time is set
 
 
 def test_get_status(tracker, mock_db_connection):
     # Test if get_status returns the correct status for a video
+    _, cursor = mock_db_connection
     video_id = "test_video"
-    tracker.start_processing(video_id)
+    cursor.fetchone.return_value = ("processing",)
 
     status = tracker.get_status(video_id)
     assert status == "processing"
 
-    tracker.complete_processing(video_id)
-    status = tracker.get_status(video_id)
-    assert status == "completed"
+    cursor.execute.assert_called_with(
+        "SELECT status FROM video_processing_status WHERE video_id = %s",
+        (video_id,)
+    )
 
 
 def test_get_unprocessed_videos(tracker, mock_db_connection):
     # Test if get_unprocessed_videos returns videos that are not marked as completed
-
-    # Start processing for three videos
-    tracker.start_processing("video1")
-    tracker.start_processing("video2")
-    tracker.start_processing("video3")
-
-    # Complete processing for video1
-    tracker.complete_processing("video1")
-
-    # Fail processing for video2
-    tracker.fail_processing("video2")
-
-    # video3 is left in 'processing' state
+    _, cursor = mock_db_connection
+    cursor.fetchall.return_value = [("video2",), ("video3",)]
 
     unprocessed = tracker.get_unprocessed_videos()
-    # trunk-ignore(bandit/B101)
     assert set(unprocessed) == {"video2", "video3"}
 
-    # Additional test to ensure completed videos are not returned
-    tracker.complete_processing("video3")
-    unprocessed = tracker.get_unprocessed_videos()
-    assert set(unprocessed) == {"video2"}
+    cursor.execute.assert_called_with(
+        "SELECT video_id FROM video_processing_status WHERE status != 'completed'"
+    )
 
 
-@patch("os.path.exists")
-@patch("os.path.join")
-@patch("os.path.abspath")
-@patch("os.path.dirname")
-@patch("sqlite3.connect")
-def test_find_db_path(mock_connect, mock_dirname, mock_abspath, mock_join, mock_exists):
-    # Set up the mock directory structure
-    mock_abspath.return_value = "/fake/path/scraper-indexer/components/video_processing_tracker.py"
+def test_check_if_video_exists_and_completed(tracker, mock_db_connection):
+    # Test if check_if_video_exists_and_completed returns True if the video exists and is completed
+    _, cursor = mock_db_connection
+    video_id = "test_video"
+    cursor.fetchone.return_value = (video_id, "completed")
 
-    def fake_dirname(path):
-        parts = path.split("/")
-        return "/".join(parts[:-1])
+    result = tracker.check_if_video_exists_and_completed(video_id)
+    assert result is True
 
-    mock_dirname.side_effect = fake_dirname
+    cursor.execute.assert_called_with(
+        'SELECT video_id, status FROM video_processing_status WHERE video_id = %s',
+        (video_id,)
+    )
 
-    mock_join.side_effect = lambda *args: "/".join(args)
 
-    # Set up mock_exists to return True only for the correct path
-    def fake_exists(path):
-        return path == "/fake/path/scraper-indexer/persistence/video_processing.db"
+@patch('os.environ.get')
+def test_init_with_environment_variable(mock_env_get):
+    # Test initialization with the DATABASE_URL environment variable
+    mock_env_get.return_value = "postgresql://user:password@host:port/dbname"
 
-    mock_exists.side_effect = fake_exists
-
-    # Mock the sqlite3.connect method to prevent actual database creation
-    mock_connect.return_value = MagicMock()
-
-    tracker = VideoProcessingTracker()
-
-    db_path = tracker.find_db_path()
-
-    assert db_path == "/fake/path/scraper-indexer/persistence/video_processing.db", f"got {db_path}"
-
-    # Check that os.path.exists was called for each directory up to the correct one
-    expected_checks = [
-        "/fake/path/scraper-indexer/components/persistence/video_processing.db",
-        "/fake/path/scraper-indexer/persistence/video_processing.db",
-    ]
-
-    for check in expected_checks:
-        mock_exists.assert_any_call(check)
-
-    # Verify that sqlite3.connect was called with the correct path
-    mock_connect.assert_called_once_with("/fake/path/scraper-indexer/persistence/video_processing.db")
-
-@patch("components.video_processing_tracker.VideoProcessingTracker.find_db_path")
-def test_init_with_default_path(mock_find_db_path):
-    # Test initialization with the default (found) database path
-    mock_find_db_path.return_value = "/fake/path/video_processing.db"
-
-    with patch("sqlite3.connect") as mock_connect:
-        # trunk-ignore(ruff/F841)
+    with patch('psycopg2.connect') as mock_connect:
         tracker = VideoProcessingTracker()
-        mock_connect.assert_called_once_with("/fake/path/video_processing.db")
+        mock_connect.assert_called_once_with("postgresql://user:password@host:port/dbname")
 
 
-def test_init_with_custom_path():
-    # Test initialization with a custom database path
-    custom_path = "/custom/path/video_processing.db"
+def test_init_with_custom_url():
+    # Test initialization with a custom database URL
+    custom_url = "postgresql://custom:url@host:port/dbname"
 
-    with patch("sqlite3.connect") as mock_connect:
-        # trunk-ignore(ruff/F841)
-        tracker = VideoProcessingTracker(db_path=custom_path)
-        mock_connect.assert_called_once_with(custom_path)
+    with patch('psycopg2.connect') as mock_connect:
+        tracker = VideoProcessingTracker(db_url=custom_url)
+        mock_connect.assert_called_once_with(custom_url)
+
+
+def test_init_without_url():
+    # Test initialization without a URL (should raise ValueError)
+    with patch('os.environ.get', return_value=None):
+        with pytest.raises(ValueError):
+            VideoProcessingTracker()

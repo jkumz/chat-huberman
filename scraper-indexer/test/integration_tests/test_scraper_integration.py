@@ -13,6 +13,7 @@ from unittest.mock import Mock, patch
 import pytest
 
 from components.transcript_scraper import Scraper
+from components.video_processing_tracker import VideoProcessingTracker
 
 
 # Mock the scrapetube module to avoid actual API calls during testing
@@ -49,15 +50,25 @@ def mock_youtube_loader():
         return mock
 
 
+# Mock the VideoProcessingTracker to avoid actual API calls during testing
+@pytest.fixture
+def mock_video_processing_tracker():
+    with patch("components.transcript_scraper.VideoProcessingTracker") as mock:
+        tracker_instance = Mock()
+        tracker_instance.check_if_video_exists_and_completed.return_value = False
+        mock.return_value = tracker_instance
+        yield mock
+
+
 # Create a Scraper instance with mocked dependencies for testing
 @pytest.fixture
-def scraper(mock_scrapetube, mock_youtube_loader):
+def scraper(mock_scrapetube, mock_youtube_loader, mock_video_processing_tracker):
     return Scraper("mockuser", youtube_loader=mock_youtube_loader)
 
 
 # Test that scrape_and_preprocess returns a list of the correct length
 # Set a 5-second timeout for this test
-def test_scrape_and_preprocess_returns_list(scraper):
+def test_scrape_and_preprocess_returns_list(scraper, mock_video_processing_tracker):
     result = scraper.scrape_and_preprocess(count=2)
     assert isinstance(result, list)
     assert len(result) == 2, f"Expected 2 items, but got {len(result)}"
@@ -263,3 +274,23 @@ def test_scrape_and_preprocess_with_different_languages(scraper, mock_youtube_lo
     result = scraper.scrape_and_preprocess(count=1)
     assert len(result) == 1, "Expected one item when falling back to another language"
     assert "Transcript in another language" in result[0]["chunks"][0]
+
+
+# Test behaviour when YouTube returns a transcript with completed videos
+
+
+def test_scrape_and_preprocess_with_completed_videos(scraper, mock_video_processing_tracker):
+    mock_video_processing_tracker.return_value.check_if_video_exists_and_completed.return_value = True
+    result = scraper.scrape_and_preprocess(count=5)
+    assert len(result) == 0, "Expected no items when all videos are completed"
+
+
+# Test behaviour when YouTube returns a mix of completed and new videos
+
+
+def test_scrape_and_preprocess_with_mix_of_completed_and_new_videos(scraper, mock_video_processing_tracker):
+    def side_effect(video_id):
+        return video_id in ["mockvideo1", "mockvideo3"]
+    mock_video_processing_tracker.return_value.check_if_video_exists_and_completed.side_effect = side_effect
+    result = scraper.scrape_and_preprocess(count=5)
+    assert len(result) == 3, "Expected 3 items (new or uncompleted videos)"
