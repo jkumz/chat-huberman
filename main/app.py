@@ -1,12 +1,54 @@
 import streamlit as st
 import sys
 import os
+import openai
+import anthropic
 
 # Add the parent directory to the Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from rag_backend.rag_engine import RAGEngine as engine
 
 conversation_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "rag_backend", "conversation.txt")
+
+def _check_openai_api_key(api_key):
+    client = openai.OpenAI(api_key=api_key)
+    try:
+        client.models.list()
+    except openai.AuthenticationError:
+        return False
+    else:
+        return True
+
+def _check_anthropic_api_key(api_key):
+    client = anthropic.Client(api_key=api_key)
+    try:
+        client.messages.create(
+            model="claude-3-haiku-20240307",
+            max_tokens=1,
+            messages=[
+                {"role": "user", "content": "Test"}
+                ]
+            )
+    except anthropic.AuthenticationError:
+        return False
+    else:
+        return True
+
+def _validate_api_keys(openai_key, anthropic_key):
+    try:
+        # Validate OpenAI API key
+        openai_valid = _check_openai_api_key(openai_key)
+        if not openai_valid:
+            return False
+        # Validate Anthropic API key
+        anthropic_valid = _check_anthropic_api_key(anthropic_key)
+        if not anthropic_valid:
+            return False
+
+        return True
+    except Exception as e:
+        st.error(f"API key validation failed: {str(e)}")
+        return False
 
 def _store_conversation(user, ai, cost):
     os.makedirs(os.path.dirname(conversation_file), exist_ok=True)
@@ -71,9 +113,13 @@ def _initialise_session_state():
         anthropic_api_key = st.sidebar.text_input("Enter your Anthropic API key", type="password")
 
         if openai_api_key and anthropic_api_key:
-            st.session_state.api_keys_accepted = True
-            st.session_state.openai_api_key = openai_api_key
-            st.session_state.anthropic_api_key = anthropic_api_key
+            if _validate_api_keys(openai_api_key, anthropic_api_key):
+                st.session_state.api_keys_accepted = True
+                st.session_state.openai_api_key = openai_api_key
+                st.session_state.anthropic_api_key = anthropic_api_key
+                st.success("API keys validated successfully!")
+            else:
+                st.error("Invalid API keys. Please check and try again.")
         else:
             st.warning("Please enter both API keys in the sidebar to continue.")
             return
