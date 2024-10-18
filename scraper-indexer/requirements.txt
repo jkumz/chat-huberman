@@ -8,3 +8,4 @@ pytest-timeout
 python-dotenv
 psycopg2
 pytest-freezegun
+schedule
