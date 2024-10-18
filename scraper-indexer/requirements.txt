@@ -3,6 +3,7 @@ langchain_openai
 langchain_community
 pinecone
 scrapetube
+youtube-transcript-api
 pytest
 pytest-timeout
 python-dotenv
