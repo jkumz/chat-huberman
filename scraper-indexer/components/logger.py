@@ -7,10 +7,15 @@ def __setup_logger():
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
+    # Create logs directory
+    log_dir = "/app/logs"
+    os.makedirs(log_dir, exist_ok=True)
+
+    # Use the current working directory for the log file
+    log_file_path = os.path.join(log_dir, "app.log")
+
     # Create handlers
     console_handler = logging.StreamHandler(sys.stdout)
-    # Use the current working directory for the log file
-    log_file_path = os.path.join(os.getcwd(), "scraper-indexer", "app.log")
     file_handler = logging.FileHandler(log_file_path)
 
     # Create formatters and add it to handlers
