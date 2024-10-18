@@ -1,16 +1,15 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.documents import Document
-import os
-import tiktoken
 from rag_backend.prompts import get_check_if_multi_query_should_be_used_prompt, get_multi_query_generation_prompt
+import tiktoken
 
 LOW_COST_LLM = "gpt-4o-mini"
 
 class QueryTranslator:
     # We only need a low cost LLM as it is only used for generating alternative queries
-    def __init__(self):
-        self.llm = ChatOpenAI(model=LOW_COST_LLM, api_key=os.getenv("OPENAI_API_KEY"), temperature=0.0)
+    def __init__(self, openai_api_key):
+        self.llm = ChatOpenAI(model=LOW_COST_LLM, api_key=openai_api_key, temperature=0.0)
         self.total_cost = 0.00
 
     '''

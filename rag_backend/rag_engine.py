@@ -19,6 +19,8 @@ from rag_backend.logger import logger as logger
 
 load_dotenv(find_dotenv(filename=".rag_engine.env"))
 
+EMBEDDING_MODEL="text-embedding-3-large"
+
 CLAUDE_SONNET_MODEL="claude-3-5-sonnet-20240620" # most powerful
 SONNET_INPUT_COST_PER_TOKEN = 0.000003 # $3 per 1m tokens in
 SONNET_OUTPUT_COST_PER_TOKEN = 0.000015 # $15 per 1m tokens out
@@ -46,14 +48,14 @@ class RAGEngine:
     - output_parser: The output parser to use for parsing the output of the LLM
     """
     def __init__(self, openai_api_key, anthropic_api_key, model=CLAUDE_SONNET_MODEL) :
-        self.embedding_model = OpenAIEmbeddings(model=os.getenv("EMBEDDING_MODEL"), api_key=openai_api_key)
+        self.embedding_model = OpenAIEmbeddings(model=EMBEDDING_MODEL, api_key=openai_api_key)
         self.anthropic_api_key = anthropic_api_key
         self.index = Pinecone(api_key=os.getenv("PINECONE_API_KEY")).Index(name=os.getenv("INDEX_NAME"), host=os.getenv("INDEX_HOST"))
         self.vector_store = PineconeVectorStore(index=self.index, embedding=self.embedding_model)
         self.retriever = self.vector_store.as_retriever(search_kwargs={"k": 5})
         self.set_model(model)
         self.output_parser = StrOutputParser()
-        self.query_translator = QueryTranslator()
+        self.query_translator = QueryTranslator(openai_api_key=openai_api_key)
 
         self.generation_cost = 0.00
         self.retrieval_cost = 0.00
@@ -67,11 +69,8 @@ class RAGEngine:
     #TODO - Remove my API key that's used here.
     def set_model(self, model):
         self.model = model
-        if self.anthropic_api_key:
-            self.llm = ChatAnthropic(model=model, temperature=0, api_key=self.anthropic_api_key, model_kwargs={"extra_headers": {"anthropic-beta": "prompt-caching-2024-07-31"}})
-        else:
-            self.llm = ChatAnthropic(model=model, temperature=0, api_key=os.getenv("ANTHROPIC_API_KEY"), model_kwargs={"extra_headers": {"anthropic-beta": "prompt-caching-2024-07-31"}})
-        self.tokenizer = tiktoken.encoding_for_model(os.getenv("EMBEDDING_MODEL"))
+        self.llm = ChatAnthropic(model=model, temperature=0, api_key=self.anthropic_api_key, model_kwargs={"extra_headers": {"anthropic-beta": "prompt-caching-2024-07-31"}})
+        self.tokenizer = tiktoken.encoding_for_model(EMBEDDING_MODEL)
         self.__update_costs()
 
     '''
