@@ -1,15 +1,11 @@
-import re
 import streamlit as st
 import sys
 import os
-
-#TODO Add error handling to this process
 
 # Add the parent directory to the Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from rag_backend.rag_engine import RAGEngine as engine
 
-GENERATION_COST = 0.00
 conversation_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "rag_backend", "conversation.txt")
 
 def _store_conversation(user, ai, cost):
@@ -25,8 +21,9 @@ def _get_rag_engine(openai_api_key, anthropic_api_key):
     return engine(openai_api_key=openai_api_key, anthropic_api_key=anthropic_api_key)
 
 def _update_total_cost(cost=0.00):
-    st.session_state.total_cost += cost
-    st.session_state.total_cost_placeholder.caption(f"Total cost: ${st.session_state.total_cost:.2f}")
+    st.session_state.total_cost = cost
+    if "total_cost_placeholder" in st.session_state:
+        st.session_state.total_cost_placeholder.caption(f"Total cost: ${st.session_state.total_cost:.2f}")
 
 def _centre_spinners():
     st.markdown("""
@@ -51,10 +48,6 @@ def _initialise_session_state():
     if "total_cost" not in st.session_state:
         st.session_state.total_cost = 0.00
 
-    # Add checkbox for storing conversation logs
-    if "store_logs" not in st.session_state:
-        st.session_state.store_logs = False
-
     # Create a placeholder for the total cost in the sidebar
     if "total_cost_placeholder" not in st.session_state:
         st.session_state.total_cost_placeholder = st.sidebar.empty()
@@ -65,6 +58,12 @@ def _initialise_session_state():
 
     if "block_processing" not in st.session_state:
         st.session_state.block_processing = False
+
+    if "total_cost" not in st.session_state:
+        st.session_state.total_cost = 0.00
+        st.session_state.total_cost_placeholder.caption(f"Total cost: ${st.session_state.total_cost:.2f}")
+
+
 
     # Check if API keys have been accepted
     if not st.session_state.api_keys_accepted:
@@ -81,14 +80,6 @@ def _initialise_session_state():
     else:
         # Hide the text input boxes when API keys are accepted
         st.sidebar.markdown("API Keys Accepted")
-
-def toggle_input(switch):
-    if switch:
-        st.session_state["processing"] = True
-    else:
-        st.session_state["processing"] = False
-
-
 
 def setup_page():
     # Set up the Streamlit page
@@ -109,14 +100,14 @@ def setup_page():
         st.sidebar.checkbox("Enable conversation logging", key="store_logs")
 
         # Update the total cost display
-        _update_total_cost()
+        _update_total_cost(st.session_state.total_cost)
 
         # Display chat messages from history
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
                 if "metadata" in message:
-                    st.caption(f"Cost: {message['metadata']['total_cost']}")
+                    st.caption(f"Cumulative Message Cost: {message['metadata']['total_cost']}")
 
         # React to user input
         if not st.session_state.processing:
@@ -140,13 +131,9 @@ def setup_page():
 
             try:
                 # Get response from RAG engine
-                with st.spinner("Gathering relevant information to answer your query..."):
-                    context = st.session_state.rag_engine.retrieve_relevant_documents(prompt)
-
-                with st.spinner("Synthesising response and calculating response generation cost..."):
+                with st.spinner("Gathering relevant information and synthesising response..."):
                     chat_history = "\n".join([m["content"] for m in st.session_state.messages])
-                    raw_response = st.session_state.rag_engine.chain(user_input=prompt, context=context, chat_history=chat_history, few_shot=True)
-                    response = re.sub(r'<thinking>.*?</thinking>', '', raw_response, flags=re.DOTALL)
+                    response = st.session_state.rag_engine.get_answer(user_input=prompt, few_shot=True, history=chat_history, format_response=True)
 
                 # Calculate costs
                 total_cost = st.session_state.rag_engine.get_generation_cost() + st.session_state.rag_engine.get_retrieval_cost() + st.session_state.rag_engine.get_translation_cost()
@@ -156,7 +143,7 @@ def setup_page():
                 # Display assistant response in chat message container
                 with st.chat_message("assistant"):
                     st.markdown(response)
-                    st.caption(f"Cost: ${total_cost:.6f}")
+                    st.caption(f"Cumulative Message Cost: ${total_cost:.6f}")
 
                 # Add assistant response to chat history
                 st.session_state.messages.append({

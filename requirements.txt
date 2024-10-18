@@ -19,3 +19,4 @@ pytest-timeout
 bs4
 ragas
 streamlit
+asyncio

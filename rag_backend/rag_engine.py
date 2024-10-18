@@ -1,9 +1,10 @@
-import queue
+import re
 import sys
 import os
+import tiktoken
+import asyncio
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import re
 from langchain_anthropic import ChatAnthropic
 from langchain_openai import OpenAIEmbeddings
 from langchain_core.output_parsers import StrOutputParser
@@ -12,8 +13,7 @@ from pinecone import Pinecone
 from dotenv import (load_dotenv, find_dotenv)
 from rag_backend.query_translator import QueryTranslator
 from rag_backend.prompts import get_main_prompt, get_few_shot_prompt
-import os
-import tiktoken
+from concurrent.futures import TimeoutError
 from rag_backend.logger import logger as logger
 
 
@@ -185,27 +185,44 @@ class RAGEngine:
     Returns:
     - The most relevant chunks from the index
     ''' 
-    #TODO - Calculate embedding cost of multi query prompts as input tokens
-    def retrieve_relevant_documents(self, user_input, use_reranking=True):
-        if self.query_translator.should_use_multi_query(user_input):
-            # RAG Fusion method removes duplicates when reranking so no need for unique union in chain
-            if use_reranking:
-                reranked_retrieval_chain = (
-                    self.query_translator.multi_query_generation()
-                    | self.retriever.map()
-                )
-                unflattened_unranked_docs = reranked_retrieval_chain.invoke({"user_input": user_input})
-                return self.query_translator.reciprocal_rank_fusion(result_docs=unflattened_unranked_docs)
+    #TODO - Calculate embedding cost of multi query prompts
+    def retrieve_relevant_documents(self, user_input, use_reranking=True, timeout=30):
+        async def retrieval_with_timeout():
+            if self.query_translator.should_use_multi_query(user_input):
+                # RAG Fusion method removes duplicates when reranking so no need for unique union in chain
+                if use_reranking:
+                    reranked_retrieval_chain = (
+                        self.query_translator.multi_query_generation()
+                        | self.retriever.map()
+                    )
+                    unflattened_unranked_docs = await asyncio.wait_for(
+                        asyncio.to_thread(reranked_retrieval_chain.invoke, {"user_input": user_input}),
+                        timeout=timeout
+                    )
+                    return await asyncio.wait_for(
+                        asyncio.to_thread(self.query_translator.reciprocal_rank_fusion, result_docs=unflattened_unranked_docs),
+                        timeout=timeout
+                    )
+                else:
+                    retrieval_chain = (
+                        self.query_translator.multi_query_generation()
+                        | self.retriever.map()
+                        | (lambda docs: self.query_translator.get_unique_union(docs))
+                    )
+                    return await asyncio.wait_for(
+                        asyncio.to_thread(retrieval_chain.invoke, {"user_input": user_input}),
+                        timeout=timeout
+                    )
             else:
-                retrieval_chain = (
-                    self.query_translator.multi_query_generation()
-                    | self.retriever.map()
-                    | (lambda docs: self.query_translator.get_unique_union(docs))
+                return await asyncio.wait_for(
+                    asyncio.to_thread(self.retriever.invoke, user_input),
+                    timeout=timeout
                 )
-                return retrieval_chain.invoke({"user_input": user_input})
-        else:
-            return self.retriever.invoke(user_input)
 
+        try:
+            return asyncio.run(retrieval_with_timeout())
+        except TimeoutError:
+            raise TimeoutError(f"Retrieval operation timed out after {timeout} seconds") from None
 
     '''
     Method for getting the answer to a user's question
@@ -216,9 +233,13 @@ class RAGEngine:
     Returns:
     - The answer to the user's question
     '''
-    def get_answer(self, user_input, few_shot=False):
+    def get_answer(self, user_input, few_shot=False, format_response=True, history=""):
         retrieved = self.retrieve_relevant_documents(user_input)
-        return self.chain(user_input=user_input, context=retrieved, few_shot=few_shot)
+        if format_response:
+            raw = self.chain(user_input=user_input, context=retrieved, few_shot=few_shot, chat_history=history)
+            return re.sub(r'<thinking>.*?</thinking>', '', raw, flags=re.DOTALL)
+        else:
+            return self.chain(user_input=user_input, context=retrieved, few_shot=few_shot, chat_history=history)
 
     '''
     Method for getting the answer to a user's question along with the relevant context
@@ -234,11 +255,11 @@ class RAGEngine:
         return {"answer": self.chain(user_input=user_input, context=retrieved, few_shot=few_shot), "context": retrieved}
 
 
-def main():
-        rag_engine = RAGEngine(openai_api_key=os.getenv("OPENAI_API_KEY"), anthropic_api_key=os.getenv("ANTHROPIC_API_KEY"))
-        ret = rag_engine.retrieve_relevant_documents("What happens when you smoke?", use_reranking=True)
-        for i, doc in enumerate(ret):
-            print(i)
+# def main():
+#         rag_engine = RAGEngine(openai_api_key=os.getenv("OPENAI_API_KEY"), anthropic_api_key=os.getenv("ANTHROPIC_API_KEY"))
+#         ret = rag_engine.retrieve_relevant_documents("Oxytocin in mammals", use_reranking=True)
+#         for i, doc in enumerate(ret):
+#             print(doc.page_content[:100])
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
