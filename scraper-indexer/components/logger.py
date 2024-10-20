@@ -5,10 +5,10 @@ import sys
 def __setup_logger():
     # Create a logger
     logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.INFO)
 
     # Create logs directory
-    log_dir = "/app/logs"
+    log_dir = os.path.join(os.getcwd(), "logs")
     os.makedirs(log_dir, exist_ok=True)
 
     # Use the current working directory for the log file

@@ -66,7 +66,7 @@ def test_user_keys_accepted():
     app.text_input(key="anthropic_api_key").set_value(ANTHROPIC_API_KEY)
 
     # Force rerun to ensure the session state is updated
-    app.run(timeout=10) # High timeout as we are waiting on generated resp from Claude
+    app.run(timeout=30) # High timeout as we are waiting on generated resp from Claude, not always fast
 
     assert app.session_state.api_keys_accepted, "API keys should have been accepted"
     assert 'rag_engine' in app.session_state, "RAG engine should have been initialized"

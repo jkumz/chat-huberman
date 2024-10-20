@@ -52,17 +52,7 @@ def main():
 
     logger.info("Completed processing and indexing all videos")
 
-def run_daily_scrape():
-    logger.info("Starting daily scrape and index process")
-    main()
-    logger.info("Completed daily scrape and index process")
-
 if __name__ == "__main__":
-    # Schedule the main function to run daily at 9:00 AM
-    schedule.every().day.at("09:00").do(run_daily_scrape)
-
-    logger.info("Scraper-indexer scheduled to run daily at 09:00")
-
-    while True:
-        schedule.run_pending()
-        time.sleep(60)  # Check every minute
+    logger.info("Starting scraper-indexer")
+    main()
+    logger.info("Completed scraper-indexer")
