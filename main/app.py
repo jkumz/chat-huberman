@@ -45,10 +45,6 @@ def _initialise_session_state():
     if 'api_keys_accepted' not in st.session_state:
         st.session_state.api_keys_accepted = False
 
-    # Initialise total conversation cost
-    if "total_cost" not in st.session_state:
-        st.session_state.total_cost = 0.00
-
     # Create a placeholder for the total cost in the sidebar
     if "total_cost_placeholder" not in st.session_state:
         st.session_state.total_cost_placeholder = st.sidebar.empty()
@@ -64,27 +60,36 @@ def _initialise_session_state():
         st.session_state.total_cost = 0.00
         st.session_state.total_cost_placeholder.caption(f"Total cost: ${st.session_state.total_cost:.2f}")
 
-
+    # Function to validate and update API keys
+    def validate_and_update_keys():
+        if st.session_state.openai_api_key and st.session_state.anthropic_api_key:
+            if validate_api_keys(st.session_state.openai_api_key, st.session_state.anthropic_api_key):
+                st.session_state.api_keys_accepted = True
+                st.sidebar.success("API keys validated successfully!")
+            else:
+                st.sidebar.error("Invalid API keys. Please check and try again.")
+        elif st.session_state.openai_api_key or st.session_state.anthropic_api_key:
+            st.sidebar.warning("Please enter both API keys in the sidebar to continue.")
 
     # Check if API keys have been accepted
     if not st.session_state.api_keys_accepted:
-        openai_api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
-        anthropic_api_key = st.sidebar.text_input("Enter your Anthropic API key", type="password")
-
-        if openai_api_key and anthropic_api_key:
-            if validate_api_keys(openai_api_key, anthropic_api_key):
-                st.session_state.openai_api_key = openai_api_key
-                st.session_state.anthropic_api_key = anthropic_api_key
-                st.session_state.api_keys_accepted = True
-                st.success("API keys validated successfully!")
-            else:
-                st.error("Invalid API keys. Please check and try again.")
-        else:
-            st.warning("Please enter both API keys in the sidebar to continue.")
-            return
+        st.sidebar.text_input(
+            label="Enter your OpenAI API key",
+            type="password",
+            key="openai_api_key",
+            on_change=validate_and_update_keys
+        )
+        st.sidebar.text_input(
+            label="Enter your Anthropic API key",
+            type="password",
+            key="anthropic_api_key",
+            on_change=validate_and_update_keys
+        )
     else:
         # Hide the text input boxes when API keys are accepted
         st.sidebar.markdown("API Keys Accepted")
+
+    return st.session_state.api_keys_accepted
 
 def setup_page():
     # Set up the Streamlit page
@@ -92,10 +97,10 @@ def setup_page():
     st.title("ChatHuberman")
     st.caption("DISCLAIMER: This has no association with the Huberman Lab podcast or Andrew Huberman. This was a fun learning project.")
 
-    _initialise_session_state()
+    api_keys_accepted = _initialise_session_state()
 
     # Initialize the RAG engine with API keys
-    if st.session_state.api_keys_accepted:
+    if api_keys_accepted:
         if 'rag_engine' not in st.session_state:
             st.session_state.rag_engine = _get_rag_engine(st.session_state.openai_api_key, st.session_state.anthropic_api_key)
 
@@ -116,7 +121,7 @@ def setup_page():
 
         # React to user input
         if not st.session_state.processing:
-            user_input = st.chat_input("Enter the question you want answered using the Huberman Lab podcast")
+            user_input = st.chat_input("Enter the question you want answered using the Huberman Lab podcast", key="user_input")
             if user_input:
                 st.session_state.processing = True
                 st.session_state.current_input = user_input
@@ -173,12 +178,14 @@ def setup_page():
                 st.session_state.current_input = None
                 st.rerun()
 
-    # Add a button to clear chat history
-    if st.button("Clear Chat History"):
+    def clear_chat_history_callback():
         st.session_state.messages = []
         st.session_state.total_cost = 0.00
         _update_total_cost()
         st.rerun()
+
+    # Add a button to clear chat history
+    st.button("Clear Chat History", key="clear_chat_history", on_click=clear_chat_history_callback)
 
 def main():
     setup_page()
