@@ -1,5 +1,6 @@
 import os
 import sys
+import pytest
 from dotenv import load_dotenv, find_dotenv
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -10,6 +11,10 @@ if not os.environ.get("OPENAI_API_KEY"):
     load_dotenv(find_dotenv(filename=".rag_engine.env"))
 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+
+@pytest.fixture(scope="module")
+def translator():
+    return qt(OPENAI_API_KEY)
 
 def test_qt_should_use_multi_query():
     translator = qt(OPENAI_API_KEY)

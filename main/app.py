@@ -146,8 +146,7 @@ def setup_page():
                     response = st.session_state.rag_engine.get_answer(user_input=prompt, few_shot=True, history=chat_history, format_response=True)
 
                 # Calculate costs
-                total_cost = st.session_state.rag_engine.get_generation_cost() + st.session_state.rag_engine.get_retrieval_cost() + st.session_state.rag_engine.get_translation_cost()
-                # Update the total cost display
+                total_cost = st.session_state.rag_engine.get_total_cost()
                 _update_total_cost(total_cost)
 
                 # Display assistant response in chat message container
@@ -179,6 +178,7 @@ def setup_page():
                 st.rerun()
 
     def clear_chat_history_callback():
+        st.session_state.rag_engine.reset_all_costs()
         st.session_state.messages = []
         st.session_state.total_cost = 0.00
         _update_total_cost()

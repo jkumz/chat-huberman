@@ -53,7 +53,7 @@ class RAGEngine:
         self.index = Pinecone(api_key=os.getenv("PINECONE_API_KEY")).Index(name=os.getenv("INDEX_NAME"), host=os.getenv("INDEX_HOST"))
         self.vector_store = PineconeVectorStore(index=self.index, embedding=self.embedding_model)
         self.retriever = self.vector_store.as_retriever(search_kwargs={"k": 5})
-        self.set_model(model)
+        self._set_model(model)
         self.output_parser = StrOutputParser()
         self.query_translator = QueryTranslator(openai_api_key=openai_api_key)
 
@@ -66,8 +66,7 @@ class RAGEngine:
     Parameters:
     - model: The model to use for generating responses
     ''' 
-    #TODO - Remove my API key that's used here.
-    def set_model(self, model):
+    def _set_model(self, model):
         self.model = model
         self.llm = ChatAnthropic(model=model, temperature=0, api_key=self.anthropic_api_key, model_kwargs={"extra_headers": {"anthropic-beta": "prompt-caching-2024-07-31"}})
         self.tokenizer = tiktoken.encoding_for_model(EMBEDDING_MODEL)
@@ -99,55 +98,40 @@ class RAGEngine:
     Returns:
     - The cost of the input and output
     '''
-    def calculate_generation_cost(self, input_tokens, output_tokens):
+    def _calculate_generation_cost(self, input_tokens, output_tokens):
         input_cost = input_tokens * self.input_cost_per_token
         output_cost = output_tokens * self.output_cost_per_token
         total_cost = input_cost + output_cost
         return total_cost
 
     '''
-    Method for getting the generation cost
-    Returns:
-    - The generation cost
-    '''
-    def get_generation_cost(self):
-        return self.generation_cost
-
-    '''
-    Method for getting the retrieval cost
-    Returns:
-    - The retrieval cost
-    '''
-    def get_retrieval_cost(self):
-        return self.retrieval_cost
-
-    '''
     Method for resetting the generation cost
     '''
-    def reset_generation_cost(self):
+    def _reset_generation_cost(self):
         self.generation_cost = 0.00
 
     '''
     Method for resetting the retrieval cost
     '''
-    def reset_retrieval_cost(self):
+    def _reset_retrieval_cost(self):
         self.retrieval_cost = 0.00
-
-    '''
-    Method for getting the translation cost
-    Returns:
-    - The translation cost
-    '''
-    def get_translation_cost(self):
-        return self.translation_cost
 
     '''
     Method for resetting the translation cost
     '''
-    def reset_translation_cost(self):
+    def _reset_translation_cost(self):
         self.translation_cost = 0.00
 
+    '''
+    Method for resetting all the costs
+    '''
+    def reset_all_costs(self):
+        self._reset_generation_cost()
+        self._reset_retrieval_cost()
+        self._reset_translation_cost()
 
+    def get_total_cost(self):
+        return self.generation_cost + self.retrieval_cost + self.translation_cost
     '''
     Method for chaining together the components of the RAG engine
     
@@ -158,7 +142,7 @@ class RAGEngine:
     Returns:
     - The response from the LLM
     '''
-    def chain(self, user_input, context, chat_history="", few_shot=False):
+    def _chain(self, user_input, context, chat_history="", few_shot=False):
         if few_shot:
             prompt = get_few_shot_prompt()
         else:
@@ -170,7 +154,7 @@ class RAGEngine:
         parsed_response = self.output_parser.invoke(response.content)
         input_tokens = resp_metadata["input_tokens"]
         output_tokens = resp_metadata["output_tokens"]
-        gen_cost = self.calculate_generation_cost(input_tokens, output_tokens)
+        gen_cost = self._calculate_generation_cost(input_tokens, output_tokens)
         self.generation_cost += gen_cost
         self.translation_cost = self.query_translator.get_total_cost()
         return parsed_response
@@ -235,10 +219,10 @@ class RAGEngine:
     def get_answer(self, user_input, few_shot=False, format_response=True, history=""):
         retrieved = self.retrieve_relevant_documents(user_input)
         if format_response:
-            raw = self.chain(user_input=user_input, context=retrieved, few_shot=few_shot, chat_history=history)
+            raw = self._chain(user_input=user_input, context=retrieved, few_shot=few_shot, chat_history=history)
             return re.sub(r'<thinking>.*?</thinking>', '', raw, flags=re.DOTALL)
         else:
-            return self.chain(user_input=user_input, context=retrieved, few_shot=few_shot, chat_history=history)
+            return self._chain(user_input=user_input, context=retrieved, few_shot=few_shot, chat_history=history)
 
     '''
     Method for getting the answer to a user's question along with the relevant context
@@ -251,14 +235,4 @@ class RAGEngine:
     '''
     def get_answer_with_context(self, user_input, few_shot=False):
         retrieved = self.retrieve_relevant_documents(user_input)
-        return {"answer": self.chain(user_input=user_input, context=retrieved, few_shot=few_shot), "context": retrieved}
-
-
-# def main():
-#         rag_engine = RAGEngine(openai_api_key=os.getenv("OPENAI_API_KEY"), anthropic_api_key=os.getenv("ANTHROPIC_API_KEY"))
-#         ret = rag_engine.retrieve_relevant_documents("Oxytocin in mammals", use_reranking=True)
-#         for i, doc in enumerate(ret):
-#             print(doc.page_content[:100])
-
-# if __name__ == "__main__":
-#     main()
+        return {"answer": self._chain(user_input=user_input, context=retrieved, few_shot=few_shot), "context": retrieved}

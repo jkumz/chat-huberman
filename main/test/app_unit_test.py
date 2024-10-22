@@ -55,6 +55,4 @@ def test_get_rag_engine(mock_query_translator, mock_chat_anthropic, mock_pinecon
     assert rag_engine.retriever == "mock_retriever"
     assert rag_engine.llm == "mock_llm"
     assert rag_engine.query_translator == "mock_query_translator"
-    assert rag_engine.generation_cost == 0.00
-    assert rag_engine.retrieval_cost == 0.00
-    assert rag_engine.translation_cost == 0.00
+    assert rag_engine.get_total_cost() == 0.00
