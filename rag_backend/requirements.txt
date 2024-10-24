@@ -14,5 +14,6 @@ python-dotenv
 ragas
 pytest
 pytest-timeout
+pytest-asyncio
 pydantic
 redis

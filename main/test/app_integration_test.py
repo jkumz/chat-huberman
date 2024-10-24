@@ -28,9 +28,25 @@ if not os.environ.get("OPENAI_API_KEY") and not os.environ.get("ANTHROPIC_API_KE
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
 
+def find_app_py():
+    """
+    Find the app.py file by searching up the directory tree.
+
+    Returns:
+    - str: The absolute path to app.py if found, None otherwise.
+    """
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    while current_dir != os.path.dirname(current_dir):  # Stop at root directory
+        app_path = os.path.join(current_dir, 'main', 'app.py')
+        if os.path.exists(app_path):
+            return app_path
+        current_dir = os.path.dirname(current_dir)
+    return None  # Return None if app.py is not found
+
+
 # Helper function to simulate the app
 def simulate_app():
-    at = AppTest.from_file("main/app.py")
+    at = AppTest.from_file(find_app_py())
     return at
 
 # Test that the session state is initialised correctly
@@ -114,7 +130,7 @@ def test_user_prompt_and_response():
     # Simulate entering a prompt
     app.chat_input(key="user_input").set_value("What is the main function of the amygdala?").run(timeout=30)
     assert app.session_state.messages[0]["content"] == "What is the main function of the amygdala?", "First message should be the user prompt"
-    assert len(app.session_state.messages) == 2, "The messages should contain two items: the user prompt and the response"
+    assert len(app.session_state.messages) == 2, f"The messages should contain two items: the user prompt and the response, instead got {app.session_state.messages}"
     assert app.session_state.total_cost > 0.00, "Total cost should be greater than $0.00"
 
     app.button(key="clear_chat_history").click().run()

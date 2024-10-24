@@ -46,7 +46,6 @@ def test_get_unique_union_when_not_unique():
     for doc in unique_sample:
         assert any(translator.serialise_doc(d) == translator.serialise_doc(doc) for d in uniq_docs), "Each document from unique_sample should be in uniq_docs"
 
-
 def test_get_unique_union_when_unique():
     uniq_docs = translator.get_unique_union(nested_unique_sample_docs)
     assert len(uniq_docs) == len(unique_sample), "Unique docs should be the same length as unique_sample"

@@ -234,7 +234,7 @@ class RAGEngine:
                 "answer": answer,
                 "generation_cost": self.generation_cost,
                 "retrieval_cost": self.retrieval_cost,
-                    "translation_cost": self.translation_cost
+                "translation_cost": self.translation_cost
                 }
         except Exception as e:
             logger.error(f"Error getting answer: {e}")
@@ -248,6 +248,7 @@ class RAGEngine:
     Returns:
     - The answer to the user's question along with the relevant context
     '''
-    def get_answer_with_context(self, user_input, few_shot=False):
-        retrieved = self.retrieve_relevant_documents(user_input)
-        return {"answer": self._chain(user_input=user_input, context=retrieved, few_shot=few_shot), "context": retrieved}
+    async def get_answer_with_context(self, user_input, few_shot=False):
+        retrieved = await self.retrieve_relevant_documents(user_input)
+        answer = self._chain(user_input=user_input, context=retrieved, few_shot=few_shot)
+        return {"answer": answer, "context": retrieved}

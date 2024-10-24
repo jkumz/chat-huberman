@@ -1,3 +1,4 @@
+import asyncio
 import streamlit as st
 import sys
 import os
@@ -20,6 +21,9 @@ def _store_conversation(user, ai, cost):
 @st.cache_resource
 def _get_rag_engine(openai_api_key, anthropic_api_key):
     return engine(openai_api_key=openai_api_key, anthropic_api_key=anthropic_api_key)
+
+async def get_answer(prompt, chat_history):
+    return await st.session_state.rag_engine.get_answer(user_input=prompt, few_shot=True, history=chat_history, format_response=True)
 
 def _update_total_cost(cost=0.00):
     st.session_state.total_cost = cost
@@ -91,7 +95,7 @@ def _initialise_session_state():
 
     return st.session_state.api_keys_accepted
 
-def setup_page():
+async def setup_page():
     # Set up the Streamlit page
     st.set_page_config(page_title="ChatHuberman", page_icon="🤖")
     st.title("ChatHuberman")
@@ -143,21 +147,21 @@ def setup_page():
                 # Get response from RAG engine
                 with st.spinner("Gathering relevant information and synthesising response..."):
                     chat_history = "\n".join([m["content"] for m in st.session_state.messages])
-                    response = st.session_state.rag_engine.get_answer(user_input=prompt, few_shot=True, history=chat_history, format_response=True)
+                    response = await get_answer(prompt, chat_history)
 
                 # Calculate costs
-                total_cost = st.session_state.rag_engine.get_total_cost()
+                total_cost = st.session_state.total_cost + response["generation_cost"] + response["retrieval_cost"] + response["translation_cost"]
                 _update_total_cost(total_cost)
 
                 # Display assistant response in chat message container
                 with st.chat_message("assistant"):
-                    st.markdown(response)
+                    st.markdown(response["answer"])
                     st.caption(f"Cumulative Message Cost: ${total_cost:.6f}")
 
                 # Add assistant response to chat history
                 st.session_state.messages.append({
                     "role": "assistant",
-                    "content": response,
+                    "content": response["answer"],
                     "metadata": {
                         "total_cost": f"${total_cost:.6f}"
                     }
@@ -171,6 +175,9 @@ def setup_page():
                 with st.spinner("Updating agent memory..."):
                     if len(st.session_state.messages) > 10:
                         st.session_state.messages = st.session_state.messages[2:]
+
+            except Exception as e:
+                st.error(f"Error getting answer: {e}")
 
             finally:
                 st.session_state.processing = False
@@ -188,7 +195,7 @@ def setup_page():
     st.button("Clear Chat History", key="clear_chat_history", on_click=clear_chat_history_callback)
 
 def main():
-    setup_page()
+    asyncio.run(setup_page())
 
 if __name__ == "__main__":
     main()
