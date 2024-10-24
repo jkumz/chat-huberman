@@ -1,7 +1,11 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.documents import Document
-from rag_backend.prompts import get_check_if_multi_query_should_be_used_prompt, get_multi_query_generation_prompt
+
+try:
+    from .prompts import get_check_if_multi_query_should_be_used_prompt, get_multi_query_generation_prompt
+except ImportError:
+    from prompts import get_check_if_multi_query_should_be_used_prompt, get_multi_query_generation_prompt
 import tiktoken
 
 LOW_COST_LLM = "gpt-4o-mini"

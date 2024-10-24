@@ -5,7 +5,11 @@ from langchain_core.prompts import(ChatPromptTemplate,
                                    AIMessagePromptTemplate,
                                    SystemMessagePromptTemplate)
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
-from .example_prompts import (example_with_context, example_without_context, example_with_history, example_with_bad_context)
+
+try:
+    from .example_prompts import (example_with_context, example_without_context, example_with_history, example_with_bad_context)
+except ImportError:
+    from example_prompts import (example_with_context, example_without_context, example_with_history, example_with_bad_context)
 
 #IMPORTANT NOTE: Claude is fine tuned to look out for XML tags, so any prompts passed to Claude should use these for maximum effect
 

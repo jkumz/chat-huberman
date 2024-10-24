@@ -10,7 +10,7 @@ def __setup_logger():
     # Create handlers
     console_handler = logging.StreamHandler(sys.stdout)
     # Use the current working directory for the log file
-    log_file_path = os.path.join(os.getcwd(), "scraper-indexer", "app.log")
+    log_file_path = os.path.join(os.getcwd(), "app.log")
     file_handler = logging.FileHandler(log_file_path)
 
     # Create formatters and add it to handlers

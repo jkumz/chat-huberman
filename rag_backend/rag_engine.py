@@ -11,10 +11,18 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
 from dotenv import (load_dotenv, find_dotenv)
-from rag_backend.query_translator import QueryTranslator
-from rag_backend.prompts import get_main_prompt, get_few_shot_prompt
+
+try:
+    from .query_translator import QueryTranslator
+    from .prompts import get_main_prompt, get_few_shot_prompt
+except ImportError:
+    from query_translator import QueryTranslator
+    from prompts import get_main_prompt, get_few_shot_prompt
 from concurrent.futures import TimeoutError
-from rag_backend.logger import logger as logger
+try:
+    from .logger import logger as logger
+except ImportError:
+    from logger import logger as logger
 
 
 load_dotenv(find_dotenv(filename=".rag_engine.env"))
@@ -169,7 +177,7 @@ class RAGEngine:
     - The most relevant chunks from the index
     ''' 
     #TODO - Calculate embedding cost of multi query prompts
-    def retrieve_relevant_documents(self, user_input, use_reranking=True, timeout=30):
+    async def retrieve_relevant_documents(self, user_input, use_reranking=True, timeout=30):
         async def retrieval_with_timeout():
             if self.query_translator.should_use_multi_query(user_input):
                 # RAG Fusion method removes duplicates when reranking so no need for unique union in chain
@@ -178,13 +186,11 @@ class RAGEngine:
                         self.query_translator.multi_query_generation()
                         | self.retriever.map()
                     )
-                    unflattened_unranked_docs = await asyncio.wait_for(
-                        asyncio.to_thread(reranked_retrieval_chain.invoke, {"user_input": user_input}),
-                        timeout=timeout
+                    unflattened_unranked_docs = await asyncio.to_thread(
+                        reranked_retrieval_chain.invoke, {"user_input": user_input}
                     )
-                    return await asyncio.wait_for(
-                        asyncio.to_thread(self.query_translator.reciprocal_rank_fusion, result_docs=unflattened_unranked_docs),
-                        timeout=timeout
+                    return await asyncio.to_thread(
+                        self.query_translator.reciprocal_rank_fusion, result_docs=unflattened_unranked_docs
                     )
                 else:
                     retrieval_chain = (
@@ -192,19 +198,18 @@ class RAGEngine:
                         | self.retriever.map()
                         | (lambda docs: self.query_translator.get_unique_union(docs))
                     )
-                    return await asyncio.wait_for(
-                        asyncio.to_thread(retrieval_chain.invoke, {"user_input": user_input}),
-                        timeout=timeout
+                    return await asyncio.to_thread(
+                        retrieval_chain.invoke, {"user_input": user_input}
                     )
             else:
-                return await asyncio.wait_for(
-                    asyncio.to_thread(self.retriever.invoke, user_input),
-                    timeout=timeout
+                return await asyncio.to_thread(
+                    self.retriever.invoke, user_input
                 )
 
         try:
-            return asyncio.run(retrieval_with_timeout())
+            return await asyncio.wait_for(retrieval_with_timeout(), timeout=timeout)
         except TimeoutError:
+            logger.error(f"Retrieval operation timed out after {timeout} seconds")
             raise TimeoutError(f"Retrieval operation timed out after {timeout} seconds") from None
 
     '''
@@ -216,14 +221,24 @@ class RAGEngine:
     Returns:
     - The answer to the user's question
     '''
-    def get_answer(self, user_input, few_shot=False, format_response=True, history=""):
-        retrieved = self.retrieve_relevant_documents(user_input)
-        if format_response:
-            raw = self._chain(user_input=user_input, context=retrieved, few_shot=few_shot, chat_history=history)
-            return re.sub(r'<thinking>.*?</thinking>', '', raw, flags=re.DOTALL)
-        else:
-            return self._chain(user_input=user_input, context=retrieved, few_shot=few_shot, chat_history=history)
-
+    #TODO - Handle cost calculation on the fly for each query, don't store in object as engine may be re-used by multiple tenants
+    async def get_answer(self, user_input, few_shot=False, format_response=True, history=""):
+        try:
+            retrieved = await self.retrieve_relevant_documents(user_input)
+            if format_response:
+                raw = self._chain(user_input=user_input, context=retrieved, few_shot=few_shot, chat_history=history)
+                answer = re.sub(r'<thinking>.*?</thinking>', '', raw, flags=re.DOTALL)
+            else:
+                answer = await asyncio.to_thread(self._chain(user_input=user_input, context=retrieved, few_shot=few_shot, chat_history=history))
+            return {
+                "answer": answer,
+                "generation_cost": self.generation_cost,
+                "retrieval_cost": self.retrieval_cost,
+                    "translation_cost": self.translation_cost
+                }
+        except Exception as e:
+            logger.error(f"Error getting answer: {e}")
+            raise e
     '''
     Method for getting the answer to a user's question along with the relevant context
 

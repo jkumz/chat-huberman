@@ -1,6 +1,6 @@
 
 # Shows how to use the context provided
-example_with_context = example_with_context = {
+example_with_context = {
 "question": "Once your brain enters a state of self-directed adapted plasticity, how do you maximise plasticity?",
 "documents": """
     {
