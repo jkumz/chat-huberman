@@ -107,27 +107,21 @@ def _initialise_session_state():
     if 'anthropic_api_key' not in st.session_state:
         st.session_state.anthropic_api_key = ""
 
-    # Initialize chat history
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-
-    # Add API key inputs to the sidebar
+    # Initialize session state variables
     if 'api_keys_accepted' not in st.session_state:
         st.session_state.api_keys_accepted = False
+    if 'total_cost' not in st.session_state:
+        st.session_state.total_cost = 0.00
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+    if "processing" not in st.session_state:
+        st.session_state.processing = False
+    if "block_processing" not in st.session_state:
+        st.session_state.block_processing = False
 
     # Create a placeholder for the total cost in the sidebar
     if "total_cost_placeholder" not in st.session_state:
         st.session_state.total_cost_placeholder = st.sidebar.empty()
-
-    # Initialize processing state if it doesn't exist
-    if "processing" not in st.session_state:
-        st.session_state.processing = False
-
-    if "block_processing" not in st.session_state:
-        st.session_state.block_processing = False
-
-    if "total_cost" not in st.session_state:
-        st.session_state.total_cost = 0.00
         st.session_state.total_cost_placeholder.caption(f"Total cost: ${st.session_state.total_cost:.2f}")
 
     # Function to validate and update API keys
@@ -136,6 +130,7 @@ def _initialise_session_state():
             if validate_api_keys(st.session_state.openai_api_key, st.session_state.anthropic_api_key):
                 st.session_state.api_keys_accepted = True
                 st.sidebar.success("API keys validated successfully!")
+                st.rerun()
             else:
                 st.sidebar.error("Invalid API keys. Please check and try again.")
         elif st.session_state.openai_api_key or st.session_state.anthropic_api_key:
@@ -143,21 +138,23 @@ def _initialise_session_state():
 
     # Check if API keys have been accepted
     if not st.session_state.api_keys_accepted:
-        st.sidebar.text_input(
-            label="Enter your OpenAI API key",
-            type="password",
-            key="openai_api_key",
-            on_change=validate_and_update_keys
-        )
-        st.sidebar.text_input(
-            label="Enter your Anthropic API key",
-            type="password",
-            key="anthropic_api_key",
-            on_change=validate_and_update_keys
-        )
+        with st.sidebar:
+            st.session_state.openai_api_key = st.text_input(
+                label="Enter your OpenAI API key",
+                type="password",
+                key="openai_api_key_input",
+                value=st.session_state.openai_api_key
+            )
+            st.session_state.anthropic_api_key = st.text_input(
+                label="Enter your Anthropic API key",
+                type="password",
+                key="anthropic_api_key_input",
+                value=st.session_state.anthropic_api_key
+            )
+            st.button("Validate API Keys", on_click=validate_and_update_keys)
     else:
-        # Hide the text input boxes when API keys are accepted
-        st.sidebar.markdown("API Keys Accepted")
+        # Show a message when API keys are accepted
+        st.sidebar.success("API Keys Accepted")
 
     return st.session_state.api_keys_accepted
 
