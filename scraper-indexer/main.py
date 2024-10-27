@@ -5,8 +5,6 @@ These transcripts are then retrieved and used by the chat service.
 """
 
 import os
-import schedule
-import time
 
 from dotenv import load_dotenv, find_dotenv
 from components.transcript_indexer import Indexer
@@ -45,6 +43,7 @@ def main():
 
         logger.info(f"Processing and indexing video: {title} - {url}")
         try:
+            logger.debug(f"Doc chunks to semantically split, embed and index: {chunks}")
             indexer.process_and_index_chunks(url, chunks, video_id, title)
             logger.info(f"Successfully processed and indexed video: {video_id}")
         except Exception as e:

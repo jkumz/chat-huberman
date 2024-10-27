@@ -5,7 +5,7 @@ import sys
 def __setup_logger():
     # Create a logger
     logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
 
     # Create logs directory
     log_dir = os.path.join(os.getcwd(), "logs")

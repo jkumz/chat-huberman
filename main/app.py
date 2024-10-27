@@ -1,6 +1,5 @@
 import asyncio
 import streamlit as st
-import requests
 import aiohttp
 import sys
 import os
@@ -22,7 +21,6 @@ def _store_conversation(user, ai, cost):
         f.write(f"Assistant: {ai}\n\n")
         f.write(f"Total Cost: ${cost:.2f}\n\n")
 
-
 async def _get_answer(prompt, chat_history):
     """
     Makes API call to RAG engine microservice
@@ -35,7 +33,7 @@ async def _get_answer(prompt, chat_history):
     - The response from the RAG engine microservice
     """
     try:
-        url = os.getenv("ENDPOINT_URL")
+        url = os.getenv("ENGINE_URL")
         headers = {
             "Content-Type": "application/json",
             "X-OpenAI-API-Key": st.session_state.openai_api_key,
@@ -138,23 +136,23 @@ def _initialise_session_state():
 
     # Check if API keys have been accepted
     if not st.session_state.api_keys_accepted:
-        with st.sidebar:
-            st.session_state.openai_api_key = st.text_input(
-                label="Enter your OpenAI API key",
-                type="password",
-                key="openai_api_key_input",
-                value=st.session_state.openai_api_key
-            )
-            st.session_state.anthropic_api_key = st.text_input(
-                label="Enter your Anthropic API key",
-                type="password",
-                key="anthropic_api_key_input",
-                value=st.session_state.anthropic_api_key
-            )
-            st.button("Validate API Keys", on_click=validate_and_update_keys)
+        st.session_state.openai_api_key = st.sidebar.text_input(
+            label="Enter your OpenAI API key",
+            type="password",
+            key="openai_api_key_input",
+            value=st.session_state.openai_api_key
+        )
+        st.session_state.anthropic_api_key = st.sidebar.text_input(
+            label="Enter your Anthropic API key",
+            type="password",
+            key="anthropic_api_key_input",
+            value=st.session_state.anthropic_api_key
+        )
+        if st.sidebar.button("Validate API Keys"):
+            validate_and_update_keys()
     else:
-        # Show a message when API keys are accepted
-        st.sidebar.success("API Keys Accepted")
+        # Hide the text input boxes when API keys are accepted
+        st.sidebar.markdown("API Keys Accepted")
 
     return st.session_state.api_keys_accepted
 

@@ -46,6 +46,7 @@ class Indexer:
     ):
         # Use attributes initialized in the constructor
         logger.info(f"Starting processing for video: {video_id}")
+        logger.info(f"Doc chunks: {doc_chunks}")
         # Check if the video is already in "processing" state
         current_status = self.tracker.get_status(video_id)
         if current_status == "processing" or current_status == "failed":
@@ -65,11 +66,15 @@ class Indexer:
         vectors_to_upsert = []
 
         try:
+            upserted = False
             for chunk_i, doc_chunk in enumerate(doc_chunks):
                 if len(doc_chunk) < 30:
                     continue
 
                 semantic_splits = self.semantic_text_splitter.split_text(doc_chunk)
+                if len(semantic_splits) == 0:
+                    logger.debug(f"No semantic splits for chunk {chunk_i} of video {video_id}")
+                    continue
                 for split_i, split in enumerate(semantic_splits):
                     embedding = self.embedding_model.embed_query(split)
                     metadata = {
@@ -85,14 +90,21 @@ class Indexer:
                     vectors_to_upsert.append((vector_id, embedding, metadata))
 
                     if len(vectors_to_upsert) >= batch_size:
+                        logger.info(f"Upserting {len(vectors_to_upsert)} vectors for video {video_id}")
                         self.index.upsert(vectors=vectors_to_upsert)
+                        upserted = True
                         vectors_to_upsert = []
 
             if vectors_to_upsert:
+                logger.info(f"Upserting {len(vectors_to_upsert)} vectors for video {video_id}")
                 self.index.upsert(vectors=vectors_to_upsert)
+                upserted = True
 
-            self.tracker.complete_processing(video_id)
-            logger.info(f"Successfully processed and indexed video: {video_id}")
+            if not upserted:
+                logger.warning(f"No vectors upserted for video {video_id}")
+            else:
+                self.tracker.complete_processing(video_id)
+                logger.info(f"Successfully processed and indexed video: {video_id}")
 
         except Exception as e:
             logger.error(f"Error processing video {video_id}: {str(e)}")

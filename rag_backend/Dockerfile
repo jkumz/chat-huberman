@@ -34,8 +34,5 @@ USER appuser
 # Make port available to the world outside this container
 EXPOSE $PORT
 
-# Add healthcheck
-HEALTHCHECK CMD curl --fail http://localhost:$PORT/health || exit 1
-
 # Run main.py when the container launches
 CMD uvicorn main:app --host 0.0.0.0 --port $PORT
