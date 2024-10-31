@@ -46,6 +46,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
           LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
+          ENGINE_URL: ${{ secrets.ENGINE_URL }}
         run: |
           python -m pytest
       - name: Upload test results
@@ -53,17 +54,3 @@ jobs:
         with:
           name: pytest-results-${{ matrix.python-version }}
           path: pytest-results/
-
-  # deploy:
-  #   needs: test
-  #   runs-on: ubuntu-latest
-  #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: Deploy to production
-  #     run: |
-  #       echo "Add your deployment steps here"
-  #       # For example:
-  #       # - ssh into your server
-  #       # - pull the latest changes
-  #       # - restart your application

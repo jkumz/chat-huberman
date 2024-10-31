@@ -148,7 +148,7 @@ def _initialise_session_state():
             key="anthropic_api_key_input",
             value=st.session_state.anthropic_api_key
         )
-        if st.sidebar.button("Validate API Keys"):
+        if st.sidebar.button("Validate API Keys", key="validate_api_keys_button"):
             validate_and_update_keys()
     else:
         # Hide the text input boxes when API keys are accepted
@@ -170,10 +170,10 @@ def _display_prompt_and_add_to_history(prompt):
         st.markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-def _display_answer(answer, total_cost):
+def _display_answer(answer, cost):
     with st.chat_message("assistant"):
         st.markdown(answer)
-        st.caption(f"Cumulative Message Cost: ${total_cost:.6f}")
+        st.caption(f"Message Cost: ${cost:.6f}")
 
 def _resize_history():
     if len(st.session_state.messages) > 10:
@@ -229,9 +229,10 @@ async def setup_page():
                     translation_cost = response["translation_cost"]
 
                 # Calculate costs
-                total_cost = st.session_state.total_cost + generation_cost + retrieval_cost + translation_cost
+                msg_cost = generation_cost + retrieval_cost + translation_cost
+                total_cost = st.session_state.total_cost + msg_cost
                 _update_total_cost(total_cost)
-                _display_answer(answer, total_cost)
+                _display_answer(answer, msg_cost)
                 _add_answer_to_history(answer, total_cost)
 
                 # Store conversation logs if the checkbox is checked

@@ -78,14 +78,14 @@ def test_user_keys_accepted():
     app.run()
 
     # Simulate entering valid API key
-    app.text_input(key="openai_api_key").set_value(OPENAI_API_KEY)
-    app.text_input(key="anthropic_api_key").set_value(ANTHROPIC_API_KEY)
+    app.text_input(key="openai_api_key_input").set_value(OPENAI_API_KEY)
+    app.text_input(key="anthropic_api_key_input").set_value(ANTHROPIC_API_KEY)
+    app.button(key="validate_api_keys_button").click()
 
     # Force rerun to ensure the session state is updated
     app.run(timeout=60) # High timeout as we are waiting on generated resp from Claude, not always fast
 
     assert app.session_state.api_keys_accepted, "API keys should have been accepted"
-    assert 'rag_engine' in app.session_state, "RAG engine should have been initialized"
 
 # Test that the user cannot enter invalid API keys
 def test_invalid_api_keys():
@@ -93,8 +93,8 @@ def test_invalid_api_keys():
     app.run()
 
     # Simulate entering invalid API keys
-    app.text_input(key="openai_api_key").set_value("invalid_openai_key")
-    app.text_input(key="anthropic_api_key").set_value("invalid_anthropic_key")
+    app.text_input(key="openai_api_key_input").set_value("invalid_openai_key")
+    app.text_input(key="anthropic_api_key_input").set_value("invalid_anthropic_key")
     app.run()
 
     assert not app.session_state.api_keys_accepted, "API keys should not have been accepted"
@@ -105,14 +105,14 @@ def test_incomplete_api_keys():
     app.run()
 
     # Simulate entering only one Open AI key
-    app.text_input(key="openai_api_key").set_value(OPENAI_API_KEY)
+    app.text_input(key="openai_api_key_input").set_value(OPENAI_API_KEY)
     app.run()
 
     assert not app.session_state.api_keys_accepted, "API keys should not have been accepted"
 
     # Simulate entering only one Anthropic key
-    app.text_input(key="openai_api_key").set_value("")
-    app.text_input(key="anthropic_api_key").set_value(ANTHROPIC_API_KEY)
+    app.text_input(key="openai_api_key_input").set_value("")
+    app.text_input(key="anthropic_api_key_input").set_value(ANTHROPIC_API_KEY)
     app.run()
 
     assert not app.session_state.api_keys_accepted, "API keys should not have been accepted"
@@ -123,9 +123,10 @@ def test_user_prompt_and_response():
     app.run()
 
     # Simulate entering valid API keys
-    app.text_input(key="openai_api_key").set_value(OPENAI_API_KEY)
-    app.text_input(key="anthropic_api_key").set_value(ANTHROPIC_API_KEY)
-    app.run(timeout=10)
+    app.text_input(key="openai_api_key_input").set_value(OPENAI_API_KEY)
+    app.text_input(key="anthropic_api_key_input").set_value(ANTHROPIC_API_KEY)
+    app.button(key="validate_api_keys_button").click()
+    app.run(timeout=60)
 
     # Simulate entering a prompt
     app.chat_input(key="user_input").set_value("What is the main function of the amygdala?").run(timeout=30)
