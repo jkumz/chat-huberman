@@ -11,6 +11,7 @@ langchain-cli
 langchain-anthropic
 langchain-pinecone
 langsmith
+freezegun
 python-dotenv
 pinecone-client
 pinecone-client[grpc]
